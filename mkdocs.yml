@@ -1,0 +1,18 @@
+site_name: Subtomo
+
+nav:
+- index.md
+- reading.md
+- team.md
+- 202406 U of M Course:
+  - Index: 202406_um/index.md
+  - Introduction: 202406_um/intro.md
+  - TOMOMAN Setup: 202406_um/setup.md
+  - Tilt-Series Preprocessing: 202406_um/preproc.md
+  - Particle Picking: 202406_um/picking.md
+- 202208 EMBO Practical: 
+  - Intro: 202208_embo/index.md
+
+theme:
+  name: mkdocs
+  navigation_depth: 
