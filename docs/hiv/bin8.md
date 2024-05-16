@@ -11,7 +11,9 @@ Here we will initialize a subtomogram averaging folder with the necessary direct
 
 2. Load the STOPGAP module.
 
-3. Run the initialize folder command with the subtomo task: `stopgap_initialize_folder.sh subtomo`
+3. Run the initialize folder command with the subtomo task:
+
+        stopgap_initialize_folder.sh subtomo
 
 4. The folder now has the required structure for subtomogram averaging jobs.
 Re-running `stopgap_intialize_folder.sh` for other jobs will add the additional required folders without affecting old ones.
@@ -25,7 +27,9 @@ The first is a motivelist; we will parse out a single HIV particle from the one 
 The second is a wedgelist, which contains the necessary information for missing wedge compensation.
 The third is a STOPGAP tomolist, which links the paths and names of the tomograms to use with the tomo_num field in the tomolist and motivelist; this is used for subtomogram extraction.
 
-1. In MATLAB, load the motivelist we have already generated: `motl = sg_motl_read2('allmotl_1.star');`
+1. In MATLAB, load the motivelist we have already generated:
+
+        motl = sg_motl_read2('allmotl_1.star');
 
     >NOTE: There are two `sg_motl_read` functions; the difference is in how they load the data.
     While `sg_motl_read()` is formatted in a way that is a bit easier to read, it requires substantially more memory.
@@ -33,22 +37,34 @@ The third is a STOPGAP tomolist, which links the paths and names of the tomogram
 2. We will parse our desired subtomograms using logical indexing.
 As an illustration,  we will first index by tomo_num; in this case we want tomo 1.
 (In this example, this will result in matching all particles, but not if there are multiple tomograms.)
-`idx1 = motl.tomo_num == 1;`
+
+        idx1 = motl.tomo_num == 1;
 
 3. Next we will index by object.
 We will pick object 1:
-`idx2 = motl.object == 1;`
 
-4. We will parse the subtomograms into a new motivelist: `new_motl = sg_motl_parse_type2(motl,(idx1&idx2));`.
+        idx2 = motl.object == 1;
+
+4. We will parse the subtomograms into a new motivelist: 
+
+        new_motl = sg_motl_parse_type2(motl, (idx1&idx2));
+
     >NOTE: we combined the two indices we made using MATLAB’s logical operators.
 
-5. Save the new motivelist: `sg_motl_write2('allmotl_tomo1_obj1_1.star',new_motl);`.
+5. Save the new motivelist:
+
+        sg_motl_write2('allmotl_tomo1_obj1_1.star', new_motl);
+
     >NOTE: STOPGAP motivelists have the following format [name]_[iteration].star, where iteration is the iteration of the subtomogram averaging run.
     The name is arbitrary but should not contain non-letter characters except for underscores.
 
-6. Generate a wedgelist: `sg_wedgelist_from_tomolist('tomolist.mat','wedgelist.star');`.
+6. Generate a wedgelist:
 
-7. Generate a STOPGAP tomolist: `sg_extract_make_tomolist('tomolist.mat',[pwd,'/novactf_bin8/'],'sg_tomolist.txt');`.
+        sg_wedgelist_from_tomolist('tomolist.mat', 'wedgelist.star');
+
+7. Generate a STOPGAP tomolist:
+
+        sg_extract_make_tomolist('tomolist.mat', [pwd,'/novactf_bin8/'], 'sg_tomolist.txt');
 
 8. Copy the three lists into the `lists/` subfolder in your STOPGAP directory.
 
@@ -100,8 +116,10 @@ For FSC calculation, a alignment mask (mask) is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
 In MATLAB, make a sphere mask and save into the mask/ folder.
 From your subtomogram averaging directory:
-    `sphere = sg_sphere(32,10,3);`
-    `sg_mrcwrite('masks/sphere.mrc',sphere);`
+
+        sphere = sg_sphere(32, 10, 3);
+        sg_mrcwrite('masks/sphere.mrc', sphere);
+
     Check the mask using 3dmod.
     What you want is a soft-edged mask that drops to 0 before hitting the box edges.
 
@@ -137,8 +155,9 @@ For this dataset, there is potentially a large error in the Z-direction, but err
 Since we seeded our positions at half the inter-subunit spacing, this is the maximum error.
 The appropriate shape for this type of error is a cylinder:
 
-    `ccmask = sg_cylinder(32,4,24);`
-    `sg_mrcwrite('masks/ccmask.mrc',ccmask);`
+        ccmask = sg_cylinder(32,4,24);
+        sg_mrcwrite('masks/ccmask.mrc',ccmask);
+
     >NOTE: A ccmask should always be binary!
 
 2. Open the subtomo parser.
@@ -157,7 +176,7 @@ Since we don’t really have any resolution in our map, we can arbitrarily set i
 STOPGAP sets filter values in Fourier pixels, a real-space values do not round well, particularly for small boxsizes or high binnings.
 You can covert resolution to Fourier pixels as:
 
-    $$fpix = \frac{((boxsize × pixelsize))}{resolution}$$
+    $$fpix = \frac{boxsize × pixelsize}{resolution}$$
 
     so for our settings, 60 Å is 5.76 Fourier pixels.
     Since we cannot set fractional pixels, we can round to 6, which is a resolution of 57.6 Å.
@@ -188,9 +207,11 @@ However, it is likely that the sphere mask does not adequately mask in your aver
 You want the binary parts of the mask to contain the entire structure with the soft edge starting outside of it.
 Since the structure continues beyond the box boundaries in the XY-plane, this would just be as large as possible while making sure the mask ends before touching the box boundaries.
 An example that worked for me is:
-    `cyl_mask = sg_cylinder(32,10,20,3,[17,17,14]);`
-    `sg_mrcwrite('cyl_mask.mrc',cyl_mask);`
-    > NOTE: since your structure is probably a bit offset, you will need to define the center when using the sg_cylinder function.
+
+        cyl_mask = sg_cylinder(32,10,20,3,[17,17,14]);
+        sg_mrcwrite('cyl_mask.mrc',cyl_mask);
+
+    >NOTE: since your structure is probably a bit offset, you will need to define the center when using the sg_cylinder function.
     I measured this using 3dmod.
 
 4. Generate alignment parameters using `stopgap_subtomo_parser.sh`.
@@ -253,6 +274,7 @@ There will also be defects in the lattice with lower CC values, this is expected
 
 5. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
 We can determine what an appropriate CC value cutoff is by setting Visualization to Cross-Correlation and adjusting the Lower CC Threshold slider.
+
     > NOTE: this is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value.
     Determine an appropriate cutoff and write it down.
 
@@ -301,12 +323,10 @@ In this case, don’t apply a score cutoff, as we haven’t determined what it s
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
-    ```matlab
-    motl = sg_motl_read2('allmotl_dclean_2.star');
-    idx = motl.score >= 0.4;
-    new_motl = sg_motl_parse_type2(motl,idx);
-    sg_motl_write2('allmotl_dclean_sclean_2.star',new_motl);
-    ```
+        motl = sg_motl_read2('allmotl_dclean_2.star');
+        idx = motl.score >= 0.4;
+        new_motl = sg_motl_parse_type2(motl, idx);
+        sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
 
 8. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
