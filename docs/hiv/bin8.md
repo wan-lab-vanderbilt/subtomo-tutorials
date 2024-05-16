@@ -1,13 +1,13 @@
 # Bin 8 Subtomogram Averaging with STOPGAP
 
-In this part, we will first prepare the necessary files and folders for a STOPGAP subtomogram averaging job. 
+In this part, we will first prepare the necessary files and folders for a STOPGAP subtomogram averaging job.
 Then we will perform "reference-free" subtomogram averaging on a single HIV particle; this will serve as a *de novo* reference for the whole dataset.
 
 ## Preparing a STOPGAP folder
 
 Here we will initialize a subtomogram averaging folder with the necessary directory structure.
 
-1. In your HIV_practical directory, make `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory. 
+1. In your HIV_practical directory, make `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
 
 2. Load the STOPGAP module.
 
@@ -79,11 +79,11 @@ Run in the terminal; this will generate a new parameter file in the `params/` fo
 6. Open run_stopgap.sh in a text editor.
 The main parameters here are the parallelization options and the directories.
 Update the rootdir and paramfilename.
- 
+
 7. For parallelization parameters, set run_type to `'slurm'`, `nodes` to 1, and `n_cores` to 96 divided by the number of participants.
 STOPGAP is a CPU-only package, so set queue to `'centos'`, which are the CPU nodes.
 The `/scratch` space is relatively fast and there is no local storage on the nodes, so set `copy_local` to 0.
- 
+
 8. Run STOPGAP by running the `run_stopgap.sh` script.
 STOPGAP is setup here to run through the stopgap_watcher, which is a separate program to track STOPGAP progress.
 This is not required; for clusters where programs are not allowed to be run on submission nodes, stopgap_watcher can be run on any computer that has access to the working directory.
