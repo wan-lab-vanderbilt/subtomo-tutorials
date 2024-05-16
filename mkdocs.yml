@@ -4,15 +4,16 @@ nav:
 - index.md
 - reading.md
 - team.md
-- 202406 U of M Course:
-  - Index: 202406_um/index.md
-  - Introduction: 202406_um/intro.md
-  - TOMOMAN Setup: 202406_um/setup.md
-  - Tilt-Series Preprocessing: 202406_um/preproc.md
-  - Particle Picking: 202406_um/picking.md
-- 202208 EMBO Practical: 
-  - Intro: 202208_embo/index.md
+- getting_started.md
+- HIV Dataset (EMPIAR-10164):
+  - Introduction: hiv/index.md
+  - TOMOMAN Setup: hiv/setup.md
+  - Tilt-Series Preprocessing: hiv/preproc.md
+  - Particle Picking: hiv/picking.md
+  - Bin 8 Subtomogram Averaging: hiv/bin8.md
+  - Bin 4 Subtomogram Averaging: hiv/bin4.md
+- Tutorial Archive: 
+  - 202208 EMBO Practical: 202208_embo/index.md
 
 theme:
-  name: mkdocs
-  navigation_depth: 
+  name: readthedocs

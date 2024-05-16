@@ -2,6 +2,4 @@
 
 New RTD
 
-[Intro](intro.md)
-
-[Preprocessing](preproc.md)
+Some links

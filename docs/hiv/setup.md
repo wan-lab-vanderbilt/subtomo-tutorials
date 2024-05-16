@@ -1,0 +1,7 @@
+# Setup
+
+## Environments
+
+### Bash
+
+### MATLAB
