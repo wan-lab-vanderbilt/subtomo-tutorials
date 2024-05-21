@@ -7,7 +7,7 @@ This includes rescaling the motivelist, applying the shifts to the extraction po
 
 1. In MATLAB, we will re-number the particles and assign odd/even halfsets:
 
-        sg_motl_assign_halfsets('allmotl_dclean_sclean_2.star', allmotl_dclean_sclean_halfset_2.star', 'oddeven', 1);
+        sg_motl_assign_halfsets('allmotl_dclean_sclean_2.star', 'allmotl_dclean_sclean_halfset_2.star', 'oddeven', 1);
 
     >NOTE: Since we have renumbered the subtomograms, this new motivelist will NOT work with the current averaging folder.
 
