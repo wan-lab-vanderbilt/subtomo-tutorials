@@ -45,7 +45,7 @@ We will pick object 1:
 
         idx2 = motl.object == 1;
 
-4. We will parse the subtomograms into a new motivelist: 
+4. We will parse the subtomograms into a new motivelist:
 
         new_motl = sg_motl_parse_type2(motl, (idx1&idx2));
 
