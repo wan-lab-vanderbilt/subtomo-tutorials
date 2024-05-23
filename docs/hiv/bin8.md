@@ -1,33 +1,41 @@
 # Bin 8 Subtomogram Averaging with STOPGAP
 
 In this part, we will first prepare the necessary files and folders for a STOPGAP subtomogram averaging job.
-Then we will perform "reference-free" subtomogram averaging on a single HIV particle; this will serve as a *de novo* reference for the whole dataset.
+Then, we will perform "reference-free" subtomogram averaging on a single HIV VLP.
+The product of this average will serve as a *de novo* reference for subtomogram averaging on the whole dataset.
 
-## Preparing a STOPGAP folder
+## Preparing a STOPGAP Folder
 
-Here we will initialize a subtomogram averaging folder with the necessary directory structure.
+Here we will initialize a subtomogram averaging folder with the necessary files and structure.
 
-1. In your HIV_practical directory, make `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
+1. In your HIV_tutorial directory, make a `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
 
-2. Load the STOPGAP module.
+2. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
+
+        cp $STOPGAPHOME/bash/stopgap_initialize_folder.sh .
+        cp $STOPGAPHOME/bash/stopgap_extract_parser.sh .
+        cp $STOPGAPHOME/bash/stopgap_subtomo_parser.sh .
+        cp $STOPGAPHOME/bash/run_stopgap.sh .
 
 3. Run the initialize folder command with the subtomo task:
 
         stopgap_initialize_folder.sh subtomo
 
-4. The folder now has the required structure for subtomogram averaging jobs.
-Re-running `stopgap_intialize_folder.sh` for other jobs will add the additional required folders without affecting old ones.
+    The folder now has the required structure for subtomogram averaging jobs.
+    Re-running `stopgap_intialize_folder.sh` for other jobs will add the additional required folders without affecting old ones.
 
-5. From the `/scratch/subtomo_pratical/SLURM_scripts/` folder, copy `run_stopgap.sh`, `stopgap_extract_parser.sh`, and `stopgap_subtomo_parser.sh`.
-
-## Preparing Lists
+### Preparing Lists
 
 For subtomogram averaging with STOPGAP, several types of lists are required.
-The first is a motivelist; we will parse out a single HIV particle from the one we have already made.
-The second is a wedgelist, which contains the necessary information for missing wedge compensation.
-The third is a STOPGAP tomolist, which links the paths and names of the tomograms to use with the tomo_num field in the tomolist and motivelist; this is used for subtomogram extraction.
 
-1. In MATLAB, load the motivelist we have already generated:
+The first is a motivelist.
+We already have a motivelist but we will parse out the particles from a single VLP for generating our initial reference.
+
+The second is a wedgelist, which contains the necessary information for missing wedge compensation.
+
+The third is a STOPGAP tomolist, which links the paths and names of the tomograms to use with the `tomo_num` field in the tomolist and motivelist; this is used for subtomogram extraction.
+
+1. In MATLAB, load the motivelist from the `tomo/` directory we have already generated:
 
         motl = sg_motl_read2('allmotl_1.star');
 
@@ -35,8 +43,8 @@ The third is a STOPGAP tomolist, which links the paths and names of the tomogram
     While `sg_motl_read()` is formatted in a way that is a bit easier to read, it requires substantially more memory.
 
 2. We will parse our desired subtomograms using logical indexing.
-As an illustration,  we will first index by tomo_num; in this case we want tomo 1.
-(In this example, this will result in matching all particles, but not if there are multiple tomograms.)
+We will first index by tomo_num; in this case we want tomo 1.
+(Since we only have one tomogram in this example, this will match all particles, but it would not if there were multiple tomograms in the motivelist.)
 
         idx1 = motl.tomo_num == 1;
 
@@ -49,13 +57,14 @@ We will pick object 1:
 
         new_motl = sg_motl_parse_type2(motl, (idx1&idx2));
 
-    >NOTE: we combined the two indices we made using MATLAB’s logical operators.
+    >NOTE: we combined the two indices using MATLAB’s logical operators.
 
 5. Save the new motivelist:
 
         sg_motl_write2('allmotl_tomo1_obj1_1.star', new_motl);
 
-    >NOTE: STOPGAP motivelists have the following format [name]_[iteration].star, where iteration is the iteration of the subtomogram averaging run.
+    >NOTE: STOPGAP motivelists have the following format `[name]_[iteration].star`, where iteration is the iteration of the subtomogram averaging run.
+    Our file ends with `_1.star` because it will be used for the first run.
     The name is arbitrary but should not contain non-letter characters except for underscores.
 
 6. Generate a wedgelist:
@@ -66,25 +75,41 @@ We will pick object 1:
 
         sg_extract_make_tomolist('tomolist.mat', [pwd,'/novactf_bin8/'], 'sg_tomolist.txt');
 
-8. Copy the three lists into the `lists/` subfolder in your STOPGAP directory.
+8. Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
+
+### Preparing to run STOPGAP with MPI
+
+STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
+
+1. Open `run_stopgap.sh` in any text editor, for example, gedit:
+
+        gedit run_stopgap.sh
+
+    The main parameters here are the "run options" which manage parallelization and the directories.
+
+2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to 10, and `copy_local` to 0.
+The rest of the run options are SLURM-specific and can be ignored.
+
+3. Set `rootdir` to the absolute path of your `init_ref/` folder.
+As with TOMOMAN, we will update `paramfilename` before running each job.
+Save `run_stopgap.sh`.
 
 ## Extract Subtomograms
 
-With the lists we have prepared, we are now ready to extract our subtomograms.
-STOPGAP jobs typically work by first generating a parameter file for a given task, and submitting it to SLURM using the `run_stopgap.sh` script.
+With the lists and run script prepared, we are now ready to extract our subtomograms.
 
-1. Open the `stopgap_extract_parser.sh` in a text editor (e.g. gedit).
+1. Open the `stopgap_extract_parser.sh` in a text editor.
 
-2. Update the rootdir to the working directory.
+2. Update the rootdir to the absolute path of the `init_ref/` directory.
 The other directory parameters can be left alone; they are overrides to the standard STOPGAP structure.
 
-3. Update the file options. Since these are all lists, they are assumed to be in the listdir.
-    > NOTE: since we are providing a tomolist, the tomodir is ignored.
+3. Update the list names in file options. Since these are all lists, they are assumed to be in the listdir.
+    > NOTE: since we are providing a tomolist, `tomodir` is ignored and can be left as `'none'`.
 
 4. Set the extraction parameters.
 The default subtomo_name is `'subtomo'`.
 For `boxsize`, 32 should be sufficient here.
-The `pixelsize` is 10.8 for bin8 data.
+Set `pixelsize` to 10.8 since we binned our 1.35 Å pixels by a factor of 8.
 For `output_format`, we find that `'mrc8'` works well, this saves the subtomogram as an 8-bit .mrc file.
 While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
 During extraction, the subtomogram is cropped and its values are floated between 0 and 255, rounded, and saved.
@@ -92,56 +117,67 @@ During extraction, the subtomogram is cropped and its values are floated between
 5. Save the file.
 Run in the terminal; this will generate a new parameter file in the `params/` folder.
 
-6. Open run_stopgap.sh in a text editor.
-The main parameters here are the parallelization options and the directories.
-Update the rootdir and paramfilename.
+        ./stopgap_extract_parser.sh
 
-7. For parallelization parameters, set run_type to `'slurm'`, `nodes` to 1, and `n_cores` to 96 divided by the number of participants.
-STOPGAP is a CPU-only package, so set queue to `'centos'`, which are the CPU nodes.
-The `/scratch` space is relatively fast and there is no local storage on the nodes, so set `copy_local` to 0.
+6. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
+Run STOPGAP by running the `run_stopgap.sh` script in a terminal.
+Feel free to preview it if you're curious.
 
-8. Run STOPGAP by running the `run_stopgap.sh` script.
-STOPGAP is setup here to run through the stopgap_watcher, which is a separate program to track STOPGAP progress.
-This is not required; for clusters where programs are not allowed to be run on submission nodes, stopgap_watcher can be run on any computer that has access to the working directory.
+        ./run_stopgap.sh
+
+    >NOTE: STOPGAP is setup here to run through the stopgap_watcher, which is a separate program to track STOPGAP progress.
+    This is not required; for running on clusters where programs are not allowed to be run on submission nodes, stopgap_watcher can be run on any computer that has access to the working directory.
 
 ### Calculate Starting Reference
 
-"Reference-free" basically refers to the fact that we are not using an external reference.
-Since a reference is always required for iterative alignment, we can generate an starting reference by averaging the extracted subtomograms.
-In this case, since we have picked our positions using geometry, we have rough starting angles; our initial reference will not be a sphere, but instead of rough features.
+"Reference-free" refers to the fact that we are not using an *external* reference.
+Since a reference is always required for iterative alignment, we generate an starting reference by averaging the extracted subtomograms.
+In this example, since we have picked our positions using geometry, we have rough starting angles and our initial reference will not be a sphere but instead have rough features.
 
 1. Subtomogram averaging in STOPGAP always involves calculating a Fourier Shell Correlation (FSC) in order to output two halfmaps and a figure-of-merit weighted average.
-Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps are randomly generated.
-For FSC calculation, a alignment mask (mask) is always required.
+Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps will be randomly generated.
+
+    For FSC calculation, an alignment mask is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
-In MATLAB, make a sphere mask and save into the mask/ folder.
-From your subtomogram averaging directory:
+In MATLAB, make a sphere mask and save into the `mask/` folder.
+Change to your `subtomo/` directory in MATLAB and run
 
         sphere = sg_sphere(32, 10, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
 
     Check the mask using 3dmod.
-    What you want is a soft-edged mask that drops to 0 before hitting the box edges.
+
+        3dmod masks/sphere.mrc
+
+    What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
 
 2. Open `stopgap_subtomo_parser.sh` in a text editor.
-Update the rootdir and main file options; ccmask_name is ignored for averaging jobs.
 
-3. The main settings for this job are in the Job parameters block.
+    1. Update the `rootdir`.
+
+    2. Update Main File Options to indicate the correct files.
+`ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `"ref"` is standard.
+`ccmask_name` is ignored for averaging jobs.
+
+    3. The main settings for this job are in the Job Parameters block.
 Since we are just averaging a single reference, set `subtomo_mode` to `'avg_singleref'`.
 Because we are on iteration 1, set `startidx` to 1.
 For averaging jobs, iterations is ignored.
 Set `binning` to `8`.
 
-4. Run the subtomo parser.
-Update paramfilename in run_stopgap.sh.
+3. Run the subtomo parser and update `paramfilename` in `run_stopgap.sh` to the new param file.
 
-5. Run STOPGAP to generate average.
+4. Run STOPGAP to generate the average.
 
-6. Open the three `.mrc` files in the `ref/` folder in 3dmod.
-STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc.`
+5. STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc.`
 A and B are raw halfsets; these are often noisy as they are not figure-of-merit weighted.
 The reference without a halfset designation is a figure-of-merit weighted average of A and B; this is NOT a fully processed reference and is supplied as a quick check of your job.
-For structural interpretation, the halfsets should be figure-of-merit weighted, low pass filtered to the estimated resolution, and B-factor sharpened; this can be done in MATLAB using the sg_calculate_FSC function.
+
+    >NOTE: Before structural interpretation, halfsets should be figure-of-merit weighted, low pass filtered to the estimated resolution, and B-factor sharpened.
+    This can be done in MATLAB using the `sg_calculate_FSC` function.
+
+    Open the three `.mrc` files in the `ref/` folder in 3dmod.
+You may wish to view them along all three axes by selecting Image > XYZ.
 
 ### Perform Z-alignment
 
