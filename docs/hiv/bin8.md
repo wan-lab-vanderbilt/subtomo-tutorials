@@ -91,6 +91,7 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder.
+Be sure to end your path with a `/`.
 As with TOMOMAN, we will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
 
@@ -128,7 +129,7 @@ Feel free to preview it if you're curious.
     >NOTE: STOPGAP is setup here to run through the stopgap_watcher, which is a separate program to track STOPGAP progress.
     This is not required; for running on clusters where programs are not allowed to be run on submission nodes, stopgap_watcher can be run on any computer that has access to the working directory.
 
-### Calculate Starting Reference
+## Calculate Starting Reference
 
 "Reference-free" refers to the fact that we are not using an *external* reference.
 Since a reference is always required for iterative alignment, we generate an starting reference by averaging the extracted subtomograms.
@@ -177,80 +178,96 @@ The reference without a halfset designation is a figure-of-merit weighted averag
     This can be done in MATLAB using the `sg_calculate_FSC` function.
 
     Open the three `.mrc` files in the `ref/` folder in 3dmod.
-You may wish to view them along all three axes by selecting Image > XYZ.
+You may wish to view them along all three axes by selecting Image > XYZ (or Ctrl+x) or as an isosurface by selecting Image > Isosurface (or Shift+u).
 
 ### Perform Z-alignment
 
-Since the HIV particles are not true spheres, our initial positions are quite rough.
-This is particularly true for the radial position (Z-axis in this dataset).
-In this step, we will perform a quick alignment with no angular search; this will improve the radial density in our reference, which will allow us to generate a tighter reference mask.
+Since the HIV VLPs are not true spheres, our initial positions are quite rough.
+This is particularly true for the radial position (Z-axis in the subtomograms).
+In this step, we will perform a quick translational alignment with no angular search; this will improve the radial density in our reference, which will allow us to generate a tighter reference mask.
 
-1. In MATLAB make a cross-correlation mask (ccmask).
-These are used to restrict the particle shifts during alignment.
+#### ccmask Creation
+
+A cross-correlation mask (ccmask) is used to restrict the particle shifts during alignment.
 For this dataset, there is potentially a large error in the Z-direction, but error in the XY-plane is well defined.
-Since we seeded our positions at half the inter-subunit spacing, this is the maximum error.
-The appropriate shape for this type of error is a cylinder:
+The appropriate shape of mask for this type of error is a cylinder.
+Since we seeded our positions at half the inter-subunit spacing, this is the maximum XY error and will be the radius of the mask.
 
-        ccmask = sg_cylinder(32,4,24);
-        sg_mrcwrite('masks/ccmask.mrc',ccmask);
+Run this command in MATLAB to save a cylindrical mask 4 pixels wide and 24 high:
 
-    >NOTE: A ccmask should always be binary!
+    ccmask = sg_cylinder(32, 4, 24);
+    sg_mrcwrite('masks/ccmask.mrc', ccmask);
 
-2. Open the subtomo parser.
+>NOTE: A ccmask should always be binary!
+
+#### Translational Alignment
+
+1. Open the subtomo parser.
 Update the `subtomo_mode` to `'ali_singleref'`.
 
-3. Set the angular search parameters.
+2. Set the angular search parameters.
 STOPGAP has multiple search strategies, with overlapping parameter sets.
 For now, set `search_mode` to `'hc'`, `search_type` to `'cone'`, and `cone_search_type` to `'coarse'`.
 Since we don’t want to do any angular search for this iteration, set `angincr`, `angiter`, `phi_angincr`, and `phi_angiter` to `0`.
 
-4. Set the bandpass filter settings.
+3. Set the bandpass filter settings.
 In general, the high pass filter defaults (`hp_rad=1`, `hp_sigma=2`) is fine; this mainly suppresses any normalization issues with the central voxel in Fourier space.
 More important is to keep track of the low-pass filter radius (`lp_rad`) during your run; a `lp_sigma` of `3` is usually fine.
 A rule of thumb is to make sure the `lp_rad` is less-than or equal to the Fourier radius where FSC=0.5.
 Since we don’t really have any resolution in our map, we can arbitrarily set it to 60 Å for now.
-STOPGAP sets filter values in Fourier pixels, a real-space values do not round well, particularly for small boxsizes or high binnings.
-You can covert resolution to Fourier pixels as:
+STOPGAP sets filter values in Fourier pixels as real-space values do not round well, particularly for small boxsizes or high binnings.
+You can covert resolution to Fourier pixels with:
 
     $$fpix = \frac{boxsize × pixelsize}{resolution}$$
 
     so for our settings, 60 Å is 5.76 Fourier pixels.
     Since we cannot set fractional pixels, we can round to 6, which is a resolution of 57.6 Å.
 
-5. Run the parser and run STOPGAP.
+4. Run the parser and run STOPGAP.
 
-6. Check `ref_2.mrc` in 3dmod.
+5. Check `ref_2.mrc` in 3dmod.
 After this alignment, we now have the 3 layers we saw in the tomograms.
-In 3dmod, you can also look at isosurface maps using `shift+u`.
-Despite no angular alignment, we already have some resolution of the in-plane structure.
+(Use the XYZ or isosurface view.)
+Despite no angular alignment, we also already have some resolution of the in-plane structure.
 
 ### Rough Angular Alignment
 
-Now that we have a reference with some level of structure, we can do several things.
-First we will make a new alignment mask to focus on our structure.
-Since we have not done any angular search, we will start with a rough angular alignment using large angular steps.
+Now that we have a reference with some level of structure we can do several things.
+First, we will make a new alignment mask to focus on our structure.
 
-1. Start chimera and open `ref_2.mrc`.
+#### Alignment Mask Creation
+
+Our goal is to produce an alignment mask that contains the entire structure.
+Since alignment masks should always have soft edges, we want the soft edge to start just outside of our reference.
+
+1. Start chimera (by running `chimera2` in the terminal) and open `ref_2.mrc`.
 Maps written by STOPGAP are not contrast-inverted, so you will need to uncheck the “Cap high values at box faces” option in Volume Viewer > Features > Surface and Mesh Options.
 Set the voxel size to 1.
+Adjust the histogram slider so you can see the three layers in your reference again.
 
 2. Open the sphere mask.
-To view the mask on top of the structure, it can be helpful to adjust the opacity of the mask.
+To view the mask on top of the structure, it can be helpful to adjust the transparency of the mask under Volume Viewer > Features > Brightness and Transparency.
 The position of your average in Z depends on a few factors such as your initial particle centering and radius, and as such, it will be different for everyone.
 However, it is likely that the sphere mask does not adequately mask in your average.
+For example, the sphere may not hold the entire reference or it may not be centered on it.
 
 3. The shape of this structure is reasonably well-suited for a cylindrical mask.
-You want the binary parts of the mask to contain the entire structure with the soft edge starting outside of it.
-Since the structure continues beyond the box boundaries in the XY-plane, this would just be as large as possible while making sure the mask ends before touching the box boundaries.
+Since the structure continues beyond the box boundaries in the XY-plane, the mask can be as large as possible without touching the box boundaries.
+Through trial and error, produce a cylindrical mask that suits your reference.
 An example that worked for me is:
 
-        cyl_mask = sg_cylinder(32,10,20,3,[17,17,14]);
-        sg_mrcwrite('cyl_mask.mrc',cyl_mask);
+        cyl_mask = sg_cylinder(32, 10, 20, 3, [17, 17, 14]);
+        sg_mrcwrite('masks/cyl_mask.mrc', cyl_mask);
 
-    >NOTE: since your structure is probably a bit offset, you will need to define the center when using the sg_cylinder function.
+    >NOTE: Since your structure is probably a bit offset, you will need to define the center when using the `sg_cylinder` function.
     I measured this using 3dmod.
 
-4. Generate alignment parameters using `stopgap_subtomo_parser.sh`.
+#### Angular Alignment
+
+Now, we will start angular alignment.
+Since we have not done any angular search yet, we will start with a rough angular alignment using large angular steps.
+
+1. Generate alignment parameters using `stopgap_subtomo_parser.sh`.
 You will need to increment your `startidx` and update your `mask_name`.
 We will use a coarse cone search with hill climbing, so the final parameters to decide on are the angular increments.
 The `angincr` and `angiter` parameters control the off-plane (i.e. off the XY-plane) search.
@@ -258,36 +275,36 @@ If you want to be very precise, you could calculate half the angular offset betw
 For `phi_angincr` and `phi_angiter`, which are control the in-plane search, we can use our knowledge that there is C6 symmetry, so the maximum error is +/- 30 deg.
 For an initial coarse search, we can then set `phi_angincr=12` and `phi_angiter=3` to find the nearest symmetry element (with a bit extra).
 
-5. Parse parameters and run alignment.
+2. Parse parameters and run alignment.
 
-6. The reference should look pretty structured now.
+3. The reference should look pretty structured now.
 Keep in mind, for iterative averaging, the quality of your alignment depends on the reference from the last around.
 As such, it is often useful to run 2 iterations per parameter set but rarely useful to run more than 2.
 Parse another iteration (remember to increment `startidx`) with the same parameters and run alignment again.
 
-7. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
+4. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
 The symmetry axis we want to use is in one of the empty space, so we may need to shift the reference in the XY plane.
 To do so, determine the offset in 3dmod and open the `sg_motl_shift_and_rotate.m` script in MATLAB; this generates a new motivelist with shifted positions.
 I will typically append the new motivelist name with something descriptive like "_shift".
 Update the motivelist and reference names in the parser and generate an averaging run.
 Generate a new average.
 
-8. Compare the old and new references to make sure it was shifted properly.
+5. Compare the old and new references to make sure it was shifted properly.
 If it wasn’t you may have applied the shifts with the wrong sign.
 If so, re-apply shifts and re-average.
 
-9. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry (`symmetry='C6'`).
+6. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry (`symmetry='C6'`).
 With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4.
 Parse parameters and perform another round of alignment.
 
-10. The reference should look much better now.
+7. The reference should look much better now.
 Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
 From here, we can refine the average a bit by reducing the angular search.
 Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
 For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe.
 Update the parameters and run 2 iterations.
 
-11. At this point the reference is largely converged.
+8. At this point the reference is largely converged.
 If you check the FSC plot generated by STOPGAP, the structure should be well beyond Nyquist.
 
 ### Clearing Overlapping Particles
@@ -329,7 +346,7 @@ Remember, FSC is NOT an objective resolution measure but instead a self-consiste
 Your FSC was likely over-inflated due to identical particles in both halfsets.
 At this point, we can consider this final average the initial *de novo* reference.
 
-### Aligning the Full Dataset
+## Aligning the Full Dataset
 
 Here we will go over how to take your initial reference and align it against the full dataset.
 
