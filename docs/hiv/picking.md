@@ -20,28 +20,28 @@ Set the Origin index to 0 and the Voxel size to 1.
 Press enter after changing each setting.
 You may need to recenter and reorient the view; there are buttons to help with that.
 
-3. If you want more contrast to better visualize the HIV particles, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
+3. If you want more contrast to better visualize the VLPs, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
 A gaussian with of 1 should be sufficient, but remember to uncheck the "Displayed subregion only" under Options before clicking Filter.
 
-4. Before picking HIV particles, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
+4. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
 Orthographic side view disables "scaling with distance" of objects far from viewing plane due to perspective effect.
 
 5. In the Volume Viewer, open the Volume Tracer tool.
-Try setting the marker radius to 20, which makes a sphere smaller than the HIV particles, but large enough to assess centering.
-Move through the planes and place a marker at each HIV particle.
-We recommend taking only the complete particles.
-This tomogram has around 9 complete particles.
+Try setting the marker radius to 20, which makes a sphere smaller than the VLPs, but large enough to assess centering.
+Move through the planes and place a marker at the center of each VLP.
+We recommend taking only the complete VLPs.
+This tomogram has around 9 complete VLPs.
 
-6. When you have finished marking your particles, select File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
+6. When you have finished marking the VLPs, select File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
 This naming convention is important for parsing the metadata files into the tomolist later.
 
 7. In the main window, open the Pick Particles tool (Tools > Utilities > Pick Particle).
 Browse for the marker file and press Display.
 A series of sliders will a appear for each marker.
 Adjust them until the radius for each as needed.
-Since the HIV particles are not perfect spheres, adjust the radius to a point with the best compromise.
-Also, there are several concentric layers to each HIV particle; set the radius for each sphere so that the edge is on similar layers.
-For these particles, we suggest setting the radius to between the two outermost layers.
+Since the VLPs are not perfect spheres, adjust the radius to a point with the best compromise.
+Also, there are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
+For these VLPs, we suggest setting the radius to between the two outermost layers.
 
 8. When all radii are set, press Save.
 For now, you can click reset to remove the spherical wireframes and close the Pick Particles window.
@@ -72,7 +72,7 @@ The parameters for this function are:
     * `padding` – Removes particles within a given distance of the edge of the tomogram
     * `subset_list` – Optional file listing a subset of tomograms to process
 
-    As an example, this should generate around 16,000 motivelist entries:
+    As an example, this should generate around 1,850 motivelist entries per sphere:
 
         sg_motl_batch_sphere('tomolist.mat', 'allmotl_1.star', 'sphere', 8, 3.5, 1, 16, []);
 
