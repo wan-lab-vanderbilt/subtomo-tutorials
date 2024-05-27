@@ -82,7 +82,7 @@ The parameters for this function are:
 3. The Place Objects tool in Chimera only opens AV3-format .em files, so we will need to convert our STOPGAP motivelist using the `sg_motl_stopgap_to_av3` function.
 As an example:
 
-        sg_motl_stopgap_to_av3('allmotl_1.star', 'allmotl1_.em');
+        sg_motl_stopgap_to_av3('allmotl_1.star');
 
 4. In Chimera, open the Place Object function (Main Window > Tools > Utilities > Place Object).
 Open the .em motivelist file and apply.
