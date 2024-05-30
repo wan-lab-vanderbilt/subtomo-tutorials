@@ -1,5 +1,9 @@
 site_name: Subtomo
 
+theme:
+  name: readthedocs
+  search: true
+
 nav:
 - index.md
 - reading.md
@@ -7,20 +11,17 @@ nav:
 - getting_started.md
 - HIV Dataset (EMPIAR-10164):
   - Introduction: hiv/index.md
-  - TOMOMAN Setup: hiv/setup.md
+  - Setup: hiv/setup.md
   - Tilt-Series Preprocessing: hiv/preproc.md
+  - Tilt-Series Alignment: hiv/align.md
+  - Tomogram Reconstruction: hiv/recon.md
   - Particle Picking: hiv/picking.md
   - Bin 8 Subtomogram Averaging: hiv/bin8.md
   - Bin 4 Subtomogram Averaging: hiv/bin4.md
-- Tutorial Archive: 
-  - 202208 EMBO Practical: 202208_embo/index.md
-
-theme:
-  name: readthedocs
-  search: true
 
 extra_javascript: 
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 markdown_extensions:
     - mdx_math
+    - footnotes
