@@ -3,6 +3,8 @@ site_name: Subtomo
 theme:
   name: readthedocs
   search: true
+  # features:
+  #   - content.code.copy
 
 nav:
 - index.md
@@ -26,3 +28,6 @@ extra_javascript:
 
 markdown_extensions:
     - mdx_math
+    # - pymdownx.superfences
+    # - pymdownx.tabbed:
+    #     alternate_style: true

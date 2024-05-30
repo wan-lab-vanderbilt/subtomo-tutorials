@@ -2,40 +2,48 @@
 
 In this section, we will pick spheres in UCSF Chimera using Kun Qu’s [Pick Particle](https://www.biochem.mpg.de/7940000/Pick-Particle) plugin.
 We will then update these metadata on the tomolist and generate a STOPGAP motivelist of these particles.
-We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin.
+We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin. These plugins are not standard in Chimera so must be installed separately.
 
 ## Picking Spheres
 
 In Chimera, we will pick centers using Volume Tracer and set radii for each sphere using the Pick Particle tool.
-The plugins mentioned above are not standard in Chimera, but we have them installed in a custom Chimera installation. Open a terminal and run `chimera2` to access this installation.
+
+1. Open Chimera.
+
+    <details><summary>Wan Lab</summary>Open a terminal and run `chimera2` to access the custom installation with plugins.</details>
+
+    <details><summary>U of M</summary>
+    Idk, tbd.</details>
+
+    Ensure that you have both Pick Particles and Place Object listed under Tools > Utilities. If not, you need to install them or use a different Chimera instance. Check the setup pages for help.
 
 1. The bin8 tomogram should be saved in `tomo/novactf_bin8/`.
-Open it in Chimera.
+Open it in Chimera with File > Open.
 Chimera may open the tomogram as an isosurface volume.
 If so, visualize it as planes (select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
 You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
-2. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
+1. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
 Set the Origin index to 0 and the Voxel size to 1.
 Press enter after changing each setting.
 You may need to recenter and reorient the view; there are buttons to help with that.
 
-3. If you want more contrast to better visualize the VLPs, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
+1. If you want more contrast to better visualize the VLPs, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
 A gaussian with of 1 should be sufficient, but remember to uncheck the "Displayed subregion only" under Options before clicking Filter.
 
-4. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
+1. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
 Orthographic side view disables "scaling with distance" of objects far from viewing plane due to perspective effect.
 
-5. In the Volume Viewer, open the Volume Tracer tool.
+1. In the Volume Viewer, open the Volume Tracer tool.
 Try setting the marker radius to 20, which makes a sphere smaller than the VLPs, but large enough to assess centering.
 Move through the planes and place a marker at the center of each VLP.
 We recommend taking only the complete VLPs.
 This tomogram has around 9 complete VLPs.
 
-6. When you have finished marking the VLPs, select File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
+1. When you have finished marking the VLPs, select File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
 This naming convention is important for parsing the metadata files into the tomolist later.
 
-7. In the main window, open the Pick Particles tool (Tools > Utilities > Pick Particle).
+1. In the main window, open the Pick Particles tool (Tools > Utilities > Pick Particle).
 Browse for the marker file and press Display.
 A series of sliders will a appear for each marker.
 Adjust them until the radius for each as needed.
@@ -43,7 +51,7 @@ Since the VLPs are not perfect spheres, adjust the radius to a point with the be
 Also, there are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
 For these VLPs, we suggest setting the radius to between the two outermost layers.
 
-8. When all radii are set, press Save.
+1. When all radii are set, press Save.
 For now, you can click reset to remove the spherical wireframes and close the Pick Particles window.
 Leave Chimera open and go back to the TOMOMAN Console.
 
