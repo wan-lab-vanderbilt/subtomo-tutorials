@@ -155,20 +155,23 @@ To save a sphere mask into the `mask/` folder, change into your `subtomo/` direc
     1. Update the `rootdir`.
 
     2. Update Main File Options to indicate the correct files.
-`ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `"ref"` is standard.
-`ccmask_name` is ignored for averaging jobs.
+    `ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `"ref"` is standard.
+    `ccmask_name` is ignored for averaging jobs.
 
     3. The main settings for this job are in the Job Parameters block.
-Since we are just averaging a single reference, set `subtomo_mode` to `'avg_singleref'`.
-Because we are on iteration 1, set `startidx` to 1.
-For averaging jobs, iterations is ignored.
-Set `binning` to `8`.
+    Since we are just averaging a single reference, set `subtomo_mode` to `'avg_singleref'`.
+    Because we are on iteration 1, set `startidx` to 1.
+    For averaging jobs, iterations is ignored.
+    Set `binning` to `8`.
+
+    4. Also, ensure that `symmetry` is set to `C1` in the bottom block.
+    We won't use symmetry until later in the averaging.
 
 3. Run the subtomo parser and update `paramfilename` in `run_stopgap.sh` to the new param file.
 
 4. Run STOPGAP to generate the average.
 
-5. STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc.`
+5. STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc`.
 A and B are raw halfsets; these are often noisy as they are not figure-of-merit weighted.
 The reference without a halfset designation is a figure-of-merit weighted average of A and B; this is NOT a fully processed reference and is supplied as a quick check of your job.
 

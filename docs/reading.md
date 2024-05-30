@@ -2,7 +2,7 @@
 
 ## Methods
 
-A very good introduction to subtomogram averaging in cryo-electron tomography can be found here: [Wan & Briggs. _Methods Enzymol._ 2016.](https://doi.org/10.1016/bs.mie.2016.04.014)
+A very good introduction to subtomogram averaging in cryo-electron tomography can be found here: [Turoňová & Wan. _Focus Struct. Biol._ 2024.](https://doi.org/10.1007/978-3-031-51171-4_8)
 
 In addition, the following references would also be useful background for some of the software packages we will use:
 
@@ -14,7 +14,6 @@ In addition, the following references would also be useful background for some o
 
 A few recent implementations of the pipeline we’ll be using:
 
-- 2023-2024 references?
 - "The palisade layer of the poxvirus core is composed of flexible A10 trimers" [Liu et al. _Nat. Struct. Mol. Biol._ 2023.](https://doi.org/10.1038/s41594-024-01218-5)
 - "In situ architecture of the ciliary base reveals the stepwise assembly of intraflagellar transport trains" [van den Hoek et al. _Science._ 2022](https://doi.org/10.1126/SCIENCE.ABM6704)
 - "Membrane-anchored HDCR nanowires drive hydrogen-powered CO2 fixation" [Dietrich et al. _Nature._ 2022](https://doi.org/10.1038/s41586-022-04971-z)
