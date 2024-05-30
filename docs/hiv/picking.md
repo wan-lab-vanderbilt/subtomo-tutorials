@@ -45,18 +45,18 @@ For these VLPs, we suggest setting the radius to between the two outermost layer
 
 8. When all radii are set, press Save.
 For now, you can click reset to remove the spherical wireframes and close the Pick Particles window.
-Leave Chimera open and go back to MATLAB.
+Leave Chimera open and go back to the TOMOMAN Console.
 
 ## Generating Motivelists
 
 After picking our spheres, we will append this data to the tomolist and use functions in the STOPGAP toolbox to generate a motivelist.
 
-1. We will add the picked spheres to the tomolist using the `tm_metadata_add_new` function in MATLAB.
+1. We will add the picked spheres to the tomolist using the `tm_metadata_add_new` function.
 The input parameters are `root_dir`, `tomolist_name`, and `type`.
 This function loads a tomolist, goes through each tilt series directory and scans the `metadata/` subfolder for a subfolder named `type`, and stores the names of all files in that folder.
 These types can then be used by other functions that parse the tomolist.
 In this case, type is `sphere`.
-If MATLAB is still in `tomo/` you can use this command:
+If your TOMOMAN Console is still in `tomo/` you can use this command:
 
         tm_metadata_add_new([pwd,'/'], 'tomolist.mat', 'sphere');
 

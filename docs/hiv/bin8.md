@@ -35,7 +35,7 @@ The second is a wedgelist, which contains the necessary information for missing 
 
 The third is a STOPGAP tomolist, which links the paths and names of the tomograms to use with the `tomo_num` field in the tomolist and motivelist; this is used for subtomogram extraction.
 
-1. In MATLAB, load the motivelist from the `tomo/` directory we have already generated:
+1. In the STOPGAP Console, load the motivelist from the `tomo/` directory we have already generated:
 
         motl = sg_motl_read2('allmotl_1.star');
 
@@ -140,15 +140,14 @@ Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps will b
 
     For FSC calculation, an alignment mask is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
-In MATLAB, make a sphere mask and save into the `mask/` folder.
-Change to your `subtomo/` directory in MATLAB and run
+To save a sphere mask into the `mask/` folder, change into your `subtomo/` directory, start the STOPGAP Console, and run
 
         sphere = sg_sphere(32, 10, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
 
     Check the mask using 3dmod.
 
-        3dmod masks/sphere.mrc
+        !3dmod masks/sphere.mrc
 
     What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
 
@@ -175,7 +174,7 @@ A and B are raw halfsets; these are often noisy as they are not figure-of-merit 
 The reference without a halfset designation is a figure-of-merit weighted average of A and B; this is NOT a fully processed reference and is supplied as a quick check of your job.
 
     >NOTE: Before structural interpretation, halfsets should be figure-of-merit weighted, low pass filtered to the estimated resolution, and B-factor sharpened.
-    This can be done in MATLAB using the `sg_calculate_FSC` function.
+    This can be done with STOPGAP using the `sg_calculate_FSC` function.
 
     Open the three `.mrc` files in the `ref/` folder in 3dmod.
 You may wish to view them along all three axes by selecting Image > XYZ (or Ctrl+x) or as an isosurface by selecting Image > Isosurface (or Shift+u).
@@ -193,7 +192,7 @@ For this dataset, there is potentially a large error in the Z-direction, but err
 The appropriate shape of mask for this type of error is a cylinder.
 Since we seeded our positions at half the inter-subunit spacing, this is the maximum XY error and will be the radius of the mask.
 
-Run this command in MATLAB to save a cylindrical mask 4 pixels wide and 24 high:
+Run this command in the STOPGAP Console to save a cylindrical mask 4 pixels wide and 24 high:
 
     ccmask = sg_cylinder(32, 4, 24);
     sg_mrcwrite('masks/ccmask.mrc', ccmask);
@@ -285,8 +284,12 @@ Parse another iteration (remember to increment `startidx`) with the same paramet
 4. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
 The symmetry axis we want to use is in one of the empty spaces, so if an empty space is not centered we need to shift the reference in the XY plane.
 You can determine the amount of shift required in 3dmod.
-Then, open the `sg_motl_shift_and_rotate.m` script in MATLAB and plug in values for old and new motivelist and for shift.
-I will typically append the new motivelist name with something descriptive like "_shift".
+Then, use `sg_motl_shift_and_rotate` in the STOPGAP Console to shift positions.
+Replace `old_motl_name`, `new_motl_name`, and `shift` with appropriate values in this command:
+
+        sg_motl_shift_and_rotate('allmotl1', 'allmotl1_shift', 42);
+
+    I typically append the new motivelist name with something descriptive like "_shift".
 
 5. Update the motivelist and reference names in the parser and generate an averaging run.
 Generate a new average.
@@ -314,7 +317,7 @@ If you check the FSC plot in the `fsc/` subfolder, the structure should be well 
 Now that the structure has converged, we can take a look at how the particles have aligned by visualizing them as a lattice map.
 We will use the Place Objects Chimera plugin for this.
 
-1. Covert the motivelist to AV3 `.em` format in MATLAB using `sg_motl_stopgap_to_av3`.
+1. Covert the motivelist to AV3 `.em` format in the STOPGAP Console using `sg_motl_stopgap_to_av3`.
 For example:
 
         sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_8.star');
@@ -342,10 +345,11 @@ We can determine what an appropriate CC value cutoff is by setting Visualization
 Determine and write down an appropriate threshold value to exclude low-scoring particles while preserving as many high-scoring as possible.
     > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value.
 
-8. In MATLAB, open `sg_motl_distance_clean.m`.
+8. Clean the motivelist in the STOPGAP Console.
 Set `s_cut` to the cutoff you determined in the previous step.
 For `d_cut`, choose a value that is smaller than the true interparticle distance.
-Run the script to clean your motivelist.
+
+        sg_motl_distance_clean('allmotl1', s_cut, d_cut);
 
 9. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.

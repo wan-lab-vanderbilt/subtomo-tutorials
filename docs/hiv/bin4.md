@@ -5,7 +5,7 @@
 The main goal here is to prepare the motivelist for bin2 processing.
 This includes rescaling the motivelist, applying the shifts to the extraction positions, and splitting halfsets.
 
-1. In MATLAB, we will re-number the particles and assign odd/even halfsets:
+1. In the STOPGAP Console, we will re-number the particles and assign odd/even halfsets:
 
         sg_motl_assign_halfsets('allmotl_dclean_sclean_2.star', 'allmotl_dclean_sclean_halfset_2.star', 'oddeven', 1);
 
@@ -104,10 +104,11 @@ One I made was:
         fsc_mask = sg_cylinder(64, 12, 22, 3, [33, 33, 32]);
         sg_mrcwrite('masks/fsc_mask.mrc', fsc_mask);
 
-2. In MATLAB, open `sg_calculate_FSC`.
-Adjust input files and fill `ref_avg_name`.
-Select a starting `bfactor`, -100 is reasonable.
-Run the script.
+2. In the STOPGAP Console, run FSC calculation. `sg_calculate_FSC`.
+Use the name of the most recent reference in place of `ref_avg_name`.
+`bfactor` can be adjusted but 100 is a reasonable starting point.
+
+        sg_calculate_FSC(ref_avg_name, bfactor=100, etc.);
 
 3. You should find that the FSC plot is significantly better than what STOGAP outputs.
 The output reference should also be less noisy and sharper.
