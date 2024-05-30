@@ -12,17 +12,16 @@ Here we will initialize a subtomogram averaging folder with the necessary files 
 
 2. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
 
-        cp $STOPGAPHOME/bash/stopgap_initialize_folder.sh .
         cp $STOPGAPHOME/bash/stopgap_extract_parser.sh .
         cp $STOPGAPHOME/bash/stopgap_subtomo_parser.sh .
         cp $STOPGAPHOME/bash/run_stopgap.sh .
 
 3. Run the initialize folder command with the subtomo task:
 
-        stopgap_initialize_folder.sh subtomo
+        stopgap_initialize_folder subtomo
 
     The folder now has the required structure for subtomogram averaging jobs.
-    Re-running `stopgap_intialize_folder.sh` for other jobs will add the additional required folders without affecting old ones.
+    Re-running `stopgap_intialize_folder` for other jobs will add the additional required folders without affecting old ones.
 
 ### Preparing Lists
 
@@ -77,7 +76,7 @@ We will pick object 1:
 
 8. Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
 
-### Preparing to run STOPGAP with MPI
+### Preparing to Run with MPI
 
 STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
@@ -91,7 +90,7 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder.
-Be sure to end your path with a `/`.
+Be sure to end your path with a `/`!
 As with TOMOMAN, we will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
 
@@ -214,13 +213,13 @@ In general, the high pass filter defaults (`hp_rad=1`, `hp_sigma=2`) is fine; th
 More important is to keep track of the low-pass filter radius (`lp_rad`) during your run; a `lp_sigma` of `3` is usually fine.
 A rule of thumb is to make sure the `lp_rad` is less-than or equal to the Fourier radius where FSC=0.5.
 Since we don’t really have any resolution in our map, we can arbitrarily set it to 60 Å for now.
-STOPGAP sets filter values in Fourier pixels as real-space values do not round well, particularly for small boxsizes or high binnings.
+STOPGAP sets filter values in Fourier pixels since real-space values do not round well, particularly for small boxsizes or high binnings.
 You can covert resolution to Fourier pixels with:
 
     $$fpix = \frac{boxsize × pixelsize}{resolution}$$
 
-    so for our settings, 60 Å is 5.76 Fourier pixels.
-    Since we cannot set fractional pixels, we can round to 6, which is a resolution of 57.6 Å.
+    In our current settings we have a 32 pixel boxsize and a 10.8 Å pixelsize so 60 Å resolution corresponds to 5.76 Fourier pixels.
+    Since we cannot set fractional pixels, we can round to 6, which corresponds to a resolution of 57.6 Å.
 
 4. Run the parser and run STOPGAP.
 

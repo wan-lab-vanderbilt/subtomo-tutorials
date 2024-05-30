@@ -1,16 +1,16 @@
 # Particle Picking in Chimera
 
-In this section, we will pick spheres in UCSF Chimera using Kun Qu’s Pick Particle plugin ([link](https://www.biochem.mpg.de/7940000/Pick-Particle)).
+In this section, we will pick spheres in UCSF Chimera using Kun Qu’s [Pick Particle](https://www.biochem.mpg.de/7940000/Pick-Particle) plugin.
 We will then update these metadata on the tomolist and generate a STOPGAP motivelist of these particles.
-We will then visualize the particle positions in UCSF Chimera using Kun Qu’s Place Object plugin ([link](https://www.biochem.mpg.de/7939908/Place-Object)).
+We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin.
 
 ## Picking Spheres
 
 In Chimera, we will pick centers using Volume Tracer and set radii for each sphere using the Pick Particle tool.
 The plugins mentioned above are not standard in Chimera, but we have them installed in a custom Chimera installation. Open a terminal and run `chimera2` to access this installation.
 
-1. Open the bin 8 tomogram.
-It should be saved in `tomo/novactf_bin8/`.
+1. The bin8 tomogram should be saved in `tomo/novactf_bin8/`.
+Open it in Chimera.
 Chimera may open the tomogram as an isosurface volume.
 If so, visualize it as planes (select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
 You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
@@ -76,7 +76,7 @@ The parameters for this function are:
 
         sg_motl_batch_sphere('tomolist.mat', 'allmotl_1.star', 'sphere', 8, 3.5, 1, 16, []);
 
-    Note that we are "oversampling," creating more objects than there are truly proteins of interest in the tomogram.
+    Note that we are oversampling, that is, creating more objects than there are truly proteins of interest in the tomogram.
     This ensures that every true particle is picked at least once and we will subsequently cull unecessary objects.
 
 3. The Place Objects tool in Chimera only opens AV3-format .em files, so we will need to convert our STOPGAP motivelist using the `sg_motl_stopgap_to_av3` function.
@@ -85,7 +85,7 @@ As an example:
         sg_motl_stopgap_to_av3('allmotl_1.star');
 
 4. In Chimera, open the Place Object function (Main Window > Tools > Utilities > Place Object).
-Open the .em motivelist file and apply.
+Open the `.em` motivelist file and apply.
 This will display the particle positions as spheres, colored by their class number.
 
 5. To visualize particles with angular information, you can change the Object style using the dropdown.

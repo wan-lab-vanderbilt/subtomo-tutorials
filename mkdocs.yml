@@ -24,4 +24,3 @@ extra_javascript:
 
 markdown_extensions:
     - mdx_math
-    - footnotes
