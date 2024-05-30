@@ -58,7 +58,7 @@ These types can then be used by other functions that parse the tomolist.
 In this case, type is `sphere`.
 If your TOMOMAN Console is still in `tomo/` you can use this command:
 
-        tm_metadata_add_new([pwd,'/'], 'tomolist.mat', 'sphere');
+        tm_metadata_add_new(pwd, 'tomolist.mat', 'sphere');
 
 2. To generate a motivelist, we will use the `sg_motl_batch_sphere` function.
 This function generates particle coordinates along the surface of the input spheres in a defined way.
