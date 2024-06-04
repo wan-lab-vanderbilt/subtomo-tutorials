@@ -12,7 +12,7 @@ Start TOMOMAN by running:
 
         $TOMOMANHOME/bin/tomoman_standalone.sh
 
-This will return a console window in which we will run various TOMOMAN tasks and functions. 
+This will return a console window in which we will run various TOMOMAN tasks and functions.
 
 > NOTE: If you want to run a system command (i.e. a terminal command not a MATLAB command), prepend an `!`. For example, `!3dmod`.
 

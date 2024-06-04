@@ -71,3 +71,5 @@ Open `tomoman_novactf.param`.
 11. After running novaCTF you can preview your reconstructed tomograms in 3dmod, for example:
 
         !3dmod novactf_bin8/TS_01_dose-filt.rec
+
+TOMOMAN reconstruction is now finished.

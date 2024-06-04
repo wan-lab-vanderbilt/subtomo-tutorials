@@ -8,38 +8,43 @@ The product of this average will serve as a *de novo* reference for subtomogram 
 
 Here we will initialize a subtomogram averaging folder with the necessary files and structure.
 
-1. In your HIV_tutorial directory, make a `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
+1. In a terminal (not the TOMOMAN standalone) change to your HIV_tutorial directory.
 
-2. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
+1. Make a `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
+
+1. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
 
         cp $STOPGAPHOME/bash/stopgap_extract_parser.sh .
         cp $STOPGAPHOME/bash/stopgap_subtomo_parser.sh .
         cp $STOPGAPHOME/bash/run_stopgap.sh .
 
-3. Run the initialize folder command with the subtomo task:
+1. Run the initialize folder command with the subtomo task:
 
         stopgap_initialize_folder subtomo
 
     The folder now has the required structure for subtomogram averaging jobs.
     Re-running `stopgap_intialize_folder` for other jobs will add the additional required folders without affecting old ones.
 
-### Preparing Lists
+## Preparing Lists
 
-For subtomogram averaging with STOPGAP, several types of lists are required.
+For subtomogram averaging with STOPGAP, three lists are required.
 
 The first is a motivelist.
 We already have a motivelist but we will parse out the particles from a single VLP for generating our initial reference.
 
-The second is a wedgelist, which contains the necessary information for missing wedge compensation.
+The second is a wedgelist which contains the necessary information for missing wedge compensation.
 
-The third is a STOPGAP tomolist, which links the paths and names of the tomograms to use with the `tomo_num` field in the tomolist and motivelist; this is used for subtomogram extraction.
+The third is a STOPGAP tomolist.
+The tomolist links the paths and names of the tomograms to a `tomo_num` field which matches the motivelist, this is used for subtomogram extraction.
 
-1. In the STOPGAP Console, load the motivelist from the `tomo/` directory we have already generated:
+### Motivelist
+
+1. In the TOMOMAN standalone, load the motivelist from the `tomo/` directory we have already generated.
 
         motl = sg_motl_read2('allmotl_1.star');
 
     >NOTE: There are two `sg_motl_read` functions; the difference is in how they load the data.
-    While `sg_motl_read()` is formatted in a way that is a bit easier to read, it requires substantially more memory.
+    While output from `sg_motl_read()` is formatted in a way that is a bit easier to read, it requires substantially more memory.
 
 2. We will parse our desired subtomograms using logical indexing.
 We will first index by tomo_num; in this case we want tomo 1.
@@ -54,7 +59,7 @@ We will pick object 1:
 
 4. We will parse the subtomograms into a new motivelist:
 
-        new_motl = sg_motl_parse_type2(motl, (idx1&idx2));
+        new_motl = sg_motl_parse_type2(motl, (idx1 & idx2));
 
     >NOTE: we combined the two indices using MATLAB’s logical operators.
 
@@ -64,19 +69,23 @@ We will pick object 1:
 
     >NOTE: STOPGAP motivelists have the following format `[name]_[iteration].star`, where iteration is the iteration of the subtomogram averaging run.
     Our file ends with `_1.star` because it will be used for the first run.
-    The name is arbitrary but should not contain non-letter characters except for underscores.
+    The rest of the name is arbitrary but should not contain non-letter characters except for underscores.
 
-6. Generate a wedgelist:
+### Wedgelist
 
-        sg_wedgelist_from_tomolist('tomolist.mat', 'wedgelist.star');
+Generate a wedgelist from the TOMOMAN tomolist:
 
-7. Generate a STOPGAP tomolist:
+    sg_wedgelist_from_tomolist('tomolist.mat', 'wedgelist.star');
 
-        sg_extract_make_tomolist('tomolist.mat', [pwd,'/novactf_bin8/'], 'sg_tomolist.txt');
+### Tomolist
 
-8. Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
+Generate a STOPGAP tomolist:
 
-### Preparing to Run with MPI
+    sg_extract_make_tomolist('tomolist.mat', [pwd,'/novactf_bin8/'], 'sg_tomolist.txt');
+
+Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
+
+### Preparing to Run STOPGAP
 
 STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
@@ -90,9 +99,24 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder.
-Be sure to end your path with a `/`!
-As with TOMOMAN, we will update `paramfilename` before running each job.
+We will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
+
+    >NOTE: Remember to end your `rootdir` path with a `/`!
+
+## Launching the STOPGAP Toolbox
+
+We are now ready to load and use the STOPGAP Toolbox.
+Its purpose is the same as the TOMOMAN standalone, to run MATLAB commands without needing a MATLAB license and installation.
+
+Exit the TOMOMAN standalone with `exit`.
+Use `cd` to change to the `init_ref/` directory.
+
+    cd ../subtomo/init_ref/
+
+Start the STOPGAP Toolbox by running:
+
+    $STOPGAPHOME/bin/stopgap_toolbox.sh
 
 ## Extract Subtomograms
 
@@ -370,7 +394,7 @@ Here we will go over how to take your initial reference and align it against the
 1. Make a new folder for averaging the full dataset (`subtomo/full/`) and initialize it for subtomogram averaging as you did with `init_ref/`.
 Copy your previous wedgelist, tomolist, masks, and `.sh` scripts into their approrpiate places in `full/`.
 
-2. Copy the full motivelist into `full/lists/`.
+2. Copy the full motivelist from `tomo/` to `subtomo/full/lists/`.
 
 3. Copy the references from your final initial average into `full/ref/` and rename them as iteration 1.
 I.e., `ref_A_9.mrc` would become `ref_A_1.mrc`.
