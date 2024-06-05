@@ -105,7 +105,7 @@ Browse for and open the `.em` motivelist file. Click Apply.
 This will display the particle positions as spheres, colored by their class number.
 In this case, all are the same class.
 
-> NOTE: Since this is an oversampled dataset, there are quite a few particle positions; it may take a while to load. It will also be a bit slow when adjusting the view.
+   > NOTE: Since this is an oversampled dataset, there are quite a few particle positions; it may take a while to load. It will also be a bit slow when adjusting the view.
 
 1. To visualize particles with angular information, you can change the Object Style dropdown.
 Hexagons with voxel-size 0.1 work well here.
