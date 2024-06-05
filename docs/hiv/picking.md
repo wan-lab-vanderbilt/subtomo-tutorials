@@ -13,10 +13,10 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
 As TOMOMAN reconstructs all tomograms using the same parameters, the tomogram positioning is identical.
 
-Open it in Chimera with File > Open.
-Chimera may open the tomogram as an isosurface volume.
-If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
-You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
+        Open it in Chimera with File > Open.
+        Chimera may open the tomogram as an isosurface volume.
+        If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
+        You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
 1. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
 Set the Origin index to 0 and the Voxel size to 1.
