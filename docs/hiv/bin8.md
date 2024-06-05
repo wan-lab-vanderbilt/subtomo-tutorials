@@ -10,7 +10,8 @@ Here we will initialize a subtomogram averaging folder with the necessary files 
 
 1. In a terminal (not the TOMOMAN standalone) change to your HIV_tutorial directory.
 
-1. Make a `subtomo/init_ref/` subdirectory. Change into the `init_ref/` directory.
+1. Make a `subtomo/init_ref/` subdirectory.
+Change into the `init_ref/` directory.
 
 1. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
 
@@ -114,7 +115,8 @@ With the lists and run script prepared, we are now ready to extract our subtomog
 2. Update the rootdir to the absolute path of the `init_ref/` directory.
 The other directory parameters can be left alone; they are overrides to the standard STOPGAP structure.
 
-3. Update the list names in file options. Since these are all lists, they are assumed to be in the listdir.
+3. Update the list names in file options.
+Since these are all lists, they are assumed to be in the listdir.
     > NOTE: since we are providing a tomolist, `tomodir` is ignored and can be left as `'none'`.
 
 4. Set the extraction parameters.

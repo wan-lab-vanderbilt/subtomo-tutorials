@@ -2,17 +2,14 @@
 
 In this section, we will pick spheres in UCSF Chimera using Kun Qu’s [Pick Particle](https://www.biochem.mpg.de/7940000/Pick-Particle) plugin.
 We will then update these metadata on the tomolist and generate a STOPGAP motivelist of these particles.
-We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin. These plugins are not standard in Chimera so must be installed separately.
+We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin.
+These plugins are not standard in Chimera so must be installed separately.
 
 ## Opening a Tomogram in Chimera
 
-1. Open Chimera.
-
-    <details><summary>Wan Lab</summary>Open a terminal and run `chimera2` to access the custom installation with plugins.</details>
-    <details><summary>U of M</summary>Run `module load chimera` and then `chimera` to load and open Chimera.
-    </details>
-
-    Ensure that you have both Pick Particles and Place Object listed under Tools > Utilities. If not, you need to install them or use a different Chimera instance. Check the setup pages for help.
+1. Run `chimera` to open Chimera.
+Ensure that you have both Pick Particles and Place Object listed under Tools > Utilities.
+If not, you need to install them or use a different Chimera instance. Check the setup pages for help.
 
 1. The bin8 tomogram should be saved in `tomo/novactf_bin8/`.
 Open it in Chimera with File > Open.

@@ -104,11 +104,17 @@ One I made was:
         fsc_mask = sg_cylinder(64, 12, 22, 3, [33, 33, 32]);
         sg_mrcwrite('masks/fsc_mask.mrc', fsc_mask);
 
-2. In the STOPGAP Console, run FSC calculation. `sg_calculate_FSC`.
-Use the name of the most recent reference in place of `ref_avg_name`.
-`bfactor` can be adjusted but 100 is a reasonable starting point.
+2. In the STOPGAP Console, run FSC calculation with `sg_calculate_FSC`.
+The parameters for this function are:
 
-        sg_calculate_FSC(ref_avg_name, bfactor=100, etc.);
+    - `ref_avg_name`
+    - `bfactor`
+    - etc.
+
+    Use the name of the most recent reference in place of `ref_avg_name`.
+    `bfactor` can be adjusted but 100 is a reasonable starting point.
+
+        sg_calculate_FSC(ref_avg_name, 100, etc.);
 
 3. You should find that the FSC plot is significantly better than what STOGAP outputs.
 The output reference should also be less noisy and sharper.
