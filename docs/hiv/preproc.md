@@ -30,6 +30,11 @@ Parameter files for all TOMOMAN tasks are now copied into the `root_dir`, in thi
 You can view the contents of `tomo/` by running `ls`.
 While files for all tasks are copied, they won’t all be used for this tutorial, and you may delete unused ones.
 
+For the rest of the preprocessing tasks, we will be editing parameter files and running them in the TOMOMAN console. To facilitate this, we suggest you now open a new terminal window and go to the `tomo` folder.
+
+        cd ~/HIV_subset/tomo/
+
+
 ## Importing New Stacks
 
 The first step in TOMOMAN processing is sorting new data into directories, one for each tilt series.
