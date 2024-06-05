@@ -10,7 +10,7 @@ Ensure you are in your `tomo/` directory.
 
 Start TOMOMAN by running:
 
-        $TOMOMANHOME/bin/tomoman_standalone.sh
+        tomoman_standalone.sh
 
 This will return a console window in which we will run various TOMOMAN tasks and functions.
 It may take a minute to start up the first time you run it.
@@ -105,8 +105,8 @@ Open the `tomoman_motioncor2.param` file and review its parameters.
     For this tutorial, leave `force_realign` as 0.
 
     2. This dataset was collected on a K2 in super-resolution mode.
-    The image_size parameter sets the output image size; in this case we want a normal resolution output image.
-    Set image_size to `3712,3712`; this pads a K2 image by 2 pixels in one axis, but results in an image size amenable to binning at factors of 2.
+    The `image_size` parameter sets the output image size; in this case we want a normal resolution output image.
+    Set `image_size` to `3712,3712`; this pads a K2 image by 2 pixels in one axis, but results in an image size amenable to binning at factors of 2.
 
 3. The MotionCor2 parameters block contains MotionCor2’s parameters.
 For this dataset, most of the defaults are fine, but be sure to set the `FtBin` parameter to 2 so that the aligned frames are Fourier cropped back to normal size.
@@ -138,7 +138,7 @@ The default parameters should work fine.
         tomoman(pwd, 'tomoman_clean_stacks.param');
 
 4. Follow the instructions in the console to remove bad images.
-For this dataset, there are at least 5-6 images that are black or too dark to see the specimen well.
+For this dataset, there is 1 blocked image that should be removed.
 
     >NOTE: Remember to close your 3dmod windows; TOMOMAN is unable to close spawned windows from external packages.
 
@@ -159,6 +159,6 @@ Open `tomoman_dosefilter.param`.
 
     2. We are not using odd and even stacks so you can set `check_oddeven` to `false` to avoid warnings about missing stacks.
 
-3. Run dose filtering in the standalone console.
+3. Run dose filtering in the TOMOMAN console.
 
-4. If you would like to see the results of dose filtering, you can open "before" and "after" stacks in 3dmod.
+4. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
