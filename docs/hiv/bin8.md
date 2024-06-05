@@ -85,6 +85,9 @@ Generate a STOPGAP tomolist:
     sg_extract_make_tomolist('tomolist.mat', [pwd,'/novactf_bin8/'], 'sg_tomolist.txt');
 
 Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
+        !cp allmotl_tomo1_obj1_1.star ~/HIV_testset/subtomo/init_ref/lists/
+        !cp wedgelist.star ~/HIV_testset/subtomo/init_ref/lists/
+        !cp sg_tomolist.txt ~/HIV_testset/subtomo/init_ref/lists/
 
 ## Preparing to Run STOPGAP with MPI
 
