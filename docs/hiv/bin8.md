@@ -20,7 +20,7 @@ Here we will initialize a subtomogram averaging folder with the necessary files 
 
 1. Run the initialize folder command with the subtomo task:
 
-        stopgap_initialize_folder subtomo
+        stopgap_initialize_folder.sh subtomo
 
     The folder now has the required structure for subtomogram averaging jobs.
     Re-running `stopgap_intialize_folder` for other jobs will add the additional required folders without affecting old ones.
@@ -85,7 +85,7 @@ Generate a STOPGAP tomolist:
 
 Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
 
-### Preparing to Run STOPGAP
+## Preparing to Run STOPGAP with MPI
 
 STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
@@ -95,7 +95,8 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 
     The main parameters here are the "run options" which manage parallelization and the directories.
 
-2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to 10, and `copy_local` to 0.
+2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, and `copy_local` to 0.
+Set `n_cores` to the same number as used for `nthreads` in [CTF estimation](recon.md/#ctf-estimation).
 The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder.
@@ -103,20 +104,6 @@ We will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
 
     >NOTE: Remember to end your `rootdir` path with a `/`!
-
-## Launching the STOPGAP Toolbox
-
-We are now ready to load and use the STOPGAP Toolbox.
-Its purpose is the same as the TOMOMAN standalone, to run MATLAB commands without needing a MATLAB license and installation.
-
-Exit the TOMOMAN standalone with `exit`.
-Use `cd` to change to the `init_ref/` directory.
-
-    cd ../subtomo/init_ref/
-
-Start the STOPGAP Toolbox by running:
-
-    $STOPGAPHOME/bin/stopgap_toolbox.sh
 
 ## Extract Subtomograms
 
@@ -151,6 +138,20 @@ Feel free to preview it if you're curious.
 
     >NOTE: STOPGAP is setup here to run through the stopgap_watcher, which is a separate program to track STOPGAP progress.
     This is not required; for running on clusters where programs are not allowed to be run on submission nodes, stopgap_watcher can be run on any computer that has access to the working directory.
+
+## Launching the STOPGAP Toolbox
+
+We are now ready to load and use the STOPGAP Toolbox.
+Its purpose is the same as the TOMOMAN standalone, to run MATLAB commands without needing a MATLAB license and installation.
+
+Exit the TOMOMAN standalone with `exit`.
+Use `cd` to change to the `init_ref/` directory:
+
+    cd ../subtomo/init_ref/
+
+Start the STOPGAP Toolbox by running:
+
+    $STOPGAPHOME/bin/stopgap_toolbox.sh
 
 ## Calculate Starting Reference
 

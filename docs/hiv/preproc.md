@@ -4,33 +4,38 @@
 
 Rather than using MATLAB in this tutorial, we will be using the TOMOMAN standalone executable. This is a compiled executable that provides all the functionalities of running TOMOMAN in MATLAB without the need for a license.
 
-Open a dedicated terminal window to run the TOMOMAN standalone executable. Use `cd` to change to your `tomo/` directory.
-
-        cd tomo/
+Open a dedicated terminal window to run the TOMOMAN standalone executable. Ensure you are in your `tomo/` directory.
 
 Start TOMOMAN by running:
 
         $TOMOMANHOME/bin/tomoman_standalone.sh
 
 This will return a console window in which we will run various TOMOMAN tasks and functions.
+It may take a minute to start up the first time you run it.
 
-> NOTE: If you want to run a system command (i.e. a terminal command not a MATLAB command), prepend an `!`. For example, `!3dmod`.
+> NOTE: If you want to run a system command (i.e. a terminal command not a MATLAB command) in the standalone, prepend an `!`. For example, `!3dmod`.
 
 ## Initializing TOMOMAN Parameter Files
 
-In this step, we will copy a set of TOMOMAN parameter files to the tomogram folder. These parameter files are plain-text files that tell TOMOMAN which processing step you wish to run and the parameters for that step.
+In this step, we will copy a set of TOMOMAN parameter files to the tomogram folder.
+These parameter files are plain-text files that tell TOMOMAN which processing step you wish to run and the parameters for that step.
 
 Copy empty parameter files for all TOMOMAN tasks to the current directory, using default TOMOMAN filenames, by running the below command in the TOMOMAN console.
 
         tomoman_copy_paramfiles(pwd);
 
-Parameter files for all TOMOMAN tasks are now copied into the `root_dir`, in this case, `tomo/`. While files for all tasks are copied, they won’t all be used for this tutorial, and you may delete unused ones.
+Parameter files for all TOMOMAN tasks are now copied into the `root_dir`, in this case, `tomo/`.
+You can view the contents of `tomo/` by running `ls`.
+While files for all tasks are copied, they won’t all be used for this tutorial, and you may delete unused ones.
 
 ## Importing New Stacks
 
-The first step in TOMOMAN processing is sorting new data into directories, one for each tilt series. During this step, TOMOMAN scans a `raw_stack_dir` for .mdoc files. For each one it finds, it generates a new folder to contain all the preprocessing data, links the .mdoc file, creates a `frames/` subdirectory, parses frame names from the .mdoc file, and generates links for all frames from the `raw_frame_dir` to the `frames/` subdirectory.
+The first step in TOMOMAN processing is sorting new data into directories, one for each tilt series.
+During this step, TOMOMAN scans a `raw_stack_dir` for .mdoc files.
+For each one it finds, it generates a new folder to contain all the preprocessing data, links the .mdoc file, creates a `frames/` subdirectory, parses frame names from the .mdoc file, and generates links for all frames from the `raw_frame_dir` to the `frames/` subdirectory.
 
-New data is imported using the `tomoman_import.param` file. Open this file in a text editor, for example, gedit using this terminal command:
+New data is imported using the `tomoman_import.param` file.
+Open this file in any text editor, for example, you can use gedit in a new terminal window:
 
     gedit tomoman_import.param
 
@@ -50,9 +55,12 @@ Parameters specified here will determine how TOMOMAN imports and sorts new data.
 
 7. After setting the parameters, save the file. To run the import task, run this command in the TOMOMAN standalone:
 
-        tomoman(pwd,'tomoman_import.param');
+        tomoman(pwd, 'tomoman_import.param');
 
-    >NOTE: The `tomoman` MATLAB command takes two inputs: a `root_dir` to search for a param file and the `paramfilename` to run. Since we started the standalone from `tomo/` we can use our working directory (`pwd`) along with the import param filename.
+    >NOTE: The `tomoman` MATLAB command takes two inputs: a `root_dir` to search for a param file and the `paramfilename` to run. Since we started the standalone from `tomo/` we can use our working directory (`pwd`) along with the import parameters filename.
+
+    >NOTE: You may get a warning about a missing `TS_01.mrc` file due to files referenced in the .mdoc but not copied for this workshop.
+    As long as importing still completes this can be disregarded.
 
 The tilt series folder should now be properly set.
 
@@ -68,7 +76,7 @@ Open the `tomoman_motioncor2.param` file and review its parameters.
 
 2. The TOMOMAN parameters set parameters for how TOMOMAN runs.
 
-    1. Most tasks have some `"force"` parameter, which tells TOMOMAN to repeat the task on tilt series that have already been processed. If set off, TOMOMAN only runs the task on tilt series that have not yet been processed. For this tutorial, leave `force_realign` as 0.
+    1. Most tasks have some "force" parameter, which tells TOMOMAN to repeat the task on tilt series that have already been processed. If set off, TOMOMAN only runs the task on tilt series that have not yet been processed. For this tutorial, leave `force_realign` as 0.
 
     2. This dataset was collected on a K2 in super-resolution mode. The image_size parameter sets the output image size; in this case we want a normal resolution output image. Set image_size to `3712,3712`; this pads a K2 image by 2 pixels in one axis, but results in an image size amenable to binning at factors of 2.
 
@@ -83,7 +91,7 @@ Open the `tomoman_motioncor2.param` file and review its parameters.
 
 6. Save the param file and run the TOMOMAN in the standalone with the new `paramfilename`:
 
-        tomoman(pwd,'tomoman_motioncor2.param');
+        tomoman(pwd, 'tomoman_motioncor2.param');
 
 ## Cleaning Stacks
 
@@ -95,7 +103,7 @@ After generating your motion-corrected tilt series stacks, you now have somethin
 
 3. Save the param file and run stack cleaning.
 
-        tomoman(pwd,'tomoman_clean_stacks.param');
+        tomoman(pwd, 'tomoman_clean_stacks.param');
 
 4. Follow the instructions in the console to remove bad images. For this dataset, there are at least 5-6 images that are black or too dark to see the specimen well.
 
@@ -109,9 +117,9 @@ We find that dose filtering (a.k.a. exposure filtering) greatly improves the con
 
 2. The dose filtering parameter block is usually fine with the default values.
 
-        1. Pre-exposure is typically from tasks such as mapping and realigning during data collection, but is generally quite low and can be ignored. TOMOMAN lets you dose filter frames (i.e., not just motion corrected images), if you first generate an aligned frame stack. This can better preserve high resolution signals, but for the practical we will just filter the aligned images. Critical exposure constants can be provided, but these are typically not known *a priori*, so we generally use the default values determined by Grant and Grigorieff.
+    1. Pre-exposure is typically from tasks such as mapping and realigning during data collection, but is generally quite low and can be ignored. TOMOMAN lets you dose filter frames (i.e., not just motion corrected images), if you first generate an aligned frame stack. This can better preserve high resolution signals, but for the practical we will just filter the aligned images. Critical exposure constants can be provided, but these are typically not known *a priori*, so we generally use the default values determined by Grant and Grigorieff.
 
-        2. We are not using odd and even stacks so you can set `check_oddeven` to `false` to avoid warnings about missing stacks.
+    2. We are not using odd and even stacks so you can set `check_oddeven` to `false` to avoid warnings about missing stacks.
 
 3. Run dose filtering in the standalone console.
 

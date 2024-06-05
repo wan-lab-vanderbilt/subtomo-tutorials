@@ -2,19 +2,31 @@
 
 ## CTF Estimation
 
-CTF estimation for tomography is similar to single particle images in that Thon ring fitting is used in both. However, since tilted images have a defocus gradient, different parts of the images have different Thon rings. TOMOMAN includes `tiltctf`, an algorithm we developed to use tilt series alignment parameters to generate power spectra that account for this defocus gradient. We then give this power spectrum to CTFFIND4 for Thon ring fitting.
+Contrast Transfer Function (CTF) estimation is similar for tomography and single particle analysis in that Thon ring fitting is used in both.
+However, tilted images have a defocus gradient because different parts of the specimen are different distances from the lens and, as a result, different parts of the images have different Thon rings.
+TOMOMAN includes `tiltctf`, an algorithm we developed to use tilt series alignment parameters to generate power spectra that account for this defocus gradient.
+We then give this power spectrum to CTFFIND4 for Thon ring fitting.
 
 Open the `tomoman_tiltctf.param` file.
 
 1. The directory parameters should already be correct.
 
-2. The `tiltctf` parameters include the parameters for calculating power spectra. Except where noted, default values are fine.
+2. The tiltctf parameters include the parameters for calculating power spectra. Except where noted, default values are fine.
 
-    1. In general, a `ps_size` of 512 and a `def_tol`, defocus tolerance, of 0.05 um is sufficient. Defocus tolerance is the maximum allowed tolerance when deciding how to tile tilted images, but `tiltctf` also always uses a minimum tile overlap of ½ the power spectrum size, so increasing this number may not directly affect computation time.
+    1. In general, a `ps_size` of 512 and a `def_tol`, defocus tolerance, of 0.05 um is sufficient.
+    Defocus tolerance is the maximum allowed tolerance when deciding how to tile tilted images, but `tiltctf` also always uses a minimum tile overlap of ½ the power spectrum size, so increasing this number may not directly affect computation time.
 
-    2. Fourier scaling, `fscaling`, should be used if the data is collected for high-resolution work (e.g. pixel size smaller than ~2 Å/pix). This helps with potential aliasing in the power spectrum. For this dataset, use `fscaling = 2`. This Fourier scaling means the Nyquist frequency in the power spectra will be 5.4 Å. In practice, this is not a problem as tilt series data is collected with such low dose per image that Thon rings cannot be fit to very high resolutions.
+    2. Fourier scaling, `fscaling`, should be used if the data is collected for high-resolution work (e.g. pixel size smaller than ~2 Å/pix).
+    This helps with potential aliasing in the power spectrum.
+    For this dataset, use `fscaling = 2`.
+    This Fourier scaling means the Nyquist frequency in the power spectra will be 5.4 Å. In practice, this is not a problem as tilt series data is collected with such low dose per image that Thon rings cannot be fit to very high resolutions.
 
-    3. Defocus range, `def_range`, is a TOMOMAN parameter that defines the search range that CTFFIND4 will use. TOMOMAN uses the defocus value stored in the tomolist and provides +/- the defocus range to CTFFIND4. If you know your target defocus was incorrect during data acquisition, you can increase this range. If not, the default is fine.
+    3. Defocus range, `def_range`, is a TOMOMAN parameter that defines the search range that CTFFIND4 will use.
+    TOMOMAN uses the defocus value stored in the tomolist and provides +/- the defocus range to CTFFIND4.
+    If you know your target defocus was incorrect during data acquisition, you can increase this range. If not, the default is fine.
+
+    4. Handedness describes which side of the image (left or right) has a greater defocus at positive tilt angles.
+    For this dataset, the right side has greater defocus at positive tilt so set `handedness` to `+1`.
 
 3. The CTFFIND4 parameter block contains the same parameters for CTFFIND4.
 
@@ -64,9 +76,9 @@ Open `tomoman_novactf.param`.
 
 9. NovaCTF’s approach to CTF-correction assumes that the center of mass is at the center of the tomograms. If this is off, the reconstructed tomogram will contain a systematic error in all planes. To refine the tomogram center, novaCTF allows you to generate an offset value for recentering. TOMOMAN can take an input STOPGAP motivelist, and use the center of mass of the particles as the refined center. Since we have no such motivelist now, this can be left off.
 
-10. Run novaCTF in the standalone. This is typically the single longest computation step in the workflow. If you are following this tutorial at a workshop, your instructors will provide you with a reconstructed tomogram for subsequent steps to save time.
+10. Run novaCTF in the standalone. This is typically the single longest computation step in the workflow. If you are following this tutorial at a workshop, your instructors will provide you with a reconstructed tomogram to use for subsequent steps to save time.
 
-    >NOTE: If you receive an error that libfftw3f.so.3 is not found, you have an issue with sourcing FFTW libraries. If this cannot be resolved, try running NovaCTF from MATLAB Command Window instead with `tomoman(pwd,'tomoman_novactf.param');`.
+    >NOTE: If you receive an error that libfftw3f.so.3 is not found, you have an issue with sourcing FFTW libraries. If this cannot be resolved, try running NovaCTF from the MATLAB Command Window instead with `tomoman(pwd,'tomoman_novactf.param');`.
 
 11. After running novaCTF you can preview your reconstructed tomograms in 3dmod, for example:
 
