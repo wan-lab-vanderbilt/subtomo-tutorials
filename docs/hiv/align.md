@@ -1,7 +1,7 @@
 # Tilt-Series Alignment
 
-Since this data set has gold fiducials, we could use bead tracking for manual tilt series alignment, for example in Etomo.
-Manual alignment typically yields superior results to automated alignment but for sake of time we will use TOMOMAN to perform automated tilt-series alignment using AreTomo.
+Since this data set has gold fiducials, we could use bead tracking for manual tilt series alignment using software like the Etomo program in IMOD.
+Manual alignment often yields superior results to automated alignment, but for sake of time we will use TOMOMAN to perform automated tilt-series alignment using AreTomo.
 TOMOMAN provides some additional settings on top of the standard AreTomo settings, including the option to use unfiltered or dose-filtered tilt-series, as well as pre-binning the tilt-series prior to alignment.
 
 For more information about AreTomo, see the publication or [manual](https://gensoft.pasteur.fr/docs/AreTomo/1.3.4/AreTomoManual_1.3.0_09292022.pdf).
@@ -22,12 +22,13 @@ Open `tomoman_aretomo.param`.
     This should be approximately the same as the actual thickness of the sample.
     `VolZ` is the thickness of the reconstructed tomogram and should be larger than both `AlignZ` and the specimen thickness.
     In this case, `AlignZ=1400` and `VolZ=1800` should work well.
-    After reconstruction, you will be able to see the tomogram extending beyond the specimen in XZ slices.
     The rest of the AreTomo parameters can be left as defaults.
+    >NOTE: After reconstruction, you will see that the tomogram is reconstructed beyond the edges of the specimen along the Z direction. 
+    
 
-    3. Note that `OutBin` is set to 8.
+    4. Note that `OutBin` is set to 8.
 
-    4. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
+    5. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
 
 4. Run reconstruction as before in the TOMOMAN console.
 
