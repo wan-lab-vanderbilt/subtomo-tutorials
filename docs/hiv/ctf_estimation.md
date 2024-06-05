@@ -1,9 +1,10 @@
 # CTF Estimation
 
 Contrast Transfer Function (CTF) estimation is similar for tomography and single particle analysis in that Thon ring fitting is used in both.
-However, tilted images have a defocus gradient because different parts of the specimen are different distances from the lens and, as a result, different parts of the images have different Thon rings.
+However, tilted images have a defocus gradient as different areas of the field of view have different heights.
+As such, Thon rings from each area of the specimen are different; these Thon rings do not sum coherently, and higher-resolution Thon rings are lost at higher tilt angles. 
 TOMOMAN includes `tiltctf`, an algorithm we developed to use tilt series alignment parameters to generate power spectra that account for this defocus gradient.
-We then give this power spectrum to CTFFIND4 for Thon ring fitting.
+We then pass this power spectrum to CTFFIND4 for Thon ring fitting.
 
 Open the `tomoman_tiltctf.param` file.
 
@@ -12,7 +13,7 @@ Open the `tomoman_tiltctf.param` file.
 2. The tiltctf parameters include the parameters for calculating power spectra.
 Except where noted, default values are fine.
 
-    1. In general, a `ps_size` of 512 and a `def_tol`, defocus tolerance, of 0.05 um is sufficient.
+    1. In general, a `ps_size` of 512 and a `def_tol`, defocus tolerance, of `0.05` um is sufficient.
     Defocus tolerance is the maximum allowed tolerance when deciding how to tile tilted images, but `tiltctf` also always uses a minimum tile overlap of ½ the power spectrum size, so increasing this number may not directly affect computation time.
 
     2. Fourier scaling, `fscaling`, should be used if the data is collected for high-resolution work (e.g. pixel size smaller than ~2 Å/pix).
@@ -27,7 +28,7 @@ Except where noted, default values are fine.
     If not, the default is fine.
 
     4. Handedness describes which side of the image (left or right) has a greater defocus at positive tilt angles.
-    For this dataset, the right side has greater defocus at positive tilt so set `handedness` to `+1`.
+    For this dataset, the right side has greater defocus at positive tilt so set `handedness` to `1`.
 
 3. The CTFFIND4 parameter block contains the same parameters for CTFFIND4.
 
@@ -36,3 +37,7 @@ Except where noted, default values are fine.
     2. The `nthreads` parameter sets parallelization for CTFFIND4, set it to 30.
 
 4. Run `tiltctf`. You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
+
+    3dmod TS_01/tiltctf/diagnostic_TS_01_dose-filt_tiltctf_ps.mrc
+
+
