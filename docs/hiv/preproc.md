@@ -78,8 +78,8 @@ To run the import task, run this command in the TOMOMAN standalone:
 
         tomoman(pwd, 'tomoman_import.param');
 
-    The `tomoman` MATLAB command takes two inputs: a `root_dir` to search for a param file and the `paramfilename` to run.
-    Since we started the standalone from `tomo/` we can use our working directory (`pwd`) along with the import parameters filename.
+    The `tomoman` command takes two inputs: a `root_dir` to search for a param file and the `paramfilename` to run.
+    Since we started the standalone from `tomo/` we can use our working directory (obtained using the `pwd` command) along with the import parameters filename.
 
     >NOTE: You may get a warning about a missing `TS_01.mrc` file due to files referenced in the .mdoc but not copied for this tutorial.
     As long as importing still completes this can be disregarded.
