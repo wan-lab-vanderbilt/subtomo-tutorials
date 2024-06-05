@@ -38,6 +38,6 @@ Except where noted, default values are fine.
 
 4. Run `tiltctf`. You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
 
-    3dmod TS_01/tiltctf/diagnostic_TS_01_dose-filt_tiltctf_ps.mrc
+        3dmod TS_01/tiltctf/diagnostic_TS_01_dose-filt_tiltctf_ps.mrc
 
 
