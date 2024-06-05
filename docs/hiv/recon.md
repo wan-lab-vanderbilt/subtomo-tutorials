@@ -65,4 +65,4 @@ For now, you can copy the precomputed 8x binned tomogram to your working directo
 
     > NOTE: The unbinned tomogram is VERY large (>90GB). As such, we recommend you only look at the lower binned tomograms. 
 
-TOMOMAN reconstruction is now finished.
+Preprocessing TOMOMAN is now finished!
