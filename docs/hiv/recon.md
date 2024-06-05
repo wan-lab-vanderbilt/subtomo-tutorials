@@ -30,7 +30,7 @@ For this tutorial, set it to `50`.
 We typically skip radial filtering.
 The `tomo_bin` parameter allows you to set the final binning factors desired. 
 For this tutorial, set binnings of 1, 2, 4, and 8 with `tomo_bin = 1,2,4,8`.
-        >NOTE: The minimum allowed value for binning is equal to the `ali_stack_bin`. E.g., if `ali_stack_bin` is set to 4, the minimum allowed value here is 4.
+        > NOTE: The minimum allowed value for binning is equal to the `ali_stack_bin`. E.g., if `ali_stack_bin` is set to 4, the minimum allowed value here is 4.
 
 7. The `output_dir_prefix` sets the name of the tomogram output directories, which will be placed within the `root_dir`.
 For instance, bin 4 tomograms will be placed in: `[root_dir]/[output_dir_prefix]_bin4/`.
@@ -55,12 +55,12 @@ This is typically the single longest computation step in the workflow.
 We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
 For now, you can copy the precomputed 8x binned tomogram to your working directory.
         !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
-    >NOTE: Make sure to leave off the last `/` to copy the directory and it's contents. 
+    > NOTE: Make sure to leave off the last `/` to copy the directory and it's contents. 
 
 13. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
 
         !3dmod novactf_bin8/TS_01_dose-filt.rec
 
-    >NOTE: The unbinned tomogram is VERY large (>90GB). As such, we recommend you only look at the lower binned tomograms. 
+    > NOTE: The unbinned tomogram is VERY large (>90GB). As such, we recommend you only look at the lower binned tomograms. 
 
 TOMOMAN reconstruction is now finished.
