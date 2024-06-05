@@ -54,10 +54,12 @@ Since we have no such motivelist now, this can be left off.
 This is typically the single longest computation step in the workflow.
 We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
 For now, you can copy the precomputed 8x binned tomogram to your working directory.
+
         !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
+    
     > NOTE: Make sure to leave off the last `/` to copy the directory and it's contents. 
 
-13. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
+14. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
 
         !3dmod novactf_bin8/TS_01_dose-filt.rec
 
