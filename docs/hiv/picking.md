@@ -11,12 +11,10 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 
 1. For particle picking, we recommend using the non-CTF-corrected tomogram from AreTomo saved in `bin8_aretomo/TS_01_dose-filt_bin8.mrc`.
 This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
-As TOMOMAN reconstructs all tomograms using the same parameters, the tomogram positioning is identical.
-
-        Open it in Chimera with File > Open.
-        Chimera may open the tomogram as an isosurface volume.
-        If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
-        You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
+Open it in Chimera with File > Open.
+Chimera may open the tomogram as an isosurface volume.
+If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
+You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
 1. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
 Set the Origin index to 0 and the Voxel size to 1.
@@ -48,7 +46,8 @@ This naming convention is important for parsing the metadata files into the tomo
 
 1. In the main window, open the Pick Particles tool (Tools > Utilities > Pick Particle).
 
-1. Browse for and open the marker file and press Display.
+1. Under Marker File, click browse  and open the marker file we just saved.
+   Ensure that Object Style is set to Sphere and press Display.
 A series of size sliders will a appear for each marker.
 
 1. Adjust the sliders to place the edge of each sphere at the edge of its VLP.
@@ -58,9 +57,9 @@ For these VLPs, we suggest setting the radius to between the two outermost layer
 If your measurements are not around 30-50, you may have forgotten to set your Voxel Size to 1.
 
 1. When all radii are set, press Save.
-For now, you can click reset to remove the spherical wireframes and close the Pick Particles window.
+For now, you can click Reset to remove the spherical wireframes and close the Pick Particles window.
 
-Leave Chimera open and go back to the TOMOMAN standalone.
+Leave Chimera open and go back to the TOMOMAN standalone console.
 
 ## Generating Motivelist
 
@@ -105,6 +104,8 @@ As an example:
 Browse for and open the `.em` motivelist file. Click Apply.
 This will display the particle positions as spheres, colored by their class number.
 In this case, all are the same class.
+
+> NOTE: Since this is an oversampled dataset, there are quite a few particle positions; it may take a while to load. It will also be a bit slow when adjusting the view.
 
 1. To visualize particles with angular information, you can change the Object Style dropdown.
 Hexagons with voxel-size 0.1 work well here.
