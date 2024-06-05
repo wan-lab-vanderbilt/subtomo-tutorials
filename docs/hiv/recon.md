@@ -22,7 +22,7 @@ Use the same `n_cores` as you used for `nthreads` in [CTF estimation](#ctf-estim
       In general, we recommend setting this to `1` and performing serial binning.
 
 4. The 3D CTF correction parameters set how novaCTF will perform 3D CTF correction.
-We always recommend using the dose-filtered stack (`process_stack = dose-filtered') and correcting CTF using phase flipping (`correction_type = phaseflip`).
+We always recommend using the dose-filtered stack (`process_stack = dose-filtered`) and correcting CTF using phase flipping (`correction_type = phaseflip`).
 For `defocus_step`, smaller steps produce more precise results at the cost of more computation time (see [the novaCTF publication](../reading.md#methods) for more information).
 For this tutorial, set it to `50`.
 
@@ -34,21 +34,22 @@ For this tutorial, set binnings of 1, 2, 4, and 8 with `tomo_bin = 1,2,4,8`.
 
 7. The `output_dir_prefix` sets the name of the tomogram output directories, which will be placed within the `root_dir`.
 For instance, bin 4 tomograms will be placed in: `[root_dir]/[output_dir_prefix]_bin4/`.
+For this tutorial, set it this to `novactf_`.
 
-8. The additional parameters include the `recons_list`, which allows for reconstructing a subset of tomograms.
+9. The additional parameters include the `recons_list`, which allows for reconstructing a subset of tomograms.
 You can leave it as none to reconstruct all non-skipped tomograms in the tomolist.
 
-9. Fourier3D is a program for Fourier cropping volumes written by Beata Turoňová.
+10. Fourier3D is a program for Fourier cropping volumes written by Beata Turoňová.
 The `f3d_memlimit` parameter sets a limit to how much memory Fourier3D can use; more memory allows for faster computation times.
 For this tutorial, set `f3d_memlimit` to `60000`.
 
-10. NovaCTF’s approach to CTF-correction assumes that the center of mass is at the center of the tomograms.
+11. NovaCTF’s approach to CTF-correction assumes that the center of mass is at the center of the tomograms.
 If this is off, the reconstructed tomogram will contain a systematic error in all planes.
 To refine the tomogram center, novaCTF allows you to generate an offset value for recentering.
 TOMOMAN can take an input STOPGAP motivelist, and use the center of mass of the particles from each tomogram as the refined center.
 Since we have no such motivelist now, this can be left off.
 
-11. Run novaCTF in the TOMOMAN console.
+12. Run novaCTF in the TOMOMAN console.
         tomoman(pwd,'tomoman_novactf.param');
 This is typically the single longest computation step in the workflow.
 We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
