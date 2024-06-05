@@ -10,11 +10,9 @@ nav:
 - index.md
 - reading.md
 - team.md
-- Setup:
-  - Wan Lab: setup/franklin.md
-  - 2024 U of M Workshop: setup/202406mich.md
 - Tutorial:
   - Introduction: hiv/index.md
+  - Setup: hiv/setup.md
   - Tilt-Series Preprocessing: hiv/preproc.md
   - Tilt-Series Alignment: hiv/align.md
   - Tomogram Reconstruction: hiv/recon.md
