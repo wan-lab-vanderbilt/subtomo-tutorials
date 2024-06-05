@@ -25,7 +25,7 @@ Open `tomoman_aretomo.param`.
     The rest of the AreTomo parameters can be left as defaults.
     
 
-    4. Note that `OutBin` is set to 8. This is the final binning, so it is effectively a additional 2x binning from the 4x binning of our input tilt-series.
+    4. Check that `OutBin` is set to 8. This is the final binning, so it is effectively a additional 2x binning from the 4x binning of our input tilt-series.
 
     5. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
 
