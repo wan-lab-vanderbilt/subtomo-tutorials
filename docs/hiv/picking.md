@@ -1,9 +1,9 @@
 # Particle Picking in Chimera
 
-In this section, we will pick spheres in UCSF Chimera using Kun Qu’s [Pick Particle](https://www.biochem.mpg.de/7940000/Pick-Particle) plugin.
+In this section, we will pick spheres in UCSF Chimera using the [Volume Tracer](https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/volumepathtracer/framevolpath.html) and Kun Qu’s [Pick Particle](https://www.biochem.mpg.de/7940000/Pick-Particle) plugin.
 We will then update these metadata on the tomolist and generate a STOPGAP motivelist of these particles.
 We will then visualize the particle positions in UCSF Chimera using Kun Qu’s [Place Object](https://www.biochem.mpg.de/7939908/Place-Object) plugin.
-These plugins are not standard in Chimera so must be installed separately.
+The Pick Particle and Place Object plugins are not standard in Chimera and have been installed separately.
 
 ## Opening a Tomogram in Chimera
 
