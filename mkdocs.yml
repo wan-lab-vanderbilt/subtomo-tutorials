@@ -15,6 +15,7 @@ nav:
   - Setup: hiv/setup.md
   - Tilt-Series Preprocessing: hiv/preproc.md
   - Tilt-Series Alignment: hiv/align.md
+  - Tilted CTF estimation: hiv/ctf_estimation.md
   - Tomogram Reconstruction: hiv/recon.md
   - Particle Picking: hiv/picking.md
   - Bin 8 Subtomogram Averaging: hiv/bin8.md
