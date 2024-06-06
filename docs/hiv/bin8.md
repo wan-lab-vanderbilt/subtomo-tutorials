@@ -133,15 +133,16 @@ The default subtomo_name is `'subtomo'`.
 For `boxsize`, `32` should be sufficient here.
 Set `pixelsize` to `10.8` since we binned our 1.35 Å pixels by a factor of 8.
 For `output_format`, we find that `'mrc8'` works well, this saves the subtomogram as an 8-bit .mrc file.
-        > NOTE: While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
+
+   > NOTE: While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
 During extraction, the subtomogram is cropped and its values are floated between 0 and 255, rounded, and saved.
 
-7. Save the file.
+8. Save the file.
 Run in the terminal; this will generate a new parameter file in the `params/` folder.
 
         ./stopgap_extract_parser.sh
 
-8. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
+9. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
 Run STOPGAP by running the `run_stopgap.sh` script in a terminal.
 Feel free to preview it if you're curious.
 
