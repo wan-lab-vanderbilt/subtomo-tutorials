@@ -16,14 +16,14 @@ This will rescale the extraction positions and apply shifts.
 
         sg_motl_rescale('allmotl_dclean_sclean_halfset_2.star', 'allmotl_bin4_1.star', 2, 1);
 
-3. Make a new subtomogram averaging folder and initialize it.
-Copy the needed lists and scripts into this new folder.
-You will use the rescaled motivelist you just created.
+3. Make a new subtomogram averaging folder (`subtomo/bin4/`) and initialize it (`stopgap_initialize_folder.sh subtomo`).
+Copy the wedgelist, STOPGAP tomolist, bin4 motivelists and scripts into this new folder.
+For simplicity, you can also rename the motivelist to `allmotl_1.star`.
 The wedgelist keeps all information in unbinned pixels, so it can be used "as is" for any binning.
-The paths in the tomolist will need to be updated; this can be done by making a new one or simply using a text editor.
+The paths in the tomolist will need to be updated; this can be done by making a new one using TOMOMAN or simply using a text editor.
 Copy the necessary bash scripts.
 
-4. Extract subtomograms.
+5. Extract subtomograms.
 Set the boxsize to 64 and update the pixelsize.
 
 ## Bin4 Angular Refinement
