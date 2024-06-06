@@ -363,12 +363,12 @@ We will use the Place Objects Chimera plugin for this.
 1. Covert the motivelist to AV3 `.em` format in the STOPGAP Console using `sg_motl_stopgap_to_av3`.
 For example:
 
-        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_8.star');
+        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_7.star');
 
 2. Start Chimera and open the tomogram.
-Remember that your tomogram is in your `tomo/novactf_bin8/` directory.
+Remember that your tomogram is in your `tomo/bin8_aretomo/` directory.
 
-3. Remember to set Origin index to 0 and Voxel size to 1, and that you can visualize the tomogram in planes if you desire.
+3. Remember to set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
 
 4. Open the Place Object plugin (Tools > Utilities > Pick Particle).
 Browse for and open the `.em` motivelist with Place Object.
@@ -381,25 +381,27 @@ You can adjust the Phi-Offset parameter to fix this.
 6. You should see that most of the oversampled positions have converged and overlapped.
 This is a good sign of true subunit positions.
 In general, cross correlation (CC) scores are lower at the tops and bottoms, owing to the missing wedge.
-There will also be defects in the lattice with lower CC values, this is expected as it is impossible to close a surface using just hexagons.
+There will also be defects in the lattice; this is expected as it is impossible to close a surface using just hexagons.
+Areas around the defects will also typically have lower CC values.
 
-7. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
+8. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
 We can determine what an appropriate CC value cutoff is by setting Visualization to Cross-Correlation and adjusting the Lower CC Threshold slider.
 Determine and write down an appropriate threshold value to exclude low-scoring particles while preserving as many high-scoring as possible.
-    > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value.
+    > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value between tomograms or datasets.
 
-8. Clean the motivelist in the STOPGAP Console.
+9. Clean the motivelist in the STOPGAP Console.
 Set `s_cut` to the cutoff you determined in the previous step.
-For `d_cut`, choose a value that is smaller than the true interparticle distance.
+For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
+The settings I used are:
 
         sg_motl_distance_clean('allmotl1', s_cut, d_cut);
 
-9. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
+11. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
 
-10. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
+12. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
 
-11. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
+13. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
 Remember, FSC is NOT an objective resolution measure but instead a self-consistency measure.
 Your FSC was likely over-inflated due to identical particles in both halfsets.
 At this point, we can consider this final average the initial *de novo* reference.
