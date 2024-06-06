@@ -46,7 +46,7 @@ E.g.:
 A cylinder should be sufficient again, but this time make one that only includes the outer structured layer.
 For my average this works but as before you may need to adjust its size and position for yours:
 
-        cyl = sg_cylinder(64, 26, 22, 3, [33, 33, 32]);
+        cyl = sg_cylinder(64, 26, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl);
 
 4. Generate a new CC mask.
@@ -66,11 +66,14 @@ In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 6
 At this point, our angular error in phi is likely somewhere around 4 deg.
 As such, setting `phi_angincr` and `phi_angiter` to 2 and 3 should provide enough sampling.
 
-7. Parse subtomo parameters and run alignment.
-Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
-Given that we have only used 60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
+7. Parse subtomo parameters and run one iteration of alignment.
+   Since we haven't really updated parameters since last unbinning, it's not necessary to run 2 iterations.
 
-8. As noted above, 2 deg angular increments should be sufficient, so our main parameter to change is our low-pass filter.
+
+   Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
+   Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
+
+9. As noted above, 2 deg angular increments should be sufficient, so our main parameter to change is our low-pass filter.
 Given that our resolution is so high, we can safely set our low pass radius to ~20 Å (17 Fourier pixels).
 Since we have limited computational power, we can play with some methods for cutting down computation time.
 Set the angular iterations to 2 and the search mode to `"shc"`.
@@ -88,7 +91,7 @@ Set the angular iterations to 2 and the search mode to `"shc"`.
     >NOTE: SHC is only really useful when refining angles and NOT during *de novo* reference generation or finding true particle positions from oversampled starting positions.
     </details></p>
 
-9. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
+10. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
 
 We will go over some of basic post-processing steps in the next section.
 
