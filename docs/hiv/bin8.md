@@ -433,9 +433,11 @@ This problem is distinct from the *de novo* structure determine we performed for
 In *de novo* structure determination, we slowly coax the structure out by iterative refinement and gradually reducing our angular search space.
 Here, we already have a good reference, so if our parameters are too coarse we may generate a worse reference than the one we put in.
 
-   As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same.
+   As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same as in the final round of the intial reference alignment.
    Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
-   `angiter=3` should be sufficient.
+   The parameters I used were: `angincr=2`, `angiter=3`,`phi_angincr=4`, `phi_angiter=8`.
+   Specifically for the phi settings, these settings allow for an in-plane search of +/- 32 degrees, which is sufficient to find the nearest symmetry group.
+   
    Set your parameters and run 1 iteration of alignment.
 
 7. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
