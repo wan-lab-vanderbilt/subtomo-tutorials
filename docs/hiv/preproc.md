@@ -161,4 +161,6 @@ Open `tomoman_dosefilter.param`.
 
 3. Run dose filtering in the TOMOMAN console.
 
-4. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
+           tomoman(pwd,'tomoman_dosefilter.param');
+
+5. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
