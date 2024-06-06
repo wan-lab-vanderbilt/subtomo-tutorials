@@ -119,12 +119,12 @@ One I made was:
         sg_mrcwrite('masks/fsc_mask.mrc', fsc_mask);
 
 2. In the STOPGAP Console, run FSC calculation with `sg_calculate_FSC`.
-There are a large number of parameters for this function, depending on what output you want. For the full parameter list, you can run `sg_calculate_FSC('help')`.
+   There are a large number of parameters for this function, depending on what output you want. For the full parameter list, you can run `sg_calculate_FSC('help')`.
 
-Here, we will calculate the FSC and plot it and generate a b-factor sharpened, contrast inverted (density is positive) map.
+   Here, we will calculate the FSC and plot it and generate a b-factor sharpened, contrast inverted (density is positive) map.
 
-Use the name of the most recent reference in place of `ref_avg_name`.
-`bfactor` can be adjusted but 100 is a reasonable starting point.
+   Use the name of the most recent reference in place of `ref_avg_name`.
+   `bfactor` can be adjusted but 100 is a reasonable starting point.
 
         sg_calculate_FSC('refA_name','ref/ref_A_4.mrc','refB_name','ref/ref_B_4.mrc','mask_name','masks/fsc_mask.mrc','pixelsize',5.4,'symmetry','c6','bfactor',100,'ref_avg_name','ref/filt_4.mrc','x_label',1);
 
