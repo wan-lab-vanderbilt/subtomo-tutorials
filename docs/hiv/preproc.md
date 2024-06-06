@@ -10,7 +10,7 @@ Ensure you are in your `tomo/` directory.
 
 Start TOMOMAN by running:
 
-        tomoman_standalone.sh
+    tomoman_standalone.sh
 
 This will return a console window in which we will run various TOMOMAN tasks and functions.
 It may take a minute to start up the first time you run it.
