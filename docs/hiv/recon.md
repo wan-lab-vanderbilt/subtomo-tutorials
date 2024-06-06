@@ -57,7 +57,7 @@ Since we have no such motivelist now, this can be left off.
    For now, you can copy the precomputed 8x and 4x binned tomogram to your working directory.
 
        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
-       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
+       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin4 .
 
     > NOTE: Make sure to leave off the last `/` to copy the directory and its contents.
 
