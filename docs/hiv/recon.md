@@ -8,7 +8,7 @@ Open `tomoman_novactf.param`.
 1. The directory parameters should already be correct.
 
 2. The parallelization parameters determine how jobs are split between cores.
-Use the same `n_cores` as you used for `nthreads` in [CTF estimation](#ctf-estimation).
+Set `n_cores` to 30.
 
 3. Stack parameters are parameters for generating the aligned stacks prior to tomogram reconstruction.
 
@@ -28,7 +28,7 @@ For this tutorial, set it to `50`.
 
 5. Tomogram reconstruction parameters have some specifics on how to perform the reconstruction.
 We typically skip radial filtering.
-The `tomo_bin` parameter allows you to set the final binning factors desired. 
+The `tomo_bin` parameter allows you to set the final binning factors desired.
 For this tutorial, set binnings of 1, 2, 4, and 8 with `tomo_bin = 1,2,4,8`.
         > NOTE: The minimum allowed value for binning is equal to the `ali_stack_bin`. E.g., if `ali_stack_bin` is set to 4, the minimum allowed value here is 4.
 

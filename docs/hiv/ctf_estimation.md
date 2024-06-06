@@ -2,7 +2,7 @@
 
 Contrast Transfer Function (CTF) estimation is similar for tomography and single particle analysis in that Thon ring fitting is used in both.
 However, tilted images have a defocus gradient as different areas of the field of view have different heights.
-As such, Thon rings from each area of the specimen are different; these Thon rings do not sum coherently, and higher-resolution Thon rings are lost at higher tilt angles. 
+As such, Thon rings from each area of the specimen are different; these Thon rings do not sum coherently, and higher-resolution Thon rings are lost at higher tilt angles.
 TOMOMAN includes `tiltctf`, an algorithm we developed to use tilt series alignment parameters to generate power spectra that account for this defocus gradient.
 We then pass this power spectrum to CTFFIND4 for Thon ring fitting.
 
@@ -39,5 +39,3 @@ Except where noted, default values are fine.
 4. Run `tiltctf`. You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
 
         3dmod TS_01/tiltctf/diagnostic_TS_01_dose-filt_tiltctf_ps.mrc
-
-

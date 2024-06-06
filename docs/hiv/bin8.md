@@ -86,25 +86,24 @@ Generate a STOPGAP tomolist:
 
 Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
 
-        !cp allmotl_tomo1_obj1_1.star ~/HIV_testset/subtomo/init_ref/lists/
-        !cp wedgelist.star ~/HIV_testset/subtomo/init_ref/lists/
-        !cp sg_tomolist.txt ~/HIV_testset/subtomo/init_ref/lists/
+        !cp allmotl_tomo1_obj1_1.star ~/HIV_dataset/subtomo/init_ref/lists/
+        !cp wedgelist.star ~/HIV_dataset/subtomo/init_ref/lists/
+        !cp sg_tomolist.txt ~/HIV_dataset/subtomo/init_ref/lists/
 
 ## Preparing to Run STOPGAP with MPI
 
 STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
-1. Open `run_stopgap.sh` in any text editor, for example, gedit:
+1. Open `run_stopgap.sh` in any text editor, for example, gedit using a terminal window:
 
         gedit run_stopgap.sh
 
     The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
 
-2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, and `copy_local` to 0.
-Set `n_cores` to the same number as used for `nthreads` in [CTF estimation](recon.md/#ctf-estimation).
+2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to 14, and `copy_local` to 0.
 The rest of the run options are SLURM-specific and can be ignored.
 
-3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_testset/subtomo/init_ref/`).
+3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_dataset/subtomo/init_ref/`).
 We will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
 
@@ -114,37 +113,46 @@ Save `run_stopgap.sh`.
 
 With the lists and run script prepared, we are now ready to extract our subtomograms.
 
-1. Open the `stopgap_extract_parser.sh` in a text editor. There are four blocks of options here: "Parser Options" which contains the path to the output parameter file; "Folder Options" which provides paths to folders; "File options" which are the input files for extraction; and "Extraction Parameters" which are settings for the output subtomograms.
+1. Open `stopgap_extract_parser.sh` in a text editor.
 
-2. In the Parser Options, the default `param_name` is fine.
+1. There are four blocks of options here: "Parser Options" which contains the path to the output parameter file; "Folder Options" which provides paths to folders; "File options" which are the input files for extraction; and "Extraction Parameters" which are settings for the output subtomograms.
 
-3. Under Folder options, update the rootdir to the absolute path of the `init_ref/` directory.
+1. In the Parser Options, the default `param_name` is fine.
+
+1. Under Folder options, update the rootdir to the absolute path of the `init_ref/` directory.
 The other directory parameters can be left alone; they are overrides to the standard STOPGAP structure.
 
-4. Under File options, update the various lists.
-   * `motl_name=allmotl_tomo1_obj1_1.star'
-   * `wedgelist_name=wedgelist.star'
-   * `tomolist_name=sg_tomolist.txt'
-Since these are all lists, they are assumed to be in the listdir.
+1. Under File options, update the various lists.
+
+    - `motl_name='allmotl_tomo1_obj1_1.star'`
+
+    - `wedgelist_name='wedgelist.star'`
+
+    - `tomolist_name='sg_tomolist.txt'`
+
+    Since these are all lists, they are assumed to be in the listdir.
+
     > NOTE: since we are providing a tomolist, `tomodir` is ignored and can be left as `'none'`.
 
-6. Set the extraction parameters.
+1. Set the extraction parameters.
 The default subtomo_name is `'subtomo'`.
 For `boxsize`, `32` should be sufficient here.
 Set `pixelsize` to `10.8` since we binned our 1.35 Å pixels by a factor of 8.
 For `output_format`, we find that `'mrc8'` works well, this saves the subtomogram as an 8-bit .mrc file.
 
-   > NOTE: While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
-During extraction, the subtomogram is cropped and its values are floated between 0 and 255, rounded, and saved.
+    > NOTE: While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
+    During extraction, the subtomogram is cropped and its values are floated between 0 and 255, rounded, and saved.
 
-8. Save the file.
-Run in the terminal; this will generate a new parameter file in the `params/` folder.
+1. Save and close the file.
+Run in the terminal.
 
         ./stopgap_extract_parser.sh
 
-9. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
-Run STOPGAP by running the `run_stopgap.sh` script in a terminal.
+This will generate a new parameter file in the `params/` folder.
 Feel free to preview it if you're curious.
+
+1. Return to `run_stopgap.sh` and set `paramfilename` to `params/extract_param.star`.
+Save the file and run STOPGAP by running `run_stopgap.sh` in a terminal.
 
         ./run_stopgap.sh
 
@@ -163,7 +171,7 @@ Use `cd` to change to the `init_ref/` directory:
 
 Start the STOPGAP Toolbox by running:
 
-    $STOPGAPHOME/bin/stopgap_toolbox.sh
+    stopgap_toolbox.sh
 
 ## Calculate Starting Reference
 
@@ -176,7 +184,7 @@ Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps will b
 
     For FSC calculation, an alignment mask is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
-To save a sphere mask into the `mask/` folder, change into your `subtomo/` directory, start the STOPGAP Console, and run
+To save a sphere mask into the `mask/` folder, change into your `subtomo/` directory, run this in the STOPGAP Toolbox:
 
         sphere = sg_sphere(32, 10, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
@@ -187,44 +195,55 @@ To save a sphere mask into the `mask/` folder, change into your `subtomo/` direc
 
     What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
 
-2. Open `stopgap_subtomo_parser.sh` in a text editor.
+1. Open `stopgap_subtomo_parser.sh` in a text editor.
 
-    1. Update the `rootdir`.
+    1. Update the `rootdir` as before.
 
-    2. Update Main File Options to indicate the correct files.
-    `ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `"ref"` is standard.
-    `ccmask_name` is ignored for averaging jobs.
-
-    3. The main settings for this job are in the Job Parameters block.
+    1. The main settings for this job are in the Job Parameters block.
     Since we are just averaging a single reference, set `subtomo_mode` to `'avg_singleref'`.
     Because we are on iteration 1, set `startidx` to 1.
     For averaging jobs, iterations is ignored.
     Set `binning` to `8`.
 
-    4. Also, ensure that `symmetry` is set to `C1` in the bottom block.
+    1. Update Main File Options to indicate the correct files.
+
+        - `motl_name` sets the rootname of the motivelist without an iteration number or extension, that is `'allmotl_tomo1_obj1`.
+
+        - `ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `'ref'` is standard.
+
+        - `mask_name` should be the `'sphere.mrc'` that you just saved.
+
+        - `ccmask_name` is ignored for averaging jobs.
+
+    1. Also, ensure that `symmetry` is set to `'C1'` in the bottom "Other inputs" block.
     We won't use symmetry until later in the averaging.
 
-3. Run the subtomo parser and update `paramfilename` in `run_stopgap.sh` to the new param file.
+1. Run the subtomo parser.
 
-4. Run STOPGAP to generate the average.
+        ./stopgap_subtomo_parser.sh
 
-5. STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc`.
+1. Update `paramfilename` in `run_stopgap.sh` to the new param file.
+
+1. Run STOPGAP to generate the average.
+
+STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc`.
 A and B are raw halfsets; these are often noisy as they are not figure-of-merit weighted.
 The reference without a halfset designation is a figure-of-merit weighted average of A and B; this is NOT a fully processed reference and is supplied as a quick check of your job.
 
-    >NOTE: Before structural interpretation, halfsets should be figure-of-merit weighted, low pass filtered to the estimated resolution, and B-factor sharpened.
+>NOTE: Before structural interpretation, halfsets should be figure-of-merit weighted, low pass filtered to the estimated resolution, and B-factor sharpened.
     This can be done with STOPGAP using the `sg_calculate_FSC` function.
 
-    Open the three `.mrc` files in the `ref/` folder in 3dmod.
+Preview the three `.mrc` files in the `ref/` folder in 3dmod.
 You may wish to view them along all three axes by selecting Image > XYZ (or Ctrl+x) or as an isosurface by selecting Image > Isosurface (or Shift+u).
+You may close 3dmod windows before continuing.
 
-### Perform Z-alignment
+### Translational Alignment
 
 Since the HIV VLPs are not true spheres, our initial positions are quite rough.
 This is particularly true for the radial position (Z-axis in the subtomograms).
 In this step, we will perform a quick translational alignment with no angular search; this will improve the radial density in our reference, which will allow us to generate a tighter reference mask.
 
-#### ccmask Creation
+#### `ccmask` Creation
 
 A cross-correlation mask (ccmask) is used to restrict the particle shifts during alignment.
 For this dataset, there is potentially a large error in the Z-direction, but error in the XY-plane is well defined.
@@ -238,7 +257,7 @@ Run this command in the STOPGAP Console to save a cylindrical mask 4 pixels wide
 
 >NOTE: A ccmask should always be binary! Do not use any Gaussian dropoff.
 
-#### Translational Alignment
+#### Run Translational Alignment
 
 1. Open the subtomo parser.
 Update the `subtomo_mode` to `'ali_singleref'`.
@@ -250,7 +269,8 @@ Since we don’t want to do any angular search for this iteration, set `angincr`
 
 3. Set the bandpass filter settings.
 In general, the high pass filter defaults (`hp_rad=1`, `hp_sigma=2`) is fine; this mainly suppresses any normalization issues with the central voxel in Fourier space.
-More important is to keep track of the low-pass filter radius (`lp_rad`) during your run; a `lp_sigma` of `3` is usually fine.
+An `lb_sigma` of 3 is usually fine.
+More important is to keep track of the low-pass filter radius (`lp_rad`) during your run.
 A rule of thumb is to make sure the `lp_rad` is less-than or equal to the Fourier radius where FSC=0.5.
 Since we don’t really have any resolution in our map, we can arbitrarily set it to 60 Å for now.
 STOPGAP sets filter values in Fourier pixels since real-space values do not round well, particularly for small boxsizes or high binnings.
@@ -259,7 +279,7 @@ You can covert resolution to Fourier pixels with:
     $$fpix = \frac{boxsize × pixelsize}{resolution}$$
 
     In our current settings we have a 32 pixel boxsize and a 10.8 Å pixelsize so 60 Å resolution corresponds to 5.76 Fourier pixels.
-    Since we cannot set fractional pixels, we can round to 6, which corresponds to a resolution of 57.6 Å.
+    Since we cannot set fractional pixels, set `lp_rad` to 6, which corresponds to a resolution of 57.6 Å.
 
 4. Run the parser and run STOPGAP.
 
@@ -268,7 +288,7 @@ After this alignment, we now have the 3 layers we saw in the tomograms.
 (Use the XYZ or isosurface view.)
 Despite no angular alignment, we also already have some resolution of the in-plane structure.
 
-### Rough Angular Alignment
+### Angular Alignment
 
 Now that we have a reference with some level of structure we can do several things.
 First, we will make a new alignment mask to focus on our structure.
@@ -279,9 +299,12 @@ Our goal is to produce an alignment mask that contains the entire structure.
 Since alignment masks should always have soft edges, we want the soft edge to start just outside of our reference.
 
 1. Start chimera (by running `chimera` in the terminal) and open `ref_2.mrc`.
-Maps written by STOPGAP are not contrast-inverted, so you will need to uncheck the “Cap high values at box faces” option in Volume Viewer > Features > Surface and Mesh Options.
-Set the voxel size to 1.
-Adjust the histogram slider so you can see the three layers in your reference again.
+
+    1. Maps written by STOPGAP are not contrast-inverted, so you will need to uncheck the “Cap high values at box faces” option in Volume Viewer > Features > Surface and Mesh Options.
+
+    1. Set the voxel size to 1 in Volume Viewer > Features > Coordinates.
+
+    1. Adjust the histogram slider so you can see the three layers in your reference.
 
 2. Open the sphere mask.
 To view the mask on top of the structure, it can be helpful to adjust the transparency of the mask under Volume Viewer > Features > Brightness and Transparency.
@@ -298,20 +321,21 @@ An example that worked for me is:
         sg_mrcwrite('masks/cyl_mask.mrc', cyl_mask);
 
     >NOTE: Since your structure is probably a bit offset, you will need to define the center when using the `sg_cylinder` function.
-    I measured this using 3dmod.
+    Center is the last argument in `sg_cylinder` and given as `[x, y, z]` coordinates.
+    You can guess the distance you need to adjust or measure it in 3dmod.
 
-#### Angular Alignment
+#### Run Angular Alignment
 
 Now, we will start angular alignment.
 Since we have not done any angular search yet, we will start with a rough angular alignment using large angular steps.
 
 1. Generate alignment parameters using `stopgap_subtomo_parser.sh`.
-    1. You will need to increment your `startidx` and update your `mask_name`.
-    2. We will use a coarse cone search with hill climbing, so the final parameters to decide on are the angular increments.
-    3. The `angincr` and `angiter` parameters control the off-plane (i.e. off the XY-plane) search.
-If you want to be very precise, you could calculate half the angular offset between two particles from your inter-particle distance and radius; for me this is ~2deg, so `angincr=2` and `angiter=3` should be plenty.
-    4. For `phi_angincr` and `phi_angiter`, which control the in-plane search, we can use our knowledge that there is C6 symmetry, so the maximum error is +/- 30 deg.
-For an initial coarse search, we can then set `phi_angincr=12` and `phi_angiter=3` to find the nearest symmetry element (with a bit extra).
+    1. You will need to increment your `startidx` by one and update your `mask_name` to `cyl_mask.mrc`.
+    1. We will use a coarse cone search with hill climbing, so the final parameters to decide on are the angular increments.
+    The `angincr` and `angiter` parameters control the off-plane (i.e. off the XY-plane) search.
+    If you want to be very precise, you could calculate half the angular offset between two particles from your inter-particle distance and radius; for me this is ~2°, so `angincr=2` and `angiter=3` should be plenty.
+    1. For `phi_angincr` and `phi_angiter`, which control the in-plane search, we can use our knowledge that there is C6 symmetry, so the maximum error is ± 30°.
+    For an initial coarse search, we can then set `phi_angincr=12` and `phi_angiter=3` to find the nearest symmetry element (with a bit extra).
 
 2. Parse parameters and run alignment.
 
@@ -323,29 +347,37 @@ Parse another iteration (remember to increment `startidx`) with the same paramet
 4. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
 The symmetry axis we want to use is in one of the empty spaces, so if an empty space is not centered we need to shift the reference in the XY plane.
 You can determine the amount of shift required in 3dmod.
-Then, use `sg_motl_shift_and_rotate` in the STOPGAP Console to shift positions.
-Replace `old_motl_name`, `new_motl_name`, and `shift` with appropriate values in this command:
+Then, use `sg_motl_shift_and_rotate` in the STOPGAP Toolbox to shift positions.
+This function takes four parameters:
+    - `old_motl_name` is the relative path to the input motivelist.
+    Be sure you use the most recent iteration.
+    - `new_motl_name` is the relative path to the output motivelist with all particle positions adjusted.
+    Append the new motivelist name with something descriptive like "_shift".
+    - `shifts` is how the particles should be shifted in `[x, y, z]`.
+    - `rotations` is how the particles should be rotated in `[phi, psi, theta]`. Since you aren't rotating, set `rotations` to `[0,0,0]`.
 
-        sg_motl_shift_and_rotate('allmotl1', 'allmotl1_shift', 42);
+    This command shows shifting particles by -2 pixels along the x axis.
+    You can adjust parameters as necessary.
 
-    I typically append the new motivelist name with something descriptive like "_shift".
+        sg_motl_shift_and_rotate('lists/allmotl_tomo1_obj1_4.star', 'lists/allmotl_tomo1_obj1_shift_4.star', [-2,0,0], [0,0,0]);
 
-5. Update the motivelist and reference names in the parser and generate an averaging run.
+5. Open the parser.
+Update `motl_name`, i.e. to `allmotl_tomo1_obj1_shift`.
 Generate a new average.
 
-6. Compare the old and new references to make sure it was shifted properly.
+6. Compare the old and new references in 3dmod to make sure it was shifted properly.
 If it wasn’t you may have applied the shifts with the wrong sign.
 If so, re-shift the motivelist and re-average.
 
 7. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
-With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4.
+With the shift, there may be a bit of off-plane error introduced, so increase `angiter` to 4.
 Parse parameters and perform another round of alignment.
 
 8. The reference should look much better now.
 Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
 From here, we can refine the average a bit by reducing the angular search.
 Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
-For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe.
+For phi, we are arguably accurate within 12°; reducing the phi increment to 4 with 4 iterations should be safe.
 Update the parameters and run 2 iterations.
 
 9. At this point the reference is largely converged.

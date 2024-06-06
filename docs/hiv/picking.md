@@ -12,7 +12,8 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 1. For particle picking, we recommend using the non-CTF-corrected tomogram from AreTomo saved in `bin8_aretomo/TS_01_dose-filt_bin8.mrc`.
 This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
 Open it in Chimera with File > Open.
-Chimera may open the tomogram as an isosurface volume.
+
+1. Chimera may open the tomogram as an isosurface volume.
 If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
 You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
@@ -39,7 +40,7 @@ Move through the planes and place a marker at the center of each VLP.
 We recommend taking only the complete VLPs.
 This tomogram has around 9 complete VLPs.
 
-1. When you have finished marking the VLPs, select File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
+1. When you have finished marking the VLPs, select Volume Tracer > File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
 This naming convention is important for parsing the metadata files into the tomolist later.
 
 ### Picking Particles
@@ -54,7 +55,7 @@ A series of size sliders will a appear for each marker.
 Since the VLPs are not perfect spheres, adjust the radius to a point with the best compromise.
 Also, there are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
 For these VLPs, we suggest setting the radius to between the two outermost layers.
-If your measurements are not around 30-50, you may have forgotten to set your Voxel Size to 1.
+If your measurements are not around 40-50, you may have forgotten to set your Voxel Size to 1.
 
 1. When all radii are set, press Save.
 For now, you can click Reset to remove the spherical wireframes and close the Pick Particles window.
@@ -111,3 +112,5 @@ In this case, all are the same class.
 Hexagons with voxel-size 0.1 work well here.
 Click Apply after specifying display options.
 Notice that the particles are evenly spaced with their planes along the surface of the spheres but their in-plane angles (phi) are randomized.
+
+1. You may close Chimera.
