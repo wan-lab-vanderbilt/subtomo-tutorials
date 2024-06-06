@@ -395,43 +395,43 @@ For example:
 
         sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_7.star');
 
-2. Start Chimera and open the tomogram.
+1. Start Chimera and open the tomogram.
 Remember that your tomogram is in your `tomo/bin8_aretomo/` directory.
 
-3. Remember to open the coordinates panel in the Volume Viewer and set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
+1. Remember to open the coordinates panel in the Volume Viewer and set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
 
-4. Open the Place Object plugin (Tools > Utilities > Pick Particle).
+1. Open the Place Object plugin (Tools > Utilities > Pick Particle).
 Browse for and open the `.em` motivelist with Place Object.
 Visualize using Hexagons with voxel-size 0.2 and Colour Style as Cross-Correlation.
 Click Apply.
 
-5. You may notice that the hexagon edges do not line up; this is because the rotation in your average is unlikely to be the same as Place Object’s particles.
+1. You may notice that the hexagon edges do not line up; this is because the rotation in your average is unlikely to be the same as Place Object’s particles.
 You can adjust the Phi-Offset parameter to fix this.
 
-6. You should see that most of the oversampled positions have converged and overlapped.
+1. You should see that most of the oversampled positions have converged and overlapped.
 This is a good sign of true subunit positions.
 In general, cross correlation (CC) scores are lower at the tops and bottoms, owing to the missing wedge.
 There will also be defects in the lattice; this is expected as it is impossible to close a surface using just hexagons.
 Areas around the defects will also typically have lower CC values.
 
-8. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
+1. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
 We can determine what an appropriate CC value cutoff is by setting Visualization to Cross-Correlation and adjusting the Lower CC Threshold slider.
 Determine and write down an appropriate threshold value to exclude low-scoring particles while preserving as many high-scoring as possible.
     > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value between tomograms or datasets.
 
-9. Clean the motivelist in the STOPGAP Console.
+1. Clean the motivelist in the STOPGAP Console.
 Set `s_cut` to the cutoff you determined in the previous step.
 For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
 The settings I used are:
 
         sg_motl_distance_clean('allmotl_tomo1_obj1_shift_7.star','allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);
 
-11. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
+1. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
 
-12. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
+1. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
 
-13. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
+1. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
 Remember, FSC is NOT an objective resolution measure but instead a self-consistency measure.
 Your FSC was likely over-inflated due to identical particles in both halfsets.
 At this point, we can consider this final average the initial *de novo* reference.
@@ -443,15 +443,15 @@ Here we will go over how to take your initial reference and align it against the
 1. Make a new folder for averaging the full dataset (`subtomo/full/`) and initialize it for subtomogram averaging as you did with `init_ref/`.
 Copy your previous wedgelist, tomolist, masks, and `.sh` scripts into their approrpiate places in `full/`.
 
-2. Copy the full motivelist from `tomo/` to `subtomo/full/lists/`.
+1. Copy the full motivelist from `tomo/` to `subtomo/full/lists/`.
 
-3. Copy the references from your final initial average into `full/ref/` and rename them as iteration 1.
+1. Copy the references from your final initial average into `full/ref/` and rename them as iteration 1.
 I.e., `ref_shift_dclean_A_7.mrc` would become `ref_A_1.mrc`.
 Technically, the weighted summed reference is not required, only the halfsets.
 
-4. Extract subtomograms from all VLPs using the full motivelist.
+1. Extract subtomograms from all VLPs using the full motivelist.
 
-5. Align the full dataset.
+1. Align the full dataset.
 This problem is distinct from the *de novo* structure determine we performed for the initial dataset.
 In *de novo* structure determination, we slowly coax the structure out by iterative refinement and gradually reducing our angular search space.
 Here, we already have a good reference, so if our parameters are too coarse we may generate a worse reference than the one we put in.
@@ -460,14 +460,14 @@ Here, we already have a good reference, so if our parameters are too coarse we m
    Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
    The parameters I used were: `angincr=2`, `angiter=3`,`phi_angincr=4`, `phi_angiter=8`.
    Specifically for the phi settings, these settings allow for an in-plane search of +/- 32 degrees, which is sufficient to find the nearest symmetry group.
-   
+
    Set your parameters and run 1 iteration of alignment.
 
-7. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
+1. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-8. Convert the cleaned motivelist to AV3 format and open in Chimera.
+1. Convert the cleaned motivelist to AV3 format and open in Chimera.
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
@@ -476,6 +476,6 @@ E.g.:
         new_motl = sg_motl_parse_type2(motl, idx);
         sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
 
-9. Generate a new average with the cleaned motivelist.
+1. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
 We can go on to rescaling the motivelist to bin4.
