@@ -7,7 +7,13 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 
 ## Opening a Tomogram in Chimera
 
-1. In a bash terminal (i.e. not in the TOMOMAN console), run `chimera` to open Chimera.
+1. Open a new bash terminal (i.e. not in the TOMOMAN console), load and open Chimera.
+
+      module load chimera
+      chimera
+
+   >NOTE: Given that chimera uses many different windows, recommend you going to a new workspace to open chimera.
+   >You can move to the window on the right by using the keyboard shortcut`CTRL + SHIFT + Right Arrow`.
 
 1. For particle picking, we recommend using the non-CTF-corrected tomogram from AreTomo saved in `bin8_aretomo/TS_01_dose-filt_bin8.mrc`.
 This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
