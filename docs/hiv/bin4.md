@@ -74,10 +74,10 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
    Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
    Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
 
-9. As noted above, 2 deg angular increments should be sufficient, so our main parameter to change is our low-pass filter.
-Given that our resolution is so high, we can safely set our low pass radius to ~20 Å (17 Fourier pixels).
+9. As noted above, 'angincr=2' should be sufficient, so our main parameter to change is the `angiter` and `lp_rad` parameters.
+Given that our resolution high compared to the previous `lp_rad` setting, we can safely set our low pass radius to ~20 Å (`lp_rad=17`).
 Since we have limited computational power, we can play with some methods for cutting down computation time.
-Set the angular iterations to 2 and the search mode to `'shc'`.
+Set the `angiter=2` and `search_mode='shc'`.
 
     <details><summary>
     Stochastic Hill Climbing (SHC)</summary>
