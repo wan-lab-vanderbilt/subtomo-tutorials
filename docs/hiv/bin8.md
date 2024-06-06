@@ -417,6 +417,7 @@ Areas around the defects will also typically have lower CC values.
 1. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
 We can determine what an appropriate CC value cutoff is by setting Visualization to Cross-Correlation and adjusting the Lower CC Threshold slider.
 Determine and write down an appropriate threshold value to exclude low-scoring particles while preserving as many high-scoring as possible.
+
     > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value between tomograms or datasets.
 
 1. Clean the motivelist in the STOPGAP Console.
