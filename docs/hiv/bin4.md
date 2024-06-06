@@ -37,7 +37,8 @@ E.g.:
         sphere = sg_sphere(64, 26, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
    >NOTE: Remember to move your STOPGAP console to the new bin4 folder. 
-    Note that the dimensions of the sphere are increased because binning is reduced.
+
+   Notice that the dimensions of the sphere are increased because binning is reduced.
 
 2. Generate an average using the bin4 motivelist.
 
