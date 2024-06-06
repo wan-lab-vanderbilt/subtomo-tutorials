@@ -236,7 +236,7 @@ Run this command in the STOPGAP Console to save a cylindrical mask 4 pixels wide
     ccmask = sg_cylinder(32, 4, 24);
     sg_mrcwrite('masks/ccmask.mrc', ccmask);
 
->NOTE: A ccmask should always be binary!
+>NOTE: A ccmask should always be binary! Do not use any Gaussian dropoff.
 
 #### Translational Alignment
 
@@ -278,7 +278,7 @@ First, we will make a new alignment mask to focus on our structure.
 Our goal is to produce an alignment mask that contains the entire structure.
 Since alignment masks should always have soft edges, we want the soft edge to start just outside of our reference.
 
-1. Start chimera (by running `chimera2` in the terminal) and open `ref_2.mrc`.
+1. Start chimera (by running `chimera` in the terminal) and open `ref_2.mrc`.
 Maps written by STOPGAP are not contrast-inverted, so you will need to uncheck the “Cap high values at box faces” option in Volume Viewer > Features > Surface and Mesh Options.
 Set the voxel size to 1.
 Adjust the histogram slider so you can see the three layers in your reference again.
