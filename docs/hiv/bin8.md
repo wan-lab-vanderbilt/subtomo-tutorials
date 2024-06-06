@@ -467,7 +467,9 @@ Here, we already have a good reference, so if our parameters are too coarse we m
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-8. Convert the cleaned motivelist to AV3 format and open in Chimera.
+        sg_motl_distance_clean('allmotl_2.star','allmotl_dclean_2.star',6,0);
+
+9. Convert the cleaned motivelist to AV3 format and open in Chimera.
    >NOTE: Sometimes there are rounding errors that results in CC values being slightly over 1; this will cause a "CC Range Error" in the Place Objects tool.
    >If this occurs, manually set the CC-Range such that the maximum value is 1. 
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
