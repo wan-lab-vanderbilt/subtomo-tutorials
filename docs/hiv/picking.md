@@ -9,8 +9,8 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 
 1. Open a new bash terminal (i.e. not in the TOMOMAN console), load and open Chimera.
 
-      module load chimera
-      chimera
+               module load chimera
+         chimera
 
    >NOTE: Given that chimera uses many different windows, recommend you going to a new workspace to open chimera.
    >You can move to the window on the right by using the keyboard shortcut`CTRL + SHIFT + Right Arrow`.
