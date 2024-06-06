@@ -106,15 +106,16 @@ We will go over some of basic post-processing steps in the next section.
 Here we will discuss some peculiarities with interpreting the structure of continuous surfaces where the structure runs off the box edges.
 
 STOPGAP’s FSC calculations during subtomogram averaging are required for figure-of-merit weighting references prior to alignment.
-As such, it is essential that they are calculated on the full alignment particle.
+As such, it is essential that they are calculated on the full reference structure.
 This is different than when you are interpreting your structures, where only the central subunits are important.
+
 Here, will generate an FSC mask to focus on the central hexamer, calculate FSC, and generate a sharpened reference.
 
 1. Generate a cylindrical mask that focuses on the central subunit.
 This will likely be similar to your alignment mask, but smaller in radius.
 One I made was:
 
-        fsc_mask = sg_cylinder(64, 12, 22, 3, [33, 33, 32]);
+        fsc_mask = sg_cylinder(64, 12, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/fsc_mask.mrc', fsc_mask);
 
 2. In the STOPGAP Console, run FSC calculation with `sg_calculate_FSC`.
