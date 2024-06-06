@@ -423,8 +423,8 @@ Copy your previous wedgelist, tomolist, masks, and `.sh` scripts into their appr
 2. Copy the full motivelist from `tomo/` to `subtomo/full/lists/`.
 
 3. Copy the references from your final initial average into `full/ref/` and rename them as iteration 1.
-I.e., `ref_A_9.mrc` would become `ref_A_1.mrc`.
-Technically, the weighted reference is not required, only the halfsets.
+I.e., `ref_shift_dclean_A_7.mrc` would become `ref_A_1.mrc`.
+Technically, the weighted summed reference is not required, only the halfsets.
 
 4. Extract subtomograms from all VLPs using the full motivelist.
 
@@ -432,16 +432,17 @@ Technically, the weighted reference is not required, only the halfsets.
 This problem is distinct from the *de novo* structure determine we performed for the initial dataset.
 In *de novo* structure determination, we slowly coax the structure out by iterative refinement and gradually reducing our angular search space.
 Here, we already have a good reference, so if our parameters are too coarse we may generate a worse reference than the one we put in.
-As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same.
-Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
-`angiter=3` should be sufficient.
-Set your parameters and run 1 iteration of alignment.
 
-6. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
+   As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same.
+   Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
+   `angiter=3` should be sufficient.
+   Set your parameters and run 1 iteration of alignment.
+
+7. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-7. Convert the cleaned motivelist to AV3 format and open in Chimera.
+8. Convert the cleaned motivelist to AV3 format and open in Chimera.
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
@@ -450,6 +451,6 @@ E.g.:
         new_motl = sg_motl_parse_type2(motl, idx);
         sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
 
-8. Generate a new average with the cleaned motivelist.
+9. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
 We can go on to rescaling the motivelist to bin4.
