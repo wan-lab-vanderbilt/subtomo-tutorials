@@ -34,7 +34,7 @@ Except where noted, default values are fine.
 
     1. In general, the defaults work, though you may wish to increase the `min_res` and reduce the `max_res` for tomography.
 
-    2. The `nthreads` parameter sets parallelization for CTFFIND4, set it to 30.
+    2. The `nthreads` parameter sets parallelization for CTFFIND4, set it to `16`.
 
 4. Run `tiltctf`. You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
 
