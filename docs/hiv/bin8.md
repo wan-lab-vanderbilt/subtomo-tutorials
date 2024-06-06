@@ -324,31 +324,33 @@ Parse another iteration (remember to increment `startidx`) with the same paramet
 The symmetry axis we want to use is in one of the empty spaces, so if an empty space is not centered we need to shift the reference in the XY plane.
 You can determine the amount of shift required in 3dmod.
 Then, use `sg_motl_shift_and_rotate` in the STOPGAP Console to shift positions.
-Replace `old_motl_name`, `new_motl_name`, and `shift` with appropriate values in this command:
+Inputs to this comman are `input_name`, `output_name`, `shifts`, and `rotations`.
+`shifts` are provided as a x-, y-, and z-shifts in square brackets while `rotations` are provided as Euler angles in square brackets.
+For example, the shifting I performed was:
 
-        sg_motl_shift_and_rotate('allmotl1', 'allmotl1_shift', 42);
+        sg_motl_shift_and_rotate('allmotl_tomo1_obj1_4.star', 'allmotl_tomo1_obj1_shift_4.star', [3,1,0], [0,0,0]);
 
     I typically append the new motivelist name with something descriptive like "_shift".
 
-5. Update the motivelist and reference names in the parser and generate an averaging run.
+6. Update the motivelist and reference names in the parser and generate an averaging run.
 Generate a new average.
 
-6. Compare the old and new references to make sure it was shifted properly.
+7. Compare the old and new references to make sure it was shifted properly.
 If it wasn’t you may have applied the shifts with the wrong sign.
 If so, re-shift the motivelist and re-average.
 
-7. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
+8. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
 With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4.
 Parse parameters and perform another round of alignment.
 
-8. The reference should look much better now.
+9. The reference should look much better now.
 Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
 From here, we can refine the average a bit by reducing the angular search.
 Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
 For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe.
 Update the parameters and run 2 iterations.
 
-9. At this point the reference is largely converged.
+10. At this point the reference is largely converged.
 If you check the FSC plot in the `fsc/` subfolder, the structure should be well beyond Nyquist.
 
 ### Clearing Overlapping & Bad Particles
