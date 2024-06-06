@@ -344,8 +344,8 @@ If so, re-shift the motivelist and re-average.
    You can re-generate the same mask, but with the appropriate Z-centering. 
    In my case it was:
    
-                cyl_mask2 = sg_cylinder(32, 10, 16, 3, [17, 17, 17]);
-                sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
+        cyl_mask2 = sg_cylinder(32, 10, 16, 3, [17, 17, 17]);
+        sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
 
 10. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
 With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4; `angiter=4`.
