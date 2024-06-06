@@ -317,7 +317,7 @@ Since the structure continues beyond the box boundaries in the XY-plane, the mas
 Through trial and error, produce a cylindrical mask that suits your reference.
 An example that worked for me is:
 
-        cyl_mask = sg_cylinder(32, 10, 20, 3, [17, 17, 14]);
+        cyl_mask = sg_cylinder(32, 10, 16, 3, [17, 17, 14]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl_mask);
 
     >NOTE: Since your structure is probably a bit offset, you will need to define the center when using the `sg_cylinder` function.
@@ -337,50 +337,52 @@ Since we have not done any angular search yet, we will start with a rough angula
     1. For `phi_angincr` and `phi_angiter`, which control the in-plane search, we can use our knowledge that there is C6 symmetry, so the maximum error is ± 30°.
     For an initial coarse search, we can then set `phi_angincr=12` and `phi_angiter=3` to find the nearest symmetry element (with a bit extra).
 
-2. Parse parameters and run alignment.
+1. Parse parameters and run alignment.
 
-3. The reference should look pretty structured now.
+1. The reference should look pretty structured now.
 Keep in mind, for iterative averaging, the quality of your alignment depends on the reference from the last round.
 As such, it is often useful to run 2 iterations per parameter set and rarely useful to run more than 2.
 Parse another iteration (remember to increment `startidx`) with the same parameters and run alignment again.
 
-4. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
+1. At this point, the reference should be relatively well resolved, looking like a grid of filled and empty spaces.
 The symmetry axis we want to use is in one of the empty spaces, so if an empty space is not centered we need to shift the reference in the XY plane.
 You can determine the amount of shift required in 3dmod.
-Then, use `sg_motl_shift_and_rotate` in the STOPGAP Toolbox to shift positions.
-This function takes four parameters:
-    - `old_motl_name` is the relative path to the input motivelist.
-    Be sure you use the most recent iteration.
-    - `new_motl_name` is the relative path to the output motivelist with all particle positions adjusted.
-    Append the new motivelist name with something descriptive like "_shift".
-    - `shifts` is how the particles should be shifted in `[x, y, z]`.
-    - `rotations` is how the particles should be rotated in `[phi, psi, theta]`. Since you aren't rotating, set `rotations` to `[0,0,0]`.
+Then, use `sg_motl_shift_and_rotate` in the STOPGAP Console to shift positions.
+Inputs to this command are `input_name`, `output_name`, `shifts`, and `rotations`.
+`shifts` are provided as a x-, y-, and z-shifts in square brackets while `rotations` are provided as Euler angles in square brackets.
+For example, the shifting I performed was:
 
-    This command shows shifting particles by -2 pixels along the x axis.
-    You can adjust parameters as necessary.
+        sg_motl_shift_and_rotate('allmotl_tomo1_obj1_4.star', 'allmotl_tomo1_obj1_shift_4.star', [3,1,3], [0,0,0]);
 
-        sg_motl_shift_and_rotate('lists/allmotl_tomo1_obj1_4.star', 'lists/allmotl_tomo1_obj1_shift_4.star', [-2,0,0], [0,0,0]);
-
-5. Open the parser.
-Update `motl_name`, i.e. to `allmotl_tomo1_obj1_shift`.
+1. Update the motivelist and reference names in the parser and generate an averaging run.
+I typically append the reference name with whatever I appended the motivelist name with.
+In this case I set `ref_name='ref_shift'`.
 Generate a new average.
 
-6. Compare the old and new references in 3dmod to make sure it was shifted properly.
+1. Compare the old and new references to make sure it was shifted properly.
 If it wasn’t you may have applied the shifts with the wrong sign.
 If so, re-shift the motivelist and re-average.
 
-7. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
-With the shift, there may be a bit of off-plane error introduced, so increase `angiter` to 4.
+    >NOTE: If you applied a Z-shift, your cylinder mask is probably not in a correct position anymore.
+    You can re-generate the same mask, but with the appropriate Z-centering.
+    In my case it was:
+
+        cyl_mask2 = sg_cylinder(32, 10, 16, 3, [17, 17, 17]);
+        sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
+
+1. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
+With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4; `angiter=4`.
 Parse parameters and perform another round of alignment.
 
-8. The reference should look much better now.
-Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
-From here, we can refine the average a bit by reducing the angular search.
-Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
-For phi, we are arguably accurate within 12°; reducing the phi increment to 4 with 4 iterations should be safe.
+1. The reference should look much better now.
+Keep in mind, the output references from STOPGAP do NOT have symmetry applied. Symmetry is applied to the reference prior to alignment, but not during averging.
+
+1. From here, we can refine the average a bit by reducing the angular search.
+Since the out-of-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2; `angiter=2`.
+For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe; `phi_angincr=4` and `phi_angiter=4`.
 Update the parameters and run 2 iterations.
 
-9. At this point the reference is largely converged.
+1. At this point the reference is largely converged.
 If you check the FSC plot in the `fsc/` subfolder, the structure should be well beyond Nyquist.
 
 ### Clearing Overlapping & Bad Particles
@@ -391,12 +393,12 @@ We will use the Place Objects Chimera plugin for this.
 1. Covert the motivelist to AV3 `.em` format in the STOPGAP Console using `sg_motl_stopgap_to_av3`.
 For example:
 
-        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_8.star');
+        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_7.star');
 
 2. Start Chimera and open the tomogram.
-Remember that your tomogram is in your `tomo/novactf_bin8/` directory.
+Remember that your tomogram is in your `tomo/bin8_aretomo/` directory.
 
-3. Remember to set Origin index to 0 and Voxel size to 1, and that you can visualize the tomogram in planes if you desire.
+3. Remember to open the coordinates panel in the Volume Viewer and set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
 
 4. Open the Place Object plugin (Tools > Utilities > Pick Particle).
 Browse for and open the `.em` motivelist with Place Object.
@@ -409,25 +411,27 @@ You can adjust the Phi-Offset parameter to fix this.
 6. You should see that most of the oversampled positions have converged and overlapped.
 This is a good sign of true subunit positions.
 In general, cross correlation (CC) scores are lower at the tops and bottoms, owing to the missing wedge.
-There will also be defects in the lattice with lower CC values, this is expected as it is impossible to close a surface using just hexagons.
+There will also be defects in the lattice; this is expected as it is impossible to close a surface using just hexagons.
+Areas around the defects will also typically have lower CC values.
 
-7. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
+8. Some particles with low CC values will be completely misaligned; this can be due getting trapped in local minima or particles that are in regions where there is no lattice.
 We can determine what an appropriate CC value cutoff is by setting Visualization to Cross-Correlation and adjusting the Lower CC Threshold slider.
 Determine and write down an appropriate threshold value to exclude low-scoring particles while preserving as many high-scoring as possible.
-    > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value.
+    > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value between tomograms or datasets.
 
-8. Clean the motivelist in the STOPGAP Console.
+9. Clean the motivelist in the STOPGAP Console.
 Set `s_cut` to the cutoff you determined in the previous step.
-For `d_cut`, choose a value that is smaller than the true interparticle distance.
+For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
+The settings I used are:
 
-        sg_motl_distance_clean('allmotl1', s_cut, d_cut);
+        sg_motl_distance_clean('allmotl_tomo1_obj1_shift_7.star','allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);
 
-9. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
+11. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
 
-10. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
+12. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
 
-11. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
+13. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
 Remember, FSC is NOT an objective resolution measure but instead a self-consistency measure.
 Your FSC was likely over-inflated due to identical particles in both halfsets.
 At this point, we can consider this final average the initial *de novo* reference.
@@ -442,8 +446,8 @@ Copy your previous wedgelist, tomolist, masks, and `.sh` scripts into their appr
 2. Copy the full motivelist from `tomo/` to `subtomo/full/lists/`.
 
 3. Copy the references from your final initial average into `full/ref/` and rename them as iteration 1.
-I.e., `ref_A_9.mrc` would become `ref_A_1.mrc`.
-Technically, the weighted reference is not required, only the halfsets.
+I.e., `ref_shift_dclean_A_7.mrc` would become `ref_A_1.mrc`.
+Technically, the weighted summed reference is not required, only the halfsets.
 
 4. Extract subtomograms from all VLPs using the full motivelist.
 
@@ -451,16 +455,19 @@ Technically, the weighted reference is not required, only the halfsets.
 This problem is distinct from the *de novo* structure determine we performed for the initial dataset.
 In *de novo* structure determination, we slowly coax the structure out by iterative refinement and gradually reducing our angular search space.
 Here, we already have a good reference, so if our parameters are too coarse we may generate a worse reference than the one we put in.
-As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same.
-Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
-`angiter=3` should be sufficient.
-Set your parameters and run 1 iteration of alignment.
 
-6. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
+   As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same as in the final round of the intial reference alignment.
+   Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
+   The parameters I used were: `angincr=2`, `angiter=3`,`phi_angincr=4`, `phi_angiter=8`.
+   Specifically for the phi settings, these settings allow for an in-plane search of +/- 32 degrees, which is sufficient to find the nearest symmetry group.
+   
+   Set your parameters and run 1 iteration of alignment.
+
+7. After alignment, the reference should look less noisy, though the resolution is still limited by the binning.
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-7. Convert the cleaned motivelist to AV3 format and open in Chimera.
+8. Convert the cleaned motivelist to AV3 format and open in Chimera.
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
@@ -469,6 +476,6 @@ E.g.:
         new_motl = sg_motl_parse_type2(motl, idx);
         sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
 
-8. Generate a new average with the cleaned motivelist.
+9. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
 We can go on to rescaling the motivelist to bin4.
