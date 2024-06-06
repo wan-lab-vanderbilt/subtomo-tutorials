@@ -345,11 +345,11 @@ With the shift, there may be a bit of off-plane error introduced, so increase th
 Parse parameters and perform another round of alignment.
 
 10. The reference should look much better now.
-Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
+Keep in mind, the output references from STOPGAP do NOT have symmetry applied. Symmetry is applied to the reference prior to alignment, but not during averging.
 
 11. From here, we can refine the average a bit by reducing the angular search.
-Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
-For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe.
+Since the out-of-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2; `angiter=2`.
+For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe; `phi_angincr=4` and `phi_angiter=4`.
 Update the parameters and run 2 iterations.
 
 12. At this point the reference is largely converged.
