@@ -343,6 +343,7 @@ If so, re-shift the motivelist and re-average.
         >NOTE: If you applied a Z-shift, your cylinder mask is probably not in a correct position anymore. 
         You can re-generate the same mask, but with the appropriate Z-centering. 
         In my case it was:
+   
                         cyl_mask2 = sg_cylinder(32, 10, 16, 3, [17, 17, 17]);
                         sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
 
