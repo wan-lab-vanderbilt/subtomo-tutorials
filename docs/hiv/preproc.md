@@ -164,3 +164,4 @@ Open `tomoman_dosefilter.param`.
            tomoman(pwd,'tomoman_dosefilter.param');
 
 5. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
+           !3dmod TS_01/TS_01.st TS_01/TS_01_dose-filt.st
