@@ -8,7 +8,7 @@ Right click on the desktop to start a terminal window.
 ## Load Modules
 
 The instaces we are using for this tutorial have all the required software installed as Lmod modules.
-Install them with:
+In terminals where you will run TOMOMAN or STOPGAP, load them with:
 
     module load imod chimera motioncor2 aretomo ctffind/4.1.14 novactf fourier3d tomoman stopgap/0.7.4
 
