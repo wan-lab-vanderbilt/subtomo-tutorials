@@ -51,12 +51,13 @@ TOMOMAN can take an input STOPGAP motivelist, and use the center of mass of the 
 Since we have no such motivelist now, this can be left off.
 
 1. Run novaCTF in the TOMOMAN console.
-        tomoman(pwd,'tomoman_novactf.param');
-This is typically the single longest computation step in the workflow.
-We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
-For now, you can copy the precomputed 8x binned tomogram to your working directory.
+       tomoman(pwd,'tomoman_novactf.param');
+   This is typically the single longest computation step in the workflow.
+   We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
+   For now, you can copy the precomputed 8x and 4x binned tomogram to your working directory.
 
-        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
+       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
+       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
 
     > NOTE: Make sure to leave off the last `/` to copy the directory and its contents.
 
