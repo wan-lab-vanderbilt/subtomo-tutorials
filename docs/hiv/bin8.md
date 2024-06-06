@@ -294,7 +294,7 @@ Since the structure continues beyond the box boundaries in the XY-plane, the mas
 Through trial and error, produce a cylindrical mask that suits your reference.
 An example that worked for me is:
 
-        cyl_mask = sg_cylinder(32, 10, 20, 3, [17, 17, 14]);
+        cyl_mask = sg_cylinder(32, 10, 16, 3, [17, 17, 14]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl_mask);
 
     >NOTE: Since your structure is probably a bit offset, you will need to define the center when using the `sg_cylinder` function.
