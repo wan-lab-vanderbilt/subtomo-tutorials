@@ -425,9 +425,10 @@ Set `s_cut` to the cutoff you determined in the previous step.
 For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
 The settings I used are:
 
-        sg_motl_distance_clean('allmotl_tomo1_obj1_shift_7.star','allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);
+        sg_motl_distance_clean('lists/allmotl_tomo1_obj1_shift_7.star','lists/allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);
 
 1. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
+
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
 
 1. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
