@@ -461,7 +461,7 @@ Here, we already have a good reference, so if our parameters are too coarse we m
    As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same as in the final round of the intial reference alignment.
    Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
    The parameters I used were: `angincr=2`, `angiter=3`,`phi_angincr=4`, `phi_angiter=8`.
-   Specifically for the phi settings, these settings allow for an in-plane search of +/- 32 degrees, which is sufficient to find the nearest symmetry group.
+   Specifically for the phi settings, these settings allow for an in-plane search of ±32 degrees, which is sufficient to find the nearest symmetry group.
 
    Set your parameters and run 1 iteration of alignment.
 
@@ -469,7 +469,7 @@ Here, we already have a good reference, so if our parameters are too coarse we m
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-        sg_motl_distance_clean('allmotl_2.star','allmotl_dclean_2.star',6,0);
+        sg_motl_distance_clean('allmotl_2.star', 'allmotl_dclean_2.star', 6, 0);
 
 1. Convert the cleaned motivelist to AV3 format and open in Chimera.
    >NOTE: Sometimes there are rounding errors that results in CC values being slightly over 1; this will cause a "CC Range Error" in the Place Objects tool.
@@ -478,7 +478,7 @@ Do this as before but don’t apply a score cutoff as we haven’t determined wh
 1. Determine an appropriate CC cutoff and parse the good particles.
 E.g.:
 
-        sg_motl_score_clean('allmotl_dclean_2.star','allmotl_dclean_sclean_2.star',0.4);
+        sg_motl_score_clean('allmotl_dclean_2.star', 'allmotl_dclean_sclean_2.star', 0.4);
 
 1. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
