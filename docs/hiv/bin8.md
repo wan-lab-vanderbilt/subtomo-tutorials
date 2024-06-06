@@ -468,6 +468,8 @@ Using the full motivelist requires a lot of memory so we can first distance clea
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
 8. Convert the cleaned motivelist to AV3 format and open in Chimera.
+   >NOTE: Sometimes there are rounding errors that results in CC values being slightly over 1; this will cause a "CC Range Error" in the Place Objects tool.
+   >If this occurs, manually set the CC-Range such that the maximum value is 1. 
 Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
@@ -476,6 +478,6 @@ E.g.:
         new_motl = sg_motl_parse_type2(motl, idx);
         sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
 
-9. Generate a new average with the cleaned motivelist.
+10. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
 We can go on to rescaling the motivelist to bin4.
