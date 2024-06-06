@@ -476,10 +476,7 @@ Do this as before but don’t apply a score cutoff as we haven’t determined wh
 1. Determine an appropriate CC cutoff and parse the good particles by logical indexing.
 E.g.:
 
-        motl = sg_motl_read2('allmotl_dclean_2.star');
-        idx = motl.score >= 0.4;
-        new_motl = sg_motl_parse_type2(motl, idx);
-        sg_motl_write2('allmotl_dclean_sclean_2.star', new_motl);
+        sg_motl_score_clean('allmotl_dclean_2.star','allmotl_dclean_sclean_2.star',0.4);
 
 1. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.
