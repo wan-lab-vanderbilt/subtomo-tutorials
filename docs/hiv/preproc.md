@@ -110,7 +110,7 @@ Open the `tomoman_motioncor2.param` file and review its parameters.
 
 3. The MotionCor2 parameters block contains MotionCor2’s parameters.
 For this dataset, most of the defaults are fine, but be sure to set the `FtBin` parameter to 2 so that the aligned frames are Fourier cropped back to normal size.
-Set the `Gpu` to 0.
+Set the `Gpu` to `0`.
 
 4. Since this dataset has .mrc frames, the “EER specific part” block can be ignored.
 
