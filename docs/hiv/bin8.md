@@ -98,13 +98,13 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 
         gedit run_stopgap.sh
 
-    The main parameters here are the "run options" which manage parallelization and the directories.
+    The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
 
 2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, and `copy_local` to 0.
 Set `n_cores` to the same number as used for `nthreads` in [CTF estimation](recon.md/#ctf-estimation).
 The rest of the run options are SLURM-specific and can be ignored.
 
-3. Set `rootdir` to the absolute path of your `init_ref/` folder.
+3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_testset/subtomo/init_ref/`).
 We will update `paramfilename` before running each job.
 Save `run_stopgap.sh`.
 
@@ -114,29 +114,34 @@ Save `run_stopgap.sh`.
 
 With the lists and run script prepared, we are now ready to extract our subtomograms.
 
-1. Open the `stopgap_extract_parser.sh` in a text editor.
+1. Open the `stopgap_extract_parser.sh` in a text editor. There are four blocks of options here: "Parser Options" which contains the path to the output parameter file; "Folder Options" which provides paths to folders; "File options" which are the input files for extraction; and "Extraction Parameters" which are settings for the output subtomograms.
 
-2. Update the rootdir to the absolute path of the `init_ref/` directory.
+2. In the Parser Options, the default `param_name` is fine.
+
+3. Under Folder options, update the rootdir to the absolute path of the `init_ref/` directory.
 The other directory parameters can be left alone; they are overrides to the standard STOPGAP structure.
 
-3. Update the list names in file options.
+4. Under File options, update the various lists.
+   * `motl_name=allmotl_tomo1_obj1_1.star'
+   * `wedgelist_name=wedgelist.star'
+   * `tomolist_name=sg_tomolist.txt'
 Since these are all lists, they are assumed to be in the listdir.
     > NOTE: since we are providing a tomolist, `tomodir` is ignored and can be left as `'none'`.
 
-4. Set the extraction parameters.
+6. Set the extraction parameters.
 The default subtomo_name is `'subtomo'`.
-For `boxsize`, 32 should be sufficient here.
-Set `pixelsize` to 10.8 since we binned our 1.35 Å pixels by a factor of 8.
+For `boxsize`, `32` should be sufficient here.
+Set `pixelsize` to `10.8` since we binned our 1.35 Å pixels by a factor of 8.
 For `output_format`, we find that `'mrc8'` works well, this saves the subtomogram as an 8-bit .mrc file.
-While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
+        > NOTE: While 8-bit only provides 256 gradations, we generally find this is sufficient for the local information contained within a subtomogram.
 During extraction, the subtomogram is cropped and its values are floated between 0 and 255, rounded, and saved.
 
-5. Save the file.
+7. Save the file.
 Run in the terminal; this will generate a new parameter file in the `params/` folder.
 
         ./stopgap_extract_parser.sh
 
-6. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
+8. Open the `run_stopgap.sh` script and set `paramfilename` to `params/extract_param.star`.
 Run STOPGAP by running the `run_stopgap.sh` script in a terminal.
 Feel free to preview it if you're curious.
 
