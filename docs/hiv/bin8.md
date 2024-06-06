@@ -474,7 +474,7 @@ Do this as before but don’t apply a score cutoff as we haven’t determined wh
    >NOTE: Sometimes there are rounding errors that results in CC values being slightly over 1; this will cause a "CC Range Error" in the Place Objects tool.
    If this occurs, manually set the CC-Range such that the maximum value is 1.
 
-1. Determine an appropriate CC cutoff and parse the good particles by logical indexing.
+1. Determine an appropriate CC cutoff and parse the good particles.
 E.g.:
 
         sg_motl_score_clean('allmotl_dclean_2.star','allmotl_dclean_sclean_2.star',0.4);
