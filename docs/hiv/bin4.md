@@ -58,17 +58,18 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
         sg_mrcwrite('masks/ccmask.mrc',ccmask);
 
 6. Set alignment parameters.
-We can keep the same low-pass filter resolution for the first alignment run.
-Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the `lp_rad` should still be the same.
-For angular alignment, the `angincr` of 2 deg we used earlier should still be sufficient (in practice, 2 deg will get you well past 10 Å resolution).
-Since our box is still relatively small, we can leave the `angiter` at 3 without too much computational expense.
-In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 60 deg range.
-At this point, our angular error in phi is likely somewhere around 4 deg.
-As such, setting `phi_angincr` and `phi_angiter` to 2 and 3 should provide enough sampling.
+   We can keep the same low-pass filter resolution for the first alignment run.
+   Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the same `lp_rad=6` setting should be fine.
 
-7. Parse subtomo parameters and run one iteration of alignment.
+   For angular alignment, the `angincr` of 2 deg we used earlier should still be sufficient (in practice, 2 deg will get you well past 10 Å resolution).
+   Since our box is still relatively small, we can leave `angiter=3` without too much computational expense.
+
+   In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 60 deg range.
+   At this point, our angular error in phi is likely somewhere around 4 deg `phi_angincr` we set in the last iteration.
+   As such, setting `phi_angincr=2` and `phi_angiter=3` should provide enough sampling.
+
+8. Parse subtomo parameters and run one iteration of alignment.
    Since we haven't really updated parameters since last unbinning, it's not necessary to run 2 iterations.
-
 
    Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
    Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
