@@ -341,17 +341,18 @@ If it wasn’t you may have applied the shifts with the wrong sign.
 If so, re-shift the motivelist and re-average.
 
 9. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
-With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4.
+With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4; `angiter=4`.
 Parse parameters and perform another round of alignment.
 
 10. The reference should look much better now.
 Keep in mind, the output references from STOPGAP do NOT have symmetry applied.
-From here, we can refine the average a bit by reducing the angular search.
+
+11. From here, we can refine the average a bit by reducing the angular search.
 Since the in-plane search already used a small angle, we can leave the increment alone and reduce the iterations to 2.
 For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 4 iterations should be safe.
 Update the parameters and run 2 iterations.
 
-11. At this point the reference is largely converged.
+12. At this point the reference is largely converged.
 If you check the FSC plot in the `fsc/` subfolder, the structure should be well beyond Nyquist.
 
 ### Clearing Overlapping & Bad Particles
