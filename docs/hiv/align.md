@@ -31,13 +31,16 @@ Open `tomoman_aretomo.param`.
 
 4. Run reconstruction as before in the TOMOMAN console.
 
+       tomoman(pwd,'tomoman_aretomo.param');
+
 You now have a reconstructed tomogram you can visualize in 3dmod.
 You can run the below command in the standalone, or omit the `!` and run it in a separate terminal.
 If it does not work, you file may have a slightly different name.
 
     !3dmod bin8_aretomo/TS_01_dose-filt_bin8.mrc
 
-In the 3dmod window, select Image > XYZ to view slices along all axes.
+In the 3dmod window, select Image > XYZ to (or use the shortcut `Ctrl + X`) view slices along all axes.
 
->NOTE: After reconstruction, you should see that the tomogram is reconstructed beyond the edges of the specimen along the Z direction. This is evidence that the 'AlignZ' and 'VolZ' parameters we set were appropriate.
+>NOTE: After reconstruction, you should see that the tomogram is reconstructed beyond the edges of the specimen along the Z direction.
+>This is evidence that the 'AlignZ' and 'VolZ' parameters we set were appropriate.
 
