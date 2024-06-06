@@ -368,7 +368,7 @@ For example:
 2. Start Chimera and open the tomogram.
 Remember that your tomogram is in your `tomo/bin8_aretomo/` directory.
 
-3. Remember to set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
+3. Remember to open the coordinates panel in the Volume Viewer and set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
 
 4. Open the Place Object plugin (Tools > Utilities > Pick Particle).
 Browse for and open the `.em` motivelist with Place Object.
@@ -394,7 +394,7 @@ Set `s_cut` to the cutoff you determined in the previous step.
 For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
 The settings I used are:
 
-        sg_motl_distance_clean('allmotl1', s_cut, d_cut);
+        sg_motl_distance_clean('allmotl_tomo1_obj1_shift_7.star','allmotl_tomo1_obj1_shift_dclean_7.star', 0.35, 6);
 
 11. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
