@@ -49,7 +49,9 @@ For my average this works but as before you may need to adjust its size and posi
         cyl = sg_cylinder(64, 26, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl);
 
-4. Generate a new CC mask.
+   >NOTE: This mask is a bit thinner than previous ones. Here, we are focusing on the ordered outer layer, not the disordered inner layer. 
+
+5. Generate a new CC mask.
 Since we’ve already determined the true particle positions at bin8, the goal is no longer to generate a CC mask that allows our randomly seeded particles to find the nearest true particle.
 Instead, we want to make a CC mask that allows for proper sampling but not too large that results in getting trapped in false local minima.
 Arguably, a sphere with a 2 pixel radius should be sufficient to account for the bin8 precision, but a 4 pixel radius should still be safe.
