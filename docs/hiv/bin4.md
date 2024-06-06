@@ -124,9 +124,7 @@ One I made was:
    There are a large number of parameters for this function, depending on what output you want. For the full parameter list, you can run `sg_calculate_FSC('help')`.
 
    Here, we will calculate the FSC and plot it and generate a b-factor sharpened, contrast inverted (density is positive) map.
-
-   Use the name of the most recent reference in place of `ref_avg_name`.
-   `bfactor` can be adjusted but 100 is a reasonable starting point.
+   The`bfactor` value can be determined empirically, but 100 is a reasonable starting point.
 
         sg_calculate_FSC('refA_name','ref/ref_A_4.mrc','refB_name','ref/ref_B_4.mrc','mask_name','masks/fsc_mask.mrc','pixelsize',5.4,'symmetry','c6','bfactor',100,'ref_avg_name','ref/filt_4.mrc','x_label',1);
 
@@ -134,3 +132,5 @@ One I made was:
 The output reference should also be less noisy and sharper.
 
     >NOTE: FSC estimations can be more accurate with tighter "body" masks, such as those generated using RELION.
+    >However, it's important to provide a wide enough Gaussian dropoff, otherwise the masking will produce sharp edges and spurious correlations.
+    >This is particularly true for structures like this HIV capsid, where the structure is continuous and runs off the edges of the box. 
