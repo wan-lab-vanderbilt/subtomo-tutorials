@@ -77,22 +77,27 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
 9. As noted above, 2 deg angular increments should be sufficient, so our main parameter to change is our low-pass filter.
 Given that our resolution is so high, we can safely set our low pass radius to ~20 Å (17 Fourier pixels).
 Since we have limited computational power, we can play with some methods for cutting down computation time.
-Set the angular iterations to 2 and the search mode to `"shc"`.
+Set the angular iterations to 2 and the search mode to `'shc'`.
 
     <details><summary>
     Stochastic Hill Climbing (SHC)</summary>
-    "shc" stands for Stochastic Hill Climbing (SHC).
-    In standard hill climbing, the goal is to sample all possible orientations (in our search range) and take the highest scoring one; i.e. to move up the hill as quickly as possible.
+    In standard hill climbing, the goal is to sample all possible orientations (within the desired search range) and take the highest scoring orientation; i.e. to move up the hill as quickly as possible.
     SHC instead randomizes the order of search angles, scores the prior best angle, and accepts the first better-scoring orientation.
     As a result, you are still moving up the hill, but potentially not as quickly as possible.
 
-    Even though alignments are somewhat suboptimal, SHC results in an incrementally better reference more quickly, so more iterations can be done in the same amount of time.
-    Low to medium resolution information, i.e. the information you are using to align, is typically still well-resolved, so further iterations will still improve the overall alignment of the dataset.
+    Even though alignments are potentially suboptimal, SHC results in an incrementally better reference more quickly, so more iterations can be done in the same amount of time.
+    Low to medium resolution information, i.e. the information you are using to align, is  still well-resolved, so further iterations will still improve the overall alignment of the dataset.
 
-    >NOTE: SHC is only really useful when refining angles and NOT during *de novo* reference generation or finding true particle positions from oversampled starting positions.
+   SHC also scales well with respect to resolution.
+   When aligning against lower resolution data, the difference between the optimal orientation and a slightly suboptimal orientation are minimal, and the CC may not pick up on the difference.
+   As you progressively align with higher resolution information, it becomes easier to score the difference between a optimal and suboptimal orientations, so the chances of finding a better solution to the prior one is lower.
+   When this approaches maximum computation time, SHC essentially becomes standard hill climbing.
+
+    >NOTE: SHC is only  useful when refining angles of particles that are close to their true orientations.
+    >SHC should NEVER be used during *de novo* reference generation or finding true particle positions from oversampled starting positions.
     </details></p>
 
-10. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
+11. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
 
 We will go over some of basic post-processing steps in the next section.
 
