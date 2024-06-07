@@ -3,6 +3,7 @@ site_name: Subtomo
 theme:
   name: material
   search: true
+  # These palette options allow for light and dark modes
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -49,8 +50,13 @@ nav:
   - Bin 8 Subtomogram Averaging: hiv/bin8.md
   - Bin 4 Subtomogram Averaging: hiv/bin4.md
 
+# This extra JS powers the mathjax support for equation rendering
 extra_javascript: 
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+# This extra CSS is just to hide the RTD flyout menu
+extra_css:
+  - extra.css
 
 markdown_extensions:
     - mdx_math
