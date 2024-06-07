@@ -18,7 +18,6 @@ For more information about TOMOMAN, see [Khavnekar & Wan. _bioRxiv._ 2024.](http
 
 ## STOPGAP
 
-_Add introduction to stopgap?_
 For more information about STOPGAP, see [Wan et al. _Acta Crystallogr., Sect. D: Biol. Crystallogr._ 2024.](https://doi.org/10.1107/S205979832400295X)
 
 ## Courses
