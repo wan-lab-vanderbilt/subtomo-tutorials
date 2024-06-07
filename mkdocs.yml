@@ -55,7 +55,8 @@ extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 # This extra CSS is just to hide the RTD flyout menu
-extra_css: [extra.css]
+extra_css:
+  -stylesheets/extra.css
 
 markdown_extensions:
     - mdx_math
