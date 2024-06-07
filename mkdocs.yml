@@ -56,7 +56,7 @@ extra_javascript:
 
 # This extra CSS is just to hide the RTD flyout menu
 extra_css:
-  - extra.css
+  - css/extra.css
 
 markdown_extensions:
     - mdx_math
