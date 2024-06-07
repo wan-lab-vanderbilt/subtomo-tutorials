@@ -30,6 +30,7 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  # These features enable copy buttons on code blocks and add prev/next nav buttons
   features:
     - content.code.copy
     - navigation.footer
@@ -54,9 +55,9 @@ nav:
 extra_javascript: 
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
-# This extra CSS is just to hide the RTD flyout menu see https://squidfunk.github.io/mkdocs-material/customization/?h=css#additional-css
-extra_css:
-  - stylesheets/extra.css
+# This extra CSS was an attempt to hide the RTD flyout menu see https://squidfunk.github.io/mkdocs-material/customization/?h=css#additional-css
+# Couldn't get it working with material theme
+extra_css: [stylesheets/extra.css]
 
 markdown_extensions:
     - mdx_math
@@ -69,3 +70,5 @@ markdown_extensions:
     # - pymdownx.superfences
     # - pymdownx.tabbed:
     #     alternate_style: true
+
+copyright: "<p><p>Tutorial written by Spencer J Rothfuss and Will Wan."
