@@ -1,10 +1,37 @@
 site_name: Subtomo
 
 theme:
-  name: readthedocs
+  name: material
   search: true
-  # features:
-  #   - content.code.copy
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - content.code.copy
+
 
 nav:
 - index.md
@@ -26,6 +53,12 @@ extra_javascript:
 
 markdown_extensions:
     - mdx_math
+    # - pymdownx.highlight:
+    #     anchor_linenums: true
+    #     line_spans: __span
+    #     pygments_lang_class: true
+    # - pymdownx.inlinehilite
+    # - pymdownx.snippets
     # - pymdownx.superfences
     # - pymdownx.tabbed:
     #     alternate_style: true
