@@ -17,14 +17,14 @@ This will rescale the extraction positions and apply shifts.
         sg_motl_rescale('allmotl_dclean_sclean_halfset_2.star', 'allmotl_bin4_1.star', 2, 1);
 
 3. Make a new subtomogram averaging folder (`subtomo/bin4/`) and initialize it (`stopgap_initialize_folder.sh subtomo`).
-Copy the wedgelist, STOPGAP tomolist, bin4 motivelists and scripts into this new folder.
-For simplicity, you can also rename the motivelist to `allmotl_1.star`.
-The wedgelist keeps all information in unbinned pixels, so it can be used "as is" for any binning.
-The paths in the tomolist will need to be updated; this can be done by making a new one using TOMOMAN or simply using a text editor.
-Copy the necessary bash scripts.
+Copy the wedgelist, STOPGAP tomolist, bin4 motivelist, and scripts into this new folder.
+    - For simplicity, you can also rename the motivelist to `allmotl_1.star`.
+    - The wedgelist keeps all information in unbinned pixels, so it can be used "as is" for any binning.
+    - The paths in the tomolist will need to be updated; this can be done by making a new one using TOMOMAN or simply using a text editor.
+    - Change `rootdir` in the bash scripts
 
-5. Extract subtomograms.
-Set the boxsize to 64 and update the pixelsize.
+4. Extract subtomograms.
+Set the boxsize to 64 and update the pixelsize to 5.4 (1.35 Å/pix × 4 = 5.4 Å/pix).
 
 ## Bin4 Angular Refinement
 
@@ -36,22 +36,22 @@ E.g.:
 
         sphere = sg_sphere(64, 26, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
-   >NOTE: Remember to move your STOPGAP console to the new bin4 folder. 
+   >NOTE: Remember to move your STOPGAP console to the new bin4 folder.
 
    Notice that the dimensions of the sphere are increased because binning is reduced.
 
-2. Generate an average using the bin4 motivelist.
+1. Generate an average using the bin4 motivelist.
 
-3. Generate a new alignment mask.
+1. Generate a new alignment mask.
 A cylinder should be sufficient again, but this time make one that only includes the outer structured layer.
 For my average this works but as before you may need to adjust its size and position for yours:
 
         cyl = sg_cylinder(64, 26, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl);
 
-   >NOTE: This mask is a bit thinner than previous ones. Here, we are focusing on the ordered outer layer, not the disordered inner layer. 
+   >NOTE: This mask is a bit thinner than previous ones. Here, we are focusing on the ordered outer layer, not the disordered inner layer.
 
-5. Generate a new CC mask.
+1. Generate a new CC mask.
 Since we’ve already determined the true particle positions at bin8, the goal is no longer to generate a CC mask that allows our randomly seeded particles to find the nearest true particle.
 Instead, we want to make a CC mask that allows for proper sampling but not too large that results in getting trapped in false local minima.
 Arguably, a sphere with a 2 pixel radius should be sufficient to account for the bin8 precision, but a 4 pixel radius should still be safe.
@@ -59,7 +59,7 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
         ccmask = sg_sphere(64,4);
         sg_mrcwrite('masks/ccmask.mrc',ccmask);
 
-6. Set alignment parameters.
+1. Set alignment parameters.
    We can keep the same low-pass filter resolution for the first alignment run.
    Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the same `lp_rad=6` setting should be fine.
 
@@ -70,13 +70,13 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
    At this point, our angular error in phi is likely somewhere around 4 deg `phi_angincr` we set in the last iteration.
    As such, setting `phi_angincr=2` and `phi_angiter=3` should provide enough sampling.
 
-8. Parse subtomo parameters and run one iteration of alignment.
+1. Parse subtomo parameters and run one iteration of alignment.
    Since we haven't really updated parameters since last unbinning, it's not necessary to run 2 iterations.
 
    Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
    Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
 
-9. As noted above, `angincr=2` should be sufficient, so our main parameters to change ares the `angiter` and `lp_rad` parameters.
+1. As noted above, `angincr=2` should be sufficient, so our main parameters to change ares the `angiter` and `lp_rad` parameters.
 Given that our resolution high compared to the previous `lp_rad` setting, we can safely set our low pass radius to ~20 Å (`lp_rad=17`).
 Since we have limited computational power, we can play with some methods for cutting down computation time.
 Set the `angiter=2` and `search_mode='shc'`.
@@ -99,7 +99,7 @@ Set the `angiter=2` and `search_mode='shc'`.
     >SHC should NEVER be used during *de novo* reference generation or finding true particle positions from oversampled starting positions.
     </details></p>
 
-11. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
+1. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
 
 We will go over some of basic post-processing steps in the next section.
 
@@ -128,9 +128,9 @@ One I made was:
 
         sg_calculate_FSC('refA_name','ref/ref_A_4.mrc','refB_name','ref/ref_B_4.mrc','mask_name','masks/fsc_mask.mrc','pixelsize',5.4,'symmetry','c6','bfactor',100,'ref_avg_name','ref/filt_4.mrc','x_label',1);
 
-4. You should find that the FSC plot is significantly better than what STOPGAP outputs.
+3. You should find that the FSC plot is significantly better than what STOPGAP outputs.
 The output reference should also be less noisy and sharper.
 
     >NOTE: FSC estimations can be more accurate with tighter "body" masks, such as those generated using RELION.
     >However, it's important to provide a wide enough Gaussian dropoff, otherwise the masking will produce sharp edges and spurious correlations.
-    >This is particularly true for structures like this HIV capsid, where the structure is continuous and runs off the edges of the box. 
+    >This is particularly true for structures like this HIV capsid, where the structure is continuous and runs off the edges of the box.
