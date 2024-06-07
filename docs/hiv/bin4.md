@@ -36,9 +36,10 @@ E.g.:
 
         sphere = sg_sphere(64, 26, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
-   >NOTE: Remember to move your STOPGAP console to the new bin4 folder.
 
-   Notice that the dimensions of the sphere are increased because binning is reduced.
+    >NOTE: Remember to move your STOPGAP console to the new bin4 folder.
+
+    Notice that the dimensions of the sphere are increased because binning is reduced.
 
 1. Generate an average using the bin4 motivelist.
 
@@ -49,7 +50,7 @@ For my average this works but as before you may need to adjust its size and posi
         cyl = sg_cylinder(64, 26, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/cyl_mask.mrc', cyl);
 
-   >NOTE: This mask is a bit thinner than previous ones. Here, we are focusing on the ordered outer layer, not the disordered inner layer.
+    >NOTE: This mask is a bit thinner than previous ones. Here, we are focusing on the ordered outer layer, not the disordered inner layer.
 
 1. Generate a new CC mask.
 Since we’ve already determined the true particle positions at bin8, the goal is no longer to generate a CC mask that allows our randomly seeded particles to find the nearest true particle.
@@ -60,21 +61,21 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
         sg_mrcwrite('masks/ccmask.mrc',ccmask);
 
 1. Set alignment parameters.
-   We can keep the same low-pass filter resolution for the first alignment run.
-   Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the same `lp_rad=6` setting should be fine.
+We can keep the same low-pass filter resolution for the first alignment run.
+Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the same `lp_rad=6` setting should be fine.
 
-   For angular alignment, the `angincr` of 2 deg we used earlier should still be sufficient (in practice, 2 deg will get you well past 10 Å resolution).
-   Since our box is still relatively small, we can leave `angiter=3` without too much computational expense.
+    For angular alignment, the `angincr` of 2° we used earlier should still be sufficient (in practice, 2° will get you well past 10 Å resolution).
+    Since our box is still relatively small, we can leave `angiter=3` without too much computational expense.
 
-   In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 60 deg range.
-   At this point, our angular error in phi is likely somewhere around 4 deg `phi_angincr` we set in the last iteration.
-   As such, setting `phi_angincr=2` and `phi_angiter=3` should provide enough sampling.
+    In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 60° range.
+    At this point, our angular error in phi is likely somewhere around 4° given the `phi_angincr` we set in the last iteration.
+    As such, setting `phi_angincr=2` and `phi_angiter=3` should provide enough sampling.
 
 1. Parse subtomo parameters and run one iteration of alignment.
    Since we haven't really updated parameters since last unbinning, it's not necessary to run 2 iterations.
 
-   Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
-   Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
+Looking at the output FSC, the average is nearly at sub-nanometer resolution, though we are limited in visualizing this due to pixelsize.
+Given that we have only used ~60 Å information in our alignment, this is a clear example that the resolution of high-resolution features is driven by the alignment of low-resolution data.
 
 1. As noted above, `angincr=2` should be sufficient, so our main parameters to change ares the `angiter` and `lp_rad` parameters.
 Given that our resolution high compared to the previous `lp_rad` setting, we can safely set our low pass radius to ~20 Å (`lp_rad=17`).
@@ -90,13 +91,13 @@ Set the `angiter=2` and `search_mode='shc'`.
     Even though alignments are potentially suboptimal, SHC results in an incrementally better reference more quickly, so more iterations can be done in the same amount of time.
     Low to medium resolution information, i.e. the information you are using to align, is  still well-resolved, so further iterations will still improve the overall alignment of the dataset.
 
-   SHC also scales well with respect to resolution.
-   When aligning against lower resolution data, the difference between the optimal orientation and a slightly suboptimal orientation are minimal, and the CC may not pick up on the difference.
-   As you progressively align with higher resolution information, it becomes easier to score the difference between a optimal and suboptimal orientations, so the chances of finding a better solution to the prior one is lower.
-   When this approaches maximum computation time, SHC essentially becomes standard hill climbing.
+    SHC also scales well with respect to resolution.
+    When aligning against lower resolution data, the difference between the optimal orientation and a slightly suboptimal orientation are minimal, and the CC may not pick up on the difference.
+    As you progressively align with higher resolution information, it becomes easier to score the difference between a optimal and suboptimal orientations, so the chances of finding a better solution to the prior one is lower.
+    When this approaches maximum computation time, SHC essentially becomes standard hill climbing.
 
     >NOTE: SHC is only  useful when refining angles of particles that are close to their true orientations.
-    >SHC should NEVER be used during *de novo* reference generation or finding true particle positions from oversampled starting positions.
+    SHC should NEVER be used during *de novo* reference generation or finding true particle positions from oversampled starting positions.
     </details></p>
 
 1. At this point, the rest of the refinement towards the dataset’s information limit is largely the same process.
@@ -120,17 +121,18 @@ One I made was:
         fsc_mask = sg_cylinder(64, 12, 22, 3, [33, 33, 31]);
         sg_mrcwrite('masks/fsc_mask.mrc', fsc_mask);
 
-2. In the STOPGAP Console, run FSC calculation with `sg_calculate_FSC`.
-   There are a large number of parameters for this function, depending on what output you want. For the full parameter list, you can run `sg_calculate_FSC('help')`.
+1. In the STOPGAP Console, run FSC calculation with `sg_calculate_FSC`.
+Parameters are passed to this function as name value pairs and there are a large number of parameters for this function depending on what output you want.
+For the full parameter list, you can run `sg_calculate_FSC('help')`.
 
-   Here, we will calculate the FSC and plot it and generate a b-factor sharpened, contrast inverted (density is positive) map.
-   The`bfactor` value can be determined empirically, but 100 is a reasonable starting point.
+    Here, we will calculate the FSC and plot it and generate a b-factor sharpened, contrast inverted (density is positive) map.
+    The`bfactor` value can be determined empirically, but 100 is a reasonable starting point.
 
         sg_calculate_FSC('refA_name','ref/ref_A_4.mrc','refB_name','ref/ref_B_4.mrc','mask_name','masks/fsc_mask.mrc','pixelsize',5.4,'symmetry','c6','bfactor',100,'ref_avg_name','ref/filt_4.mrc','x_label',1);
 
-3. You should find that the FSC plot is significantly better than what STOPGAP outputs.
+1. You should find that the FSC plot is significantly better than what STOPGAP outputs.
 The output reference should also be less noisy and sharper.
 
     >NOTE: FSC estimations can be more accurate with tighter "body" masks, such as those generated using RELION.
-    >However, it's important to provide a wide enough Gaussian dropoff, otherwise the masking will produce sharp edges and spurious correlations.
-    >This is particularly true for structures like this HIV capsid, where the structure is continuous and runs off the edges of the box.
+    However, it's important to provide a wide enough Gaussian dropoff, otherwise the masking will produce sharp edges and spurious correlations.
+    This is particularly true for structures like this HIV capsid, where the structure is continuous and runs off the edges of the box.

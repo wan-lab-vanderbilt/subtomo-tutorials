@@ -23,15 +23,14 @@ Open `tomoman_aretomo.param`.
     `VolZ` is the thickness of the reconstructed tomogram and should be larger than both `AlignZ` and the specimen thickness.
     In this case, `AlignZ=1400` and `VolZ=1800` should work well.
     The rest of the AreTomo parameters can be left as defaults.
-    
 
-    4. Check that `OutBin` is set to 8. This is the final binning, so it is effectively a additional 2x binning from the 4x binning of our input tilt-series.
+    3. Check that `OutBin` is set to 8. This is the final binning, so it is effectively a additional 2x binning from the 4x binning of our input tilt-series.
 
-    5. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
+    4. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
 
 4. Run reconstruction as before in the TOMOMAN console.
 
-       tomoman(pwd,'tomoman_aretomo.param');
+        tomoman(pwd,'tomoman_aretomo.param');
 
 You now have a reconstructed tomogram you can visualize in 3dmod.
 You can run the below command in the standalone, or omit the `!` and run it in a separate terminal.
@@ -42,5 +41,4 @@ If it does not work, you file may have a slightly different name.
 In the 3dmod window, select Image > XYZ to (or use the shortcut `Ctrl + X`) view slices along all axes.
 
 >NOTE: After reconstruction, you should see that the tomogram is reconstructed beyond the edges of the specimen along the Z direction.
->This is evidence that the 'AlignZ' and 'VolZ' parameters we set were appropriate.
-
+This is evidence that the 'AlignZ' and 'VolZ' parameters we set were appropriate.

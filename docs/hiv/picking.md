@@ -61,9 +61,9 @@ In Chimera, we will pick centers using Volume Tracer and set radii for each sphe
    Since the VLPs are not perfect spheres, adjust the radius to a point with the best compromise.
 
      >NOTE: There are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
-     >For these VLPs, we suggest setting the radius to between the two outermost layers.
-     >If your diameters are not around 40-50 voxels, you may have forgotten to set your Voxel Size to 1.
-     >If so, you will need to re-pick the volume centers. 
+     For these VLPs, we suggest setting the radius to between the two outermost layers.
+     If your diameters are not around 40-50 voxels, you may have forgotten to set your Voxel Size to 1.
+     If so, you will need to re-pick the volume centers.
 
 1. When all radii are set, press Save.
    For now, you can click Reset to remove the spherical wireframes and close the Pick Particles window.
@@ -83,7 +83,7 @@ After picking our spheres, we can append this data to the tomolist and use funct
 
         tm_metadata_add_new(pwd, 'tomolist.mat', 'sphere');
 
-3. To generate a motivelist, we will use the `sg_motl_batch_sphere` function.
+1. To generate a motivelist, we will use the `sg_motl_batch_sphere` function.
    This function generates particle coordinates along the surface of the input spheres in a defined way.
    The parameters for this function are:
 

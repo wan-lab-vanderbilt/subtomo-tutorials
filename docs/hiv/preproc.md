@@ -34,7 +34,6 @@ For the rest of the preprocessing tasks, we will be editing parameter files and 
 
     cd ~/HIV_subset/tomo/
 
-
 ## Importing New Stacks
 
 The first step in TOMOMAN processing is sorting new data into directories, one for each tilt series.
@@ -163,6 +162,6 @@ Open `tomoman_dosefilter.param`.
 
         tomoman(pwd,'tomoman_dosefilter.param');
 
-5. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
+4. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
 
         !3dmod TS_01/TS_01.st TS_01/TS_01_dose-filt.st
