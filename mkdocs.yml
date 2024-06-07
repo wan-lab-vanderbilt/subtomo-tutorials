@@ -54,9 +54,9 @@ nav:
 extra_javascript: 
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
-# This extra CSS is just to hide the RTD flyout menu
+# This extra CSS is just to hide the RTD flyout menu see https://squidfunk.github.io/mkdocs-material/customization/?h=css#additional-css
 extra_css:
-  -stylesheets/extra.css
+  - stylesheets/extra.css
 
 markdown_extensions:
     - mdx_math
