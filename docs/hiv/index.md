@@ -18,8 +18,6 @@ In this tutorial, we will work on the HIV immature capsid virus-like particles (
 - Expanding the dataset to all VLPs in the 8x-binned tomogram
 - Rescaling the motivelists for processing 4x-binned data
 
-Be sure to set up your environment properly before beginning.
-
 ## External Packages
 
 During this tutorial we will be using a number of other software packages.

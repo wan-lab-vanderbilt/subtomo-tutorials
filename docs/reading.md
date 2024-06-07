@@ -8,7 +8,7 @@ In addition, the following references would also be useful background for some o
 
 - Dose weighting: [Grant & Grigorieff. _eLife._ 2015.](https://doi.org/10.7554/ELIFE.06980)
 - AreTomo: [Zheng et al. _J. Struct. Biol.: X._ 2022.](https://doi.org/10.1016/J.YJSBX.2022.100068)
-- 3D-CTF Correction: [Turoňová et al. _J. Struct. Biol._ 2017](https://doi.org/10.1016/j.jsb.2017.07.007)
+- 3D-CTF Correction: [Turoňová et al. _J. Struct. Biol._ 2017.](https://doi.org/10.1016/j.jsb.2017.07.007)
 
 ## Application
 

@@ -13,7 +13,7 @@ Open the `tomoman_tiltctf.param` file.
 2. The tiltctf parameters include the parameters for calculating power spectra.
 Except where noted, default values are fine.
 
-    1. In general, a `ps_size` of 512 and a `def_tol`, defocus tolerance, of `0.05` um is sufficient.
+    1. A `ps_size` of 512 and a `def_tol`, defocus tolerance, of `0.05` µm is sufficient.
     Defocus tolerance is the maximum allowed tolerance when deciding how to tile tilted images, but `tiltctf` also always uses a minimum tile overlap of ½ the power spectrum size, so increasing this number may not directly affect computation time.
 
     2. Fourier scaling, `fscaling`, should be used if the data is collected for high-resolution work (e.g. pixel size smaller than ~2 Å/pix).

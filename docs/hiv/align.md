@@ -33,8 +33,6 @@ Open `tomoman_aretomo.param`.
         tomoman(pwd,'tomoman_aretomo.param');
 
 You now have a reconstructed tomogram you can visualize in 3dmod.
-You can run the below command in the standalone, or omit the `!` and run it in a separate terminal.
-If it does not work, you file may have a slightly different name.
 
     !3dmod bin8_aretomo/TS_01_dose-filt_bin8.mrc
 

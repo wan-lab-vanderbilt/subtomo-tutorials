@@ -7,14 +7,14 @@ This includes rescaling the motivelist, applying the shifts to the extraction po
 
 1. In the STOPGAP Console, we will re-number the particles and assign odd/even halfsets:
 
-        sg_motl_assign_halfsets('allmotl_dclean_sclean_2.star', 'allmotl_dclean_sclean_halfset_2.star', 'oddeven', 1);
+        sg_motl_assign_halfsets('lists/allmotl_dclean_sclean_2.star', 'lists/allmotl_dclean_sclean_halfset_2.star', 'oddeven', 1);
 
     >NOTE: Since we have renumbered the subtomograms, this new motivelist will NOT work with the current averaging folder.
 
 2. Rescale the motivelist.
 This will rescale the extraction positions and apply shifts.
 
-        sg_motl_rescale('allmotl_dclean_sclean_halfset_2.star', 'allmotl_bin4_1.star', 2, 1);
+        sg_motl_rescale('lists/allmotl_dclean_sclean_halfset_2.star', 'lists/allmotl_bin4_1.star', 2, 1);
 
 3. Make a new subtomogram averaging folder (`subtomo/bin4/`) and initialize it (`stopgap_initialize_folder.sh subtomo`).
 Copy the wedgelist, STOPGAP tomolist, bin4 motivelist, and scripts into this new folder.

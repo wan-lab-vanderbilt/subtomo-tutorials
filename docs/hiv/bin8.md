@@ -10,7 +10,7 @@ Here we will initialize a subtomogram averaging folder with the necessary files 
 
 1. In a terminal (not the TOMOMAN standalone) change to your HIV_tutorial directory.
 
-1. Make a `subtomo/init_ref/` subdirectory.
+1. Make `subtomo/` and `subtomo/init_ref/` subdirectories.
 Change into the `init_ref/` directory.
 
 1. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
@@ -105,9 +105,10 @@ The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_dataset/subtomo/init_ref/`).
 We will update `paramfilename` before running each job.
-Save `run_stopgap.sh`.
 
     >NOTE: Remember to end your `rootdir` path with a `/`!
+
+4. Save `run_stopgap.sh`.
 
 ## Extract Subtomograms
 
@@ -122,7 +123,7 @@ With the lists and run script prepared, we are now ready to extract our subtomog
 1. Under Folder options, update the rootdir to the absolute path of the `init_ref/` directory.
 The other directory parameters can be left alone; they are overrides to the standard STOPGAP structure.
 
-1. Under File options, update the various lists.
+1. Under File options, update the lists.
 
     - `motl_name='allmotl_tomo1_obj1_1.star'`
 
@@ -202,12 +203,12 @@ To save a sphere mask into the `mask/` folder, change into your `subtomo/` direc
     1. The main settings for this job are in the Job Parameters block.
     Since we are just averaging a single reference, set `subtomo_mode` to `'avg_singleref'`.
     Because we are on iteration 1, set `startidx` to 1.
-    For averaging jobs, iterations is ignored.
+    For averaging jobs, `iterations` is ignored.
     Set `binning` to `8`.
 
     1. Update Main File Options to indicate the correct files.
 
-        - `motl_name` sets the rootname of the motivelist without an iteration number or extension, that is `'allmotl_tomo1_obj1`.
+        - `motl_name` sets the rootname of the motivelist without an iteration number or extension, that is `'allmotl_tomo1_obj1'`.
 
         - `ref_name` sets the prefix for the references produced by averaging and may be chosen at your discretion, `'ref'` is standard.
 
@@ -352,7 +353,7 @@ Inputs to this command are `input_name`, `output_name`, `shifts`, and `rotations
 `shifts` are provided as a x-, y-, and z-shifts in square brackets while `rotations` are provided as Euler angles in square brackets.
 For example, the shifting I performed was:
 
-        sg_motl_shift_and_rotate('allmotl_tomo1_obj1_4.star', 'allmotl_tomo1_obj1_shift_4.star', [3,1,3], [0,0,0]);
+        sg_motl_shift_and_rotate('lists/allmotl_tomo1_obj1_4.star', 'lists/allmotl_tomo1_obj1_shift_4.star', [3,1,3], [0,0,0]);
 
 1. Update the motivelist and reference names in the parser and generate an averaging run.
 I typically append the reference name with whatever I appended the motivelist name with.
@@ -469,7 +470,7 @@ Here, we already have a good reference, so if our parameters are too coarse we m
 Using the full motivelist requires a lot of memory so we can first distance clean the overlapping particles.
 Do this as before but don’t apply a score cutoff as we haven’t determined what it should be yet.
 
-        sg_motl_distance_clean('allmotl_2.star', 'allmotl_dclean_2.star', 6, 0);
+        sg_motl_distance_clean('lists/allmotl_2.star', 'lists/allmotl_dclean_2.star', 6, 0);
 
 1. Convert the cleaned motivelist to AV3 format and open in Chimera.
    >NOTE: Sometimes there are rounding errors that results in CC values being slightly over 1; this will cause a "CC Range Error" in the Place Objects tool.
@@ -478,7 +479,7 @@ Do this as before but don’t apply a score cutoff as we haven’t determined wh
 1. Determine an appropriate CC cutoff and parse the good particles.
 E.g.:
 
-        sg_motl_score_clean('allmotl_dclean_2.star', 'allmotl_dclean_sclean_2.star', 0.4);
+        sg_motl_score_clean('lists/allmotl_dclean_2.star', 'lists/allmotl_dclean_sclean_2.star', 0.4);
 
 1. Generate a new average with the cleaned motivelist.
 Since we are already well beyond Nyquist, it’s unnecessary to perform any more angular refinement.

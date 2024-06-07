@@ -41,7 +41,7 @@ During this step, TOMOMAN scans a `raw_stack_dir` for .mdoc files.
 For each one it finds, it generates a new folder to contain all the preprocessing data, links the .mdoc file, creates a `frames/` subdirectory, parses frame names from the .mdoc file, and generates links for all frames from the `raw_frame_dir` to the `frames/` subdirectory.
 
 New data is imported using the `tomoman_import.param` file.
-Open this file in any text editor, for example, you can use gedit in a new terminal window:
+Open this file in any text editor, for example, you can use gedit:
 
     gedit tomoman_import.param
 
@@ -93,7 +93,7 @@ This can be useful if you wish to process data during your data acquisition.
 The tilt series directory has been set up, but before we can examine it, we must first perform motion correction on the frames and assemble the motion corrected images into a stack.
 For this dataset, we will be using MotionCor2.
 
-Open the `tomoman_motioncor2.param` file and review its parameters.
+Open the `tomoman_motioncor2.param` file in a text editor and review its parameters.
 
 1. The tomolist parameters should already be correctly set.
 
@@ -163,5 +163,6 @@ Open `tomoman_dosefilter.param`.
         tomoman(pwd,'tomoman_dosefilter.param');
 
 4. If you would like to see the results of dose filtering, you can open the unfiltered and filtered stacks in 3dmod.
+You can run the below command in the standalone, or omit the `!` and run it in a separate terminal.
 
         !3dmod TS_01/TS_01.st TS_01/TS_01_dose-filt.st

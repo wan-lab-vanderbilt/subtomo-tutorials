@@ -8,18 +8,18 @@ Open `tomoman_novactf.param`.
 1. The directory parameters should already be correct.
 
 1. The parallelization parameters determine how jobs are split between cores.
-Set `n_cores` to 30.
+Set `n_cores` to 14.
 
 1. Stack parameters are parameters for generating the aligned stacks prior to tomogram reconstruction.
 
-    - `ali_dim` allows for resizing, though I recommend using the full image size: `3712,3712`.
+    - `ali_dim` allows for resizing, but we recommend using the full image size: `3712,3712`.
 
     - `erase_radius` is for gold fiducial erasing. Since we used autmoated tilt-series alignment, we don't have a model for the gold fiducials. Set this to `none`.
 
     - `taper_pixels` is used to taper the edges of the rotated images when generating an aligned stack; `100` is usually sufficient.
 
     - `ali_stack_bin` is used to bin the image stack before reconstruction.
-      In general, we recommend setting this to `1` and performing serial binning.
+    In general, we recommend setting this to `1` and performing serial binning.
 
 1. The 3D CTF correction parameters set how novaCTF will perform 3D CTF correction.
 We always recommend using the dose-filtered stack (`process_stack = dose-filtered`) and correcting CTF using phase flipping (`correction_type = phaseflip`).
@@ -52,16 +52,16 @@ Since we have no such motivelist now, this can be left off.
 
 1. Run novaCTF in the TOMOMAN console.
 
-       tomoman(pwd,'tomoman_novactf.param');
+        tomoman(pwd,'tomoman_novactf.param');
 
-   This is typically the single longest computation step in the workflow.
-   We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
-   For now, you can copy the precomputed 8x and 4x binned tomogram to your working directory.
+    This is typically the single longest computation step in the workflow.
+    We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
+    For now, you can copy the precomputed 8x and 4x binned tomogram to your working directory.
 
-       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
-       !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin4 .
+        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
+        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin4 .
 
-    > NOTE: Make sure to leave off the last `/` to copy the directory and its contents.
+    >NOTE: Make sure to leave off the last `/` to copy the directory and its contents.
 
 1. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
 

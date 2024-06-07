@@ -9,19 +9,20 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 
 1. Open a new bash terminal (i.e. not in the TOMOMAN console), load and open Chimera.
 
-         module load chimera
-         chimera
+        module load chimera
+        chimera
 
-   >NOTE: Given that chimera uses many different windows, recommend you going to a new workspace to open chimera.
-   >You can move to the window on the right by using the keyboard shortcut`CTRL + SHIFT + Right Arrow`.
+    >NOTE: Given that chimera uses many different windows, we recommend you go to a new workspace to open chimera.
+    You can move to the window on the right by using the keyboard shortcut `Ctrl + Shift + Right Arrow`.
 
 1. For particle picking, we recommend using the non-CTF-corrected tomogram from AreTomo saved in `bin8_aretomo/TS_01_dose-filt_bin8.mrc`.
    This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
    Open it in Chimera with File > Open.
 
 1. Chimera may open the tomogram as an isosurface volume.
-   If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
-   You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
+    If so, visualize it as planes (in the Volume Viewer window select Features > Planes, click "One," and use the slider) and set the appropriate levels on the histogram.
+
+    You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
 1. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
    Set the Origin index to 0 and the Voxel size to 1.
@@ -29,14 +30,14 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
    You may need to recenter and reorient the view; there are buttons to help with that.
 
 1. If you want more contrast to better visualize the VLPs, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
-   A gaussian with of 1 should be sufficient, but remember to uncheck the "Displayed subregion only" under Options before clicking Filter.
+   A gaussian with of 1 should be sufficient. Uncheck "Displayed subregion only" under Options before clicking Filter.
 
 1. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
    Orthographic side view disables "scaling with distance" of objects far from viewing plane due to perspective effect.
 
 ## Picking Spheres
 
-In Chimera, we will pick centers using Volume Tracer and set radii for each sphere using the Pick Particle tool.
+In Chimera, we will pick VLP centers using Volume Tracer and set radii for each sphere using the Pick Particle tool.
 
 ### Picking Centers
 
@@ -53,17 +54,17 @@ In Chimera, we will pick centers using Volume Tracer and set radii for each sphe
 
 1. In the main window, open the Pick Particles tool (Tools > Utilities > Pick Particle).
 
-1. Under Marker File, click browse  and open the marker file we just saved.
+1. Under Marker File, click browse and open the marker file we just saved.
    Ensure that Object Style is set to Sphere and press Display.
    A series of size sliders will a appear for each marker.
 
 1. Adjust the sliders to place the edge of each sphere at the edge of its VLP.
    Since the VLPs are not perfect spheres, adjust the radius to a point with the best compromise.
 
-     >NOTE: There are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
-     For these VLPs, we suggest setting the radius to between the two outermost layers.
-     If your diameters are not around 40-50 voxels, you may have forgotten to set your Voxel Size to 1.
-     If so, you will need to re-pick the volume centers.
+    >NOTE: There are several concentric layers to each VLP; set the radius for each sphere so that the edge is on similar layers.
+    For these VLPs, we suggest setting the radius to between the two outermost layers.
+    If your diameters are not around 40-50 voxels, you may have forgotten to set your Voxel Size to 1.
+    If so, you will need to re-pick the volume centers.
 
 1. When all radii are set, press Save.
    For now, you can click Reset to remove the spherical wireframes and close the Pick Particles window.
@@ -96,7 +97,7 @@ After picking our spheres, we can append this data to the tomolist and use funct
     * `padding` – Removes particles within a given distance of the edge of the tomogram
     * `subset_list` – Optional file listing a subset of tomograms to process
 
-    As an example, this should generate around 1,800-1,900 motivelist entries per sphere:
+    As an example, this should generate 1,800-1,900 motivelist entries per sphere:
 
         sg_motl_batch_sphere('tomolist.mat', 'allmotl_1.star', 'sphere', 8, 3.5, 1, 16, []);
 
@@ -115,7 +116,8 @@ Browse for and open the `.em` motivelist file. Click Apply.
 This will display the particle positions as spheres, colored by their class number.
 In this case, all are the same class.
 
-   > NOTE: Since this is an oversampled dataset, there are quite a few particle positions; it may take a while to load. It will also be a bit slow when adjusting the view.
+    > NOTE: Since this is an oversampled dataset, there are quite a few particle positions; it may take a while to load.
+    It will also be a bit slow when adjusting the view.
 
 1. To visualize particles with angular information, you can change the Object Style dropdown.
 Hexagons with voxel-size 0.1 work well here.
