@@ -63,7 +63,7 @@ Arguably, a sphere with a 2 pixel radius should be sufficient to account for the
    >NOTE: There are potential downsides to an overly large CC mask.
    >If it is too large, it may allow the subtomograms to shift to a neighboring subunit.
    >Also, as you unbin, the signal-to-noise ratio of the data decreases.
-   >This makes the CC noisier, and thus more likley to have false maxima; masking near the center of the CC map helps guard against this. 
+   >This makes the CC noisier, and thus increases the changes of false maxima; masking near the center of the CC map helps guard against this. 
 
 1. Set alignment parameters.
 We can keep the same low-pass filter resolution for the first alignment run.
