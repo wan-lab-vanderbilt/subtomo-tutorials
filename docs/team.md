@@ -11,6 +11,7 @@ Team members in alphabetical order.
 ### Spencer J Rothfuss
 
 [Google Scholar](https://scholar.google.com/citations?hl=en&user=weeGSMcAAAAJ)
+[Contact](mailto:spencer.j.rothfuss@vanderbilt.edu)
 
 ### William Wan
 
