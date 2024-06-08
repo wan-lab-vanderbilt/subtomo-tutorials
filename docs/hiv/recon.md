@@ -65,7 +65,7 @@ Since we have no such motivelist now, this can be left off.
 
 1. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
 
-        !3dmod novactf_bin8/TS_01_dose-filt.rec
+        3dmod novactf_bin8/TS_01_dose-filt.rec
 
     > NOTE: The unbinned tomogram is VERY large (>90GB). As such, we recommend you only look at the lower binned tomograms.
 
