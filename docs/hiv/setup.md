@@ -12,6 +12,8 @@ In terminals where you will run TOMOMAN or STOPGAP, load them with:
 
     module load imod motioncor2 aretomo ctffind/4.1.14 novactf fourier3d tomoman stopgap/0.7.4
 
+    >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + C`.
+
 You can see what packages are loaded with `module list`.
 
 > NOTE: loading modules makes software accessible as well as defining paths and aliases appropriately to run them.
