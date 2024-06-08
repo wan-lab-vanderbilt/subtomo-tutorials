@@ -1,7 +1,7 @@
 site_name: Subtomo
 
 theme:
-  name: material
+  name: mkdocs
   search: true
   # These palette options allow for light and dark modes
   palette:
