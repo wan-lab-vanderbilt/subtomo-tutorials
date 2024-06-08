@@ -34,7 +34,7 @@ Open `tomoman_aretomo.param`.
 
 You now have a reconstructed tomogram you can visualize in 3dmod.
 
-    !3dmod bin8_aretomo/TS_01_dose-filt_bin8.mrc
+    3dmod bin8_aretomo/TS_01_dose-filt_bin8.mrc
 
 In the 3dmod window, select Image > XYZ to (or use the shortcut `Ctrl + X`) view slices along all axes.
 
