@@ -1,7 +1,7 @@
 site_name: Subtomo
 
 theme:
-  name: readthedocs
+  name: material
   search: true
   # These palette options allow for light and dark modes
   palette:
