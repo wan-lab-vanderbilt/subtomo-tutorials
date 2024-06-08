@@ -198,7 +198,7 @@ To save a sphere mask into the `mask/` folder, change into your `subtomo/` direc
 
     Check the mask using 3dmod.
 
-        !3dmod masks/sphere.mrc
+        3dmod masks/sphere.mrc
 
     What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
 
