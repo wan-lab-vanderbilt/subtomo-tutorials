@@ -15,7 +15,7 @@ Start TOMOMAN by running:
 This will return a console window in which we will run various TOMOMAN tasks and functions.
 It may take a minute to start up the first time you run it.
 
-> NOTE: If you want to run a system command (i.e. a terminal command not a MATLAB command) in the standalone, prepend an `!`. For example, `!3dmod`.
+> NOTE: If you want to run a system command (i.e. a terminal command not a MATLAB command) in the standalone, prepend an `!`.
 
 ## Initializing TOMOMAN Parameter Files
 
