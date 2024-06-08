@@ -18,6 +18,10 @@ For more information about TOMOMAN, see [Khavnekar & Wan. _bioRxiv._ 2024.](http
 
 ## STOPGAP
 
+STOPGAP is a real-space correlation-based package for template matching, subtomogram alignment and averaging, and classification. 
+STOPGAP's main goal is to provide users a set of useful subtomogram averaging algorithms while making virtually all parameters readily accesible. 
+This is based around the notion that every biological problem has unqiue requirements on cryo-ET, and that the user is best suited to determining these requirements.
+It is an open-source package written in MATLAB, and is primarily designed to run on CPUs in high-performance computing (HPC) environments. 
 For more information about STOPGAP, see [Wan et al. _Acta Crystallogr., Sect. D: Biol. Crystallogr._ 2024.](https://doi.org/10.1107/S205979832400295X)
 
 ## Courses
