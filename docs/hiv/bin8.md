@@ -10,8 +10,14 @@ Here we will initialize a subtomogram averaging folder with the necessary files 
 
 1. In a terminal (not the TOMOMAN standalone) change to your HIV_tutorial directory.
 
+        cd ~/HIV_testset/
+
 1. Make `subtomo/` and `subtomo/init_ref/` subdirectories.
-Change into the `init_ref/` directory.
+   Change into the `init_ref/` directory.
+
+        mkdir subtomo/
+        mkdir subtomo/init_ref/
+        cd subtomo/init_ref/     
 
 1. Copy the initalization, parsing, and running scripts from the `$STOPGAPHOME` directory into `init_ref/`:
 
