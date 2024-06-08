@@ -57,7 +57,8 @@ extra_javascript:
 
 # This extra CSS was an attempt to hide the RTD flyout menu see https://squidfunk.github.io/mkdocs-material/customization/?h=css#additional-css
 # Couldn't get it working with material theme
-extra_css: [stylesheets/extra.css]
+extra_css:
+  - stylesheets/extra.css
 
 markdown_extensions:
     - mdx_math
