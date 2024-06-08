@@ -65,10 +65,10 @@ We can keep the same low-pass filter resolution for the first alignment run.
 Since we have unbinned by a factor of 2 and increased the boxsize by a factor of 2, the same `lp_rad=6` setting should be fine.
 
     For angular alignment, the `angincr` of 2° we used earlier should still be sufficient (in practice, 2° will get you well past 10 Å resolution).
-    Since our box is still relatively small, we can leave `angiter=3` without too much computational expense.
+    Leaving `angiter=2` should provide enough range.
 
     In our last run, the `phi_angincr` and `phi_angiter` were set to sample a full 60° range.
-    At this point, our angular error in phi is likely somewhere around 4° given the `phi_angincr` we set in the last iteration.
+    At this point, our angular error in phi is likely somewhere around 6° given the `phi_angincr` we set in the last iteration.
     As such, setting `phi_angincr=2` and `phi_angiter=3` should provide enough sampling.
 
 1. Parse subtomo parameters and run one iteration of alignment.
