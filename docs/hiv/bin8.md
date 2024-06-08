@@ -467,7 +467,9 @@ Here, we already have a good reference, so if our parameters are too coarse we m
 
    As such, our goal is to align the full dataset to the same precision that we aligned the initial reference; i.e. our angular increments should be the same as in the final round of the intial reference alignment.
    Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
-   The parameters I used were: `angincr=2`, `angiter=3`,`phi_angincr=4`, `phi_angiter=8`.
+
+   For computational efficiency, we can go a little coarser and get similar results.
+   The parameters I used were: `angincr=2`, `angiter=2`,`phi_angincr=6`, `phi_angiter=6`.
    Specifically for the phi settings, these settings allow for an in-plane search of ±32 degrees, which is sufficient to find the nearest symmetry group.
 
    Set your parameters and run 1 iteration of alignment.
