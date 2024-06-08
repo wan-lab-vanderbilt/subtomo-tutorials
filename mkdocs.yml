@@ -56,7 +56,7 @@ extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 # This extra CSS was an attempt to hide the RTD flyout menu see https://squidfunk.github.io/mkdocs-material/customization/?h=css#additional-css
-# Couldn't get it working with material theme
+# Unclear if it is working in all cases
 extra_css:
   - stylesheets/extra.css
 
@@ -73,4 +73,4 @@ markdown_extensions:
     #     alternate_style: true
 
 # Extra space added to footer to keep nav buttons from being hidden by RTD flyout menu
-copyright: "<p><p>Tutorial written by Spencer J Rothfuss and Will Wan."
+copyright: "<p><p>Tutorial written by Spencer J Rothfuss and Will Wan. Hosted by readthedocs.org."
