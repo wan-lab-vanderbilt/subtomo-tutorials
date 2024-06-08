@@ -469,8 +469,8 @@ Here, we already have a good reference, so if our parameters are too coarse we m
    Therefore, the main parameter to change here is the angular iterations so that we sample wide enough.
 
    For computational efficiency, we can go a little coarser and get similar results.
-   The parameters I used were: `angincr=2`, `angiter=2`,`phi_angincr=6`, `phi_angiter=6`.
-   Specifically for the phi settings, these settings allow for an in-plane search of ±32 degrees, which is sufficient to find the nearest symmetry group.
+   The parameters I used were: `angincr=2`, `angiter=2`,`phi_angincr=6`, `phi_angiter=5`.
+   Specifically for the phi settings, these settings allow for an in-plane search of ±30 degrees, which is sufficient to find the nearest symmetry group.
 
    Set your parameters and run 1 iteration of alignment.
 
