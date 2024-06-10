@@ -24,7 +24,7 @@ The test data we will be using for this workshop is tilt series 1 (TS_01) from t
 The `/data/EMPIAR-10164/data/` directory contains `frames/` and `mdoc-files/` subfolders.
 The `frames/` subfolder contains the raw .mrc frames for the tilt series, while the `mdoc-files/` folder contains the SerialEM .mdoc files for the tilt series.
 With a larger dataset there would be one mdoc file for each tilt series.
-Make the appropriate folders in your working directory and copy the files relevant to TS_01.
+Here, we will generate symbolic links for the files relevant to TS_01.
 
     mkdir ~/HIV_dataset/
     cd ~/HIV_dataset/
