@@ -59,8 +59,8 @@ Since we have no such motivelist now, this can be left off.
     For now, you can create symbolic links to the precomputed 8x and 4x binned tomogram in your working directory.
 
         !rm -rf novactf_bin*
-        !ln -s /data/EMPIAR-10184/precomputed/novactf_bin8/ .
-        !ln -s /data/EMPIAR-10184/precomputed/novactf_bin4/ .
+        !ln -s /data/EMPIAR-10164/precomputed/novactf_bin8/ .
+        !ln -s /data/EMPIAR-10164/precomputed/novactf_bin4/ .
 
 1. After running novaCTF or copying the precomputed tomograms, you can preview your them in 3dmod, for example:
 
