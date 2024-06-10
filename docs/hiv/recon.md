@@ -56,10 +56,10 @@ Since we have no such motivelist now, this can be left off.
 
     This is typically the single longest computation step in the workflow.
     We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
-    For now, you can copy the precomputed 8x and 4x binned tomogram to your working directory.
+    For now, you can create symbolic links to the precomputed 8x and 4x binned tomogram in your working directory.
 
-        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin8 .
-        !rsync -a /data/EMPIAR-10184/precomputed/novactf_bin4 .
+        !ln -s /data/EMPIAR-10184/precomputed/novactf_bin8 .
+        !ln -s /data/EMPIAR-10184/precomputed/novactf_bin4 .
 
     >NOTE: Make sure to leave off the last `/` to copy the directory and its contents.
 
