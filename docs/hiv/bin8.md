@@ -8,9 +8,9 @@ The product of this average will serve as a *de novo* reference for subtomogram 
 
 Here we will initialize a subtomogram averaging folder with the necessary files and structure.
 
-1. In a terminal (not the TOMOMAN standalone) change to your HIV_tutorial directory.
+1. In a terminal (not the TOMOMAN standalone) change to your HIV_dataset directory.
 
-        cd ~/HIV_testset/
+        cd ~/HIV_dataset/
 
 1. Make `subtomo/` and `subtomo/init_ref/` subdirectories.
    Change into the `init_ref/` directory.

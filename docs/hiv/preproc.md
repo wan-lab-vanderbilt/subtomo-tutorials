@@ -32,7 +32,7 @@ While files for all tasks are copied, they won’t all be used for this tutorial
 
 For the rest of the preprocessing tasks, we will be editing parameter files and running them in the TOMOMAN console. To facilitate this, we suggest you now open a new terminal window and go to the `tomo` folder.
 
-    cd ~/HIV_subset/tomo/
+    cd ~/HIV_dataset/tomo/
 
 ## Importing New Stacks
 
