@@ -30,7 +30,7 @@ Here, we will generate symbolic links for the files relevant to TS_01.
     cd ~/HIV_dataset/
     mkdir tomo/
     cd tomo/
-    ln -s /data/EMPIAR-10164/data/frames/ frames/
-    ln -s /data/EMPIAR-10164/data/mdoc-files/ rawdata/
+    ln -s /data/EMPIAR-10164/data/frames/ frames
+    ln -s /data/EMPIAR-10164/data/mdoc-files/ rawdata
 
 You are now ready to begin the tutorial.
