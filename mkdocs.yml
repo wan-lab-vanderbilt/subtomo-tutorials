@@ -60,6 +60,7 @@ extra_javascript:
 extra_css:
   - stylesheets/extra.css
 
+# All of the commented out extensions are ones I tested for syntax highlighting but I couldn't get it working 
 markdown_extensions:
     - mdx_math
     # - pymdownx.highlight:

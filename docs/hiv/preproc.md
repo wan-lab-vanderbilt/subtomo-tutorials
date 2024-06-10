@@ -47,7 +47,7 @@ Open this file in any text editor, for example, you can use gedit:
 
 >NOTE: Most scripts and parameter files in this tutorial are formatted with very long lines.
 >As such, they are typically best viewed without text wrapping.
->To disable text wrapping in gedit, open the preferences and untick the "Enable text wrapping" option. 
+>To disable text wrapping in gedit, open the preferences and untick the "Enable text wrapping" option.
 
 Parameters specified here will determine how TOMOMAN imports and sorts new data.
 Types of parameters are typically broken into comment blocks.
@@ -141,12 +141,12 @@ The default parameters should work fine.
         tomoman(pwd, 'tomoman_clean_stacks.param');
 
 4. Follow the instructions in the console to remove bad images.
-   For this dataset, there is 1 blocked image that should be removed.
+For this dataset, there is 1 blocked image that should be removed.
 
-   There are some issues with running 3dmod in the TOMOMAN standalone in these AWS instances.
-   You can instead open another terminal from the TOMOMAN standalone (`CTRL + Shift + T`) and open the tilt series manually:
+    There are some issues with running 3dmod in the TOMOMAN standalone On these AWS instanceso
+    You can instead open another terminal from the TOMOMAN standalone (`Ctrl + Shift + T`) and open the tilt series manually:
 
-       3dmod TS_01/TS_01.st
+        3dmod TS_01/TS_01.st
 
     >NOTE: Remember to close your 3dmod windows; TOMOMAN is unable to close spawned windows from external packages.
 
