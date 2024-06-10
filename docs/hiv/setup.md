@@ -30,9 +30,7 @@ Make the appropriate folders in your working directory and copy the files releva
     cd ~/HIV_dataset/
     mkdir tomo/
     cd tomo/
-    mkdir frames/
-    mkdir rawdata/
-    rsync -a /data/EMPIAR-10164/data/frames/ frames/
-    rsync -a /data/EMPIAR-10164/data/mdoc-files/ rawdata/
+    ln -s /data/EMPIAR-10164/data/frames/ frames/
+    ln -s /data/EMPIAR-10164/data/mdoc-files/ rawdata/
 
 You are now ready to begin the tutorial.
