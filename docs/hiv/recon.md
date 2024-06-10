@@ -54,11 +54,11 @@ Since we have no such motivelist now, this can be left off.
 
         tomoman(pwd,'tomoman_novactf.param');
 
-   This is typically the single longest computation step in the workflow.
-   We suggest starting this job to ensure that it is running, but precompued tomograms are provided.
-   If the job was running and you killed it, we need to clear the directories it generated.
+    This is typically the single longest computation step in the workflow.
+    We suggest starting this job to ensure that it is running and precompued tomograms are provided so you don't have to wait.
+    If the job is running and you kill it, clear the directories it generated.
 
-       !rm -rf novactf_bin*
+        !rm -rf novactf_bin*
 
     Now you can create symbolic links to the precomputed 8x and 4x binned tomogram in your working directory.
 

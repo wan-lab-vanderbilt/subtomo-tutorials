@@ -92,9 +92,9 @@ Generate a STOPGAP tomolist:
 
 Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
 
-        !cp allmotl_tomo1_obj1_1.star ~/HIV_dataset/subtomo/init_ref/lists/
-        !cp wedgelist.star ~/HIV_dataset/subtomo/init_ref/lists/
-        !cp sg_tomolist.txt ~/HIV_dataset/subtomo/init_ref/lists/
+    !cp allmotl_tomo1_obj1_1.star ~/HIV_dataset/subtomo/init_ref/lists/
+    !cp wedgelist.star ~/HIV_dataset/subtomo/init_ref/lists/
+    !cp sg_tomolist.txt ~/HIV_dataset/subtomo/init_ref/lists/
 
 ## Preparing to Run STOPGAP with MPI
 

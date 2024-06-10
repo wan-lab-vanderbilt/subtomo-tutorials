@@ -34,12 +34,12 @@ Except where noted, default values are fine.
 
     1. In general, the defaults work, though you may wish to increase the `min_res` and reduce the `max_res` for tomography.
 
-    2. The `nthreads` parameter sets parallelization for CTFFIND4, set it to `16`.
+    2. The `nthreads` parameter sets parallelization for CTFFIND4, set it to `14`.
 
 4. Run `tiltctf`.
 
         tomoman(pwd,'tomoman_tiltctf.param');
 
-   You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
+5. You can examine the results by opening the diagnostic .mrc file in the `tiltctf/` subfolder with 3dmod.
 
         3dmod TS_01/tiltctf/diagnostic_TS_01_dose-filt_tiltctf_ps.mrc

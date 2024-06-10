@@ -14,7 +14,7 @@ Open `tomoman_aretomo.param`.
 
 3. The AreTomo parameters block determines how AreTomo will be run.
 
-    1. Set `InBin` to 4.
+    1. Set `InBin` to `4`.
     We find that processing the dose-filtered stack with an input binning of 4 yields better results.
 
     2. `AlignZ` and `VolZ` are measures of thickness along the z axis measured in unbinned pixels.

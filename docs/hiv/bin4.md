@@ -31,8 +31,8 @@ Set the boxsize to 64 and update the pixelsize to 5.4 (1.35 Å/pix × 4 = 5.4 Å
 Here, we will go over how to set up parameters for angular refinement.
 
 1. Before we can generate our first average, we need to provide an alignment mask.
-As with our bin8 processing, we can generate a simple sphere for this step.
-E.g.:
+    As with our bin8 processing, we can generate a simple sphere for this step.
+    E.g.:
 
         sphere = sg_sphere(64, 26, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
@@ -57,13 +57,13 @@ Since we’ve already determined the true particle positions at bin8, the goal i
 Instead, we want to make a CC mask that allows for proper sampling but not too large that results in getting trapped in false local minima.
 Arguably, a sphere with a 2 pixel radius should be sufficient to account for the bin8 precision, but a 4 pixel radius should still be safe.
 
-        ccmask = sg_sphere(64,4);
-        sg_mrcwrite('masks/ccmask.mrc',ccmask);
+        ccmask = sg_sphere(64, 4);
+        sg_mrcwrite('masks/ccmask.mrc', ccmask);
 
-   >NOTE: There are potential downsides to an overly large CC mask.
-   >If it is too large, it may allow the subtomograms to shift to a neighboring subunit.
-   >Also, as you unbin, the signal-to-noise ratio of the data decreases.
-   >This makes the CC noisier, and thus increases the changes of false maxima; masking near the center of the CC map helps guard against this. 
+    >NOTE: There are potential downsides to an overly large CC mask.
+    If it is too large, it may allow the subtomograms to shift to a neighboring subunit.
+    Also, as you unbin, the signal-to-noise ratio of the data decreases.
+    This makes the CC noisier, and thus increases the changes of false maxima; masking near the center of the CC map helps guard against this.
 
 1. Set alignment parameters.
 We can keep the same low-pass filter resolution for the first alignment run.
