@@ -276,7 +276,7 @@ Since we don’t want to do any angular search for this iteration, set `angincr`
 
 3. Set the bandpass filter settings.
 In general, the high pass filter defaults (`hp_rad=1`, `hp_sigma=2`) is fine; this mainly suppresses any normalization issues with the central voxel in Fourier space.
-An `lb_sigma` of 3 is usually fine.
+An `lp_sigma` of 3 is usually fine.
 More important is to keep track of the low-pass filter radius (`lp_rad`) during your run.
 A rule of thumb is to make sure the `lp_rad` is less-than or equal to the Fourier radius where FSC=0.5.
 Since we don’t really have any resolution in our map, we can arbitrarily set it to 60 Å for now.
@@ -407,7 +407,7 @@ Remember that your tomogram is in your `tomo/bin8_aretomo/` directory.
 
 1. Remember to open the coordinates panel in the Volume Viewer and set Origin index to 0 and Voxel size to 1, and that you should visualize the tomogram as planes.
 
-1. Open the Place Object plugin (Tools > Utilities > Pick Particle).
+1. Open the Place Object plugin (Tools > Utilities > Place Object).
 Browse for and open the `.em` motivelist with Place Object.
 Visualize using Hexagons with voxel-size 0.2 and Colour Style as Cross-Correlation.
 Click Apply.
