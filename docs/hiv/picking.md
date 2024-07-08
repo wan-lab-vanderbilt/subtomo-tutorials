@@ -47,7 +47,8 @@ In Chimera, we will pick VLP centers using Volume Tracer and set radii for each 
    We recommend taking only the complete VLPs.
    This tomogram has around 9 complete VLPs.
 
-1. When you have finished marking the VLPs, select Volume Tracer > File > "Save current marker set as..." and save the marker set into the tilt series folder (`TS_01/`) as `metadata/sphere/sphere.cmm`.
+1. When you have finished marking the VLPs, select Volume Tracer > File > "Save current marker set as..." and save the marker set as `sphere.cmm` in `TS_01/metadata/sphere/`.
+   You will need to create the subdirectories inside `TS_01`.
    This naming convention is important for parsing the metadata files into the tomolist later.
 
 ### Picking Particles
