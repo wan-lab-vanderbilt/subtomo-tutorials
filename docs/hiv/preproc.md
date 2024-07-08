@@ -54,7 +54,7 @@ Types of parameters are typically broken into comment blocks.
 
 1. The directory parameters block contains information about working directories
 The `root_dir` should already be set from copying.
-For this dataset, the `raw_stack_dir` and `raw_frame_dir` should be `rawdata/` and `frames/`, respectively.
+For this tutorial, the `raw_stack_dir` and `raw_frame_dir` are `rawdata/` and `frames/`, respectively.
 
 2. The tomolist block contains filenames for TOMOMAN’s output files.
 This should already be set during copying.
