@@ -107,13 +107,12 @@ Open the `tomoman_motioncor2.param` file in a text editor and review its paramet
     If set off, TOMOMAN only runs the task on tilt series that have not yet been processed.
     For this tutorial, leave `force_realign` as 0.
 
-    2. This dataset was collected on a K2 in super-resolution mode.
-    The `image_size` parameter sets the output image size; in this case we want a normal resolution output image.
+    2. The `image_size` parameter sets the output image size.
+    This dataset was collected on a K2 in super-resolution mode but we want a normal resolution output image.
     Set `image_size` to `3712,3712`; this pads a K2 image by 2 pixels in one axis, but results in an image size amenable to binning at factors of 2.
 
 3. The MotionCor2 parameters block contains MotionCor2’s parameters.
-For this dataset, most of the defaults are fine, but be sure to set the `FtBin` parameter to 2 so that the aligned frames are Fourier cropped back to normal size.
-Set the `Gpu` to `0`.
+For this dataset, most of the defaults are fine. However, because the data was collected in super-resolution, set the `FtBin` parameter to 2 so that the aligned frames are Fourier cropped back to normal size and set the `Gpu` to `0`.
 
 4. Since this dataset has .mrc frames, the “EER specific part” block can be ignored.
 
