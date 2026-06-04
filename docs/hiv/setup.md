@@ -10,7 +10,7 @@ Right click on the desktop to start a terminal window.
 The instances we are using for this tutorial have all the required software installed as Lmod modules.
 In terminals where you will run TOMOMAN or STOPGAP, load them with:
 
-    module load imod motioncor3 aretomo ctffind/4.1.14 novactf fourier3d tomoman stopgap/0.7.5
+    module load aretomo2 chimera ctffind/4.1.14 motioncor3/1.2.4 novactf stopgap tomoman
 
 >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + V`.
 
@@ -21,7 +21,7 @@ You can see what packages are loaded with `module list`.
 ## Tutorial Data
 
 The test data we will be using for this workshop is tilt series 1 (TS_01) from the EMPIAR-10164 dataset.
-The `/data/EMPIAR-10164/data/` directory contains `frames/` and `mdoc-files/` subfolders.
+The `/work/data/EMPIAR-10164/data/` directory contains `frames/` and `mdoc-files/` subfolders.
 The `frames/` subfolder contains the raw .mrc frames for the tilt series, while the `mdoc-files/` folder contains the SerialEM .mdoc files for the tilt series.
 With a larger dataset there would be one mdoc file for each tilt series.
 Here, we will generate symbolic links for the files relevant to TS_01.
@@ -30,7 +30,7 @@ Here, we will generate symbolic links for the files relevant to TS_01.
     cd ~/HIV_dataset/
     mkdir tomo/
     cd tomo/
-    ln -s /data/EMPIAR-10164/data/frames/ frames
-    ln -s /data/EMPIAR-10164/data/mdoc-files/ rawdata
+    ln -s /work/data/EMPIAR-10164/data/frames/ frames
+    ln -s /work/data/EMPIAR-10164/data/mdoc-files/ rawdata
 
 You are now ready to begin the tutorial.
