@@ -61,7 +61,9 @@ This should already be set during copying.
 
 3. The filename parameters are to provide some inputs on the file naming conventions.
 
-    `raw_stack_ext` defines the extension for the raw tilt series file generated during data collection. For this dataset, we don’t have them so this can be left as 'none'.
+    `raw_stack_ext` defines the extension for the raw tilt series file generated during data collection. For this dataset, we don’t have them so this can be left as `none`.
+
+    For tilt-series with a numerical naming convention, e.g. "Position_1", the `prefix` parameter defines the prefix before the number and stores the number as a `tomo_num` in the tomolist. For this dataset, set `prefix` to `TS_`.
 
 4. The data collection parameters block contains information specific to the parameters used for data collection and the setup of the microscope.
 This dataset contains gain-normalized .mrc files, so set the `gainref` parameter to `none`.
