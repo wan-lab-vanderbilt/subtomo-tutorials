@@ -71,7 +71,7 @@ All other defaults are fine.
 
 5. The override .mdoc values block allows users to override fields that are normally parsed from the .mdoc file.
 This may be important when certain settings aren’t properly calibrated in SerialEM.
-For this dataset, set the `tilt_axis_angle` to 85.3, the `dose_rate` to 8, and the `pixelsize` to 1.35.
+For this dataset, set the `tilt_axis_angle` to `85.3`, the `dose_rate` to `8`, and the `pixelsize` to `1.35`.
 `target_defocus` will be parsed from the .mdoc file.
 When batch acquiring tilt series, it is typically the best choice to set `target_defocus` during data collection and subsequently parse it from the .mdoc during processing.
 
