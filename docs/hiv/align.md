@@ -6,11 +6,13 @@ TOMOMAN provides some additional settings on top of the standard AreTomo setting
 
 For more information about AreTomo, see the publication or [manual](https://gensoft.pasteur.fr/docs/AreTomo/1.3.4/AreTomoManual_1.3.0_09292022.pdf).
 
+## Run tilt-series alignment with AreTomo
+
 Open `tomoman_aretomo.param`.
 
 1. The directory parameters block should already be set correctly.
 
-2. The AreTomo files and folders block should already be set correctly. We will generate a bin8 tomogram so `bin8_aretomo/` is a good output directory name.
+2. The AreTomo files and folders block should already be set correctly. We will generate a bin8 tomogram so `aretomo_bin8/` is a good output directory name.
 
 3. The AreTomo parameters block determines how AreTomo will be run.
 
@@ -26,7 +28,7 @@ Open `tomoman_aretomo.param`.
 
     3. Check that `OutBin` is set to 8. This is the final binning, so it is effectively a additional 2x binning from the 4x binning of our input tilt-series.
 
-    4. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks).
+    4. Use the same `Gpu` setting as for [motion correction](preproc.md#making-motion-corrected-stacks); in this case `0`.
 
 4. Run reconstruction as before in the TOMOMAN console.
 
@@ -34,7 +36,7 @@ Open `tomoman_aretomo.param`.
 
 You now have a reconstructed tomogram you can visualize in 3dmod.
 
-    3dmod bin8_aretomo/TS_01_dose-filt_bin8.mrc
+    3dmod aretomo_bin8/TS_01_dose-filt_bin8.mrc
 
 In the 3dmod window, select Image > XYZ to (or use the shortcut `Ctrl + X`) view slices along all axes.
 
