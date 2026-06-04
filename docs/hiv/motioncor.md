@@ -20,12 +20,14 @@ Open the `tomoman_motioncor3.param` file in a text editor and review its paramet
     Set `image_size` to `3712,3712`; this pads a K2 image by 2 pixels in one axis, but results in an image size amenable to binning at factors of 2.
 
 3. The MotionCor3 parameters block contains MotionCor3’s parameters.
-For this dataset, most of the defaults are fine. However, because the data was collected in super-resolution, set the `FtBin` parameter to 2 so that the aligned frames are Fourier cropped back to normal size and set the `Gpu` to `0`.
+For this dataset, most of the defaults are fine. However, because the data was collected in super-resolution, set the `FtBin` parameter to `2` so that the aligned frames are Fourier cropped back to normal size and set the `Gpu` to `0`.
 
 4. Since this dataset has .mrc frames, the “EER specific part” block can be ignored.
 
 5. We will not be doing noise2noise training, so odd/even stacks are not needed.
 
-6. Save the param file and run the TOMOMAN in the standalone with the new `paramfilename`:
+6. We will estimate the CTF after tilt-series alignment, so `ctf_est` can be set to `0`.
+
+7. Save the param file and run the TOMOMAN in the standalone with the new `paramfilename`:
 
         tomoman(pwd, 'tomoman_motioncor3.param');
