@@ -59,8 +59,9 @@ For this tutorial, the `raw_stack_dir` and `raw_frame_dir` are `rawdata/` and `f
 2. The tomolist block contains filenames for TOMOMAN’s output files.
 This should already be set during copying.
 
-3. The filename parameters are for the raw stacks generated during data collection.
-For this dataset, we don’t have them so this can be set to none.
+3. The filename parameters are to provide some inputs on the file naming conventions.
+
+'raw_stack_ext' defines the extension for the raw tilt series file generated during data collection. For this dataset, we don’t have them so this can be left as 'none'.
 
 4. The data collection parameters block contains information specific to the parameters used for data collection and the setup of the microscope.
 This dataset contains gain-normalized .mrc files, so set the `gainref` parameter to `none`.
