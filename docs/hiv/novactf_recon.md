@@ -1,16 +1,18 @@
 # Tomogram Reconstruction using NovaCTF
 
 Final tomogram reconstruction for subtomogram averaging will be performed using novaCTF, which allows for 3D CTF-correction during reconstruction.
-TOMOMAN will generate the appropriate scripts and output directories for running novaCTF and binning tomograms by Fourier cropping using Fourier3D. For this tutorial, we will walk through setting up and running novaCTF. However, in the interests of time, precomputed 8x and 4x binned tomograms will be provided for further steps. 
+TOMOMAN will generate the appropriate scripts and output directories for running novaCTF and binning tomograms by Fourier cropping using Fourier3D. 
+
+For this tutorial, we will walk through setting up and running novaCTF. We will directly reconstruct an 8x binned tomogram, and if time permits, we can later reconstruct a 4x binned tomogram for higher-resolution averaging.
 
 Open `tomoman_novactf.param`.
 
 1. The directory parameters should already be correct.
 
-1. The parallelization parameters determine how jobs are split between cores.
-Set `n_cores` to 14.
+2. The parallelization parameters determine how jobs are split between cores.
+Set `n_cores` to `20`.
 
-1. Stack parameters are parameters for generating the aligned stacks prior to tomogram reconstruction.
+3. Stack parameters are parameters for generating the aligned stacks prior to tomogram reconstruction.
 
     - `ali_dim` allows for resizing, but we recommend using the full image size: `3712,3712`.
 
@@ -19,7 +21,9 @@ Set `n_cores` to 14.
     - `taper_pixels` is used to taper the edges of the rotated images when generating an aligned stack; `100` is usually sufficient.
 
     - `ali_stack_bin` is used to bin the image stack before reconstruction.
-    In general, we recommend setting this to 1 and performing serial binning. However, for this tutorial, set it to `4`.
+    If you want tomograms of several binning factors, it is possible to reconstruct at the lowest binning, then bin the tomograms. While this produces the best results, it is often more computationally efficient to bin the stack to the target binning for the tomogram, and perform this multiple times if necessary.
+    
+    For this tutorial, set `ali_stack_bin` to `8`.
 
 1. The 3D CTF correction parameters set how novaCTF will perform 3D CTF correction.
 We always recommend using the dose-filtered stack (`process_stack = dose-filtered`) and correcting CTF using phase flipping (`correction_type = phaseflip`).

@@ -49,7 +49,8 @@ nav:
   - Dose Filtering Stacks: hiv/dose_filter.md
   - Tilt-Series Alignment: hiv/align.md
   - Tilted CTF estimation: hiv/ctf_estimation.md
-  - Tomogram Reconstruction: hiv/recon.md
+  - 3D CTF-Corrected Tomogram Reconstruction: hiv/novactf_recon.md
+  - Reconstuct Tomogram with a SIRT-like Filter: hiv/sirtlie_recons.md
   - Particle Picking: hiv/picking.md
   - Bin 8 Subtomogram Averaging: hiv/bin8.md
   - Bin 4 Subtomogram Averaging: hiv/bin4.md
