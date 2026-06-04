@@ -43,7 +43,10 @@ nav:
 - Tutorial:
   - Introduction: hiv/index.md
   - Setup: hiv/setup.md
-  - Tilt-Series Preprocessing: hiv/preproc.md
+  - Initializing a TOMOMAN Project and Importing Data: hiv/import.md
+  - Aligning Frames and Making Stacks: hiv/motioncor.md
+  - Removing Bad Tilt Images: hiv/clean_stacks.md
+  - Dose Filtering Stacks: hiv/dose_filter.md
   - Tilt-Series Alignment: hiv/align.md
   - Tilted CTF estimation: hiv/ctf_estimation.md
   - Tomogram Reconstruction: hiv/recon.md
