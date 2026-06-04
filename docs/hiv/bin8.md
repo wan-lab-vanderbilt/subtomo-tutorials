@@ -191,7 +191,7 @@ Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps will b
 
     For FSC calculation, an alignment mask is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
-To save a sphere mask into the `mask/` folder, change into your `subtomo/` directory, run this in the STOPGAP Toolbox:
+To save a sphere mask into the `mask/` folder, change into your `init_ref/` directory, run this in the STOPGAP Toolbox:
 
         sphere = sg_sphere(32, 10, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
@@ -428,8 +428,8 @@ Determine and write down an appropriate threshold value to exclude low-scoring p
     > NOTE: the CC threshold is relative value that is affected by many factors such as binning and defocus of the tomogram, so you cannot reuse the same value between tomograms or datasets.
 
 1. Clean the motivelist in the STOPGAP Console.
-Set `s_cut` to the cutoff you determined in the previous step.
 For `d_cut`, choose a value that is smaller than the true interparticle distance. This can be measured in 3dmod.
+Set `s_cut` to the CC value cutoff you determined in the previous step.
 The settings I used are:
 
         sg_motl_distance_clean('lists/allmotl_tomo1_obj1_shift_7.star','lists/allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);

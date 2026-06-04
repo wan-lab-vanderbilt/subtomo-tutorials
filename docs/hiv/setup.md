@@ -1,16 +1,16 @@
-# Setup for 2024 U of M Workshop
+# Setup for 2026 U of M Workshop
 
-These instructions are for setting up your system to run this tutorial in the 2024 University of Michigan cryo-ET workshop.
+These instructions are for setting up your system to run this tutorial in the 2026 University of Michigan cryo-ET workshop.
 
 First, use DCV Viewer to connect to your AWS instance using the provided IP address, username, and password.
 Right click on the desktop to start a terminal window.
 
 ## Load Modules
 
-The instaces we are using for this tutorial have all the required software installed as Lmod modules.
+The instances we are using for this tutorial have all the required software installed as Lmod modules.
 In terminals where you will run TOMOMAN or STOPGAP, load them with:
 
-    module load imod motioncor2 aretomo ctffind/4.1.14 novactf fourier3d tomoman stopgap/0.7.4
+    module load imod motioncor3 aretomo ctffind/4.1.14 novactf fourier3d tomoman stopgap/0.7.5
 
 >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + V`.
 

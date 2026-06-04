@@ -23,7 +23,7 @@ In this tutorial, we will work on the HIV immature capsid virus-like particles (
 During this tutorial we will be using a number of other software packages.
 These include:
 
-- MotionCor2 ([publication](https://doi.org/10.1038/nmeth.4193))
+- MotionCor3 ([publication](https://doi.org/10.1038/nmeth.4193), [code](https://github.com/czimaginginstitute/MotionCor3))
 - AreTomo ([publication](https://doi.org/10.1016/j.yjsbx.2022.100068))
 - IMOD ([publication](https://doi.org/10.1006/jsbi.1996.0013))
 - CTFFIND4 ([publication](https://doi.org/10.1016/j.jsb.2015.08.008))

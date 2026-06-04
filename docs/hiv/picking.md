@@ -93,7 +93,7 @@ After picking our spheres, we can append this data to the tomolist and use funct
     * `output_name` – Name of output motivelist (file extension should be .star)
     * `metadata_type` – Type of metadata; in this case ‘sphere’
     * `binning` – Binning of input files
-    * `p_dist` – Distance between particles; set to half the true distance (e.g. 3.5) for oversampling
+    * `p_dist` – Distance between particles; set to half the true distance (e.g. 3.5) for oversampling. The distance between particles can be measured on the tomogram using 3dmod by opening your tomogram, selecting Special-Drawing Tools-Measure from the 3dmod menu, and middle clicking to measure the distance between two subunits. 
     * `rand_phi` – Randomize starting phi angles; set to 1
     * `padding` – Removes particles within a given distance of the edge of the tomogram
     * `subset_list` – Optional file listing a subset of tomograms to process

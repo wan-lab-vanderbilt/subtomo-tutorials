@@ -1,7 +1,7 @@
 # Tomogram Reconstruction using NovaCTF
 
 Final tomogram reconstruction for subtomogram averaging will be performed using novaCTF, which allows for 3D CTF-correction during reconstruction.
-TOMOMAN will generate the appropriate scripts and output directories for running novaCTF and binning tomograms by Fourier cropping using Fourier3D.
+TOMOMAN will generate the appropriate scripts and output directories for running novaCTF and binning tomograms by Fourier cropping using Fourier3D. For this tutorial, we will walk through setting up and running novaCTF. However, in the interests of time, precomputed 8x and 4x binned tomograms will be provided for further steps. 
 
 Open `tomoman_novactf.param`.
 
@@ -19,7 +19,7 @@ Set `n_cores` to 14.
     - `taper_pixels` is used to taper the edges of the rotated images when generating an aligned stack; `100` is usually sufficient.
 
     - `ali_stack_bin` is used to bin the image stack before reconstruction.
-    In general, we recommend setting this to `1` and performing serial binning.
+    In general, we recommend setting this to 1 and performing serial binning. However, for this tutorial, set it to `4`.
 
 1. The 3D CTF correction parameters set how novaCTF will perform 3D CTF correction.
 We always recommend using the dose-filtered stack (`process_stack = dose-filtered`) and correcting CTF using phase flipping (`correction_type = phaseflip`).
@@ -29,13 +29,13 @@ For this tutorial, set it to `50`.
 1. Tomogram reconstruction parameters have some specifics on how to perform the reconstruction.
 We typically skip radial filtering.
 The `tomo_bin` parameter allows you to set the final binning factors desired.
-For this tutorial, set binnings of 1, 2, 4, and 8 with `tomo_bin = 1,2,4,8`.
+For this tutorial, set a binning of 4 and 8 with `tomo_bin = 4,8`.
 
     > NOTE: The minimum allowed value for binning is equal to the `ali_stack_bin`. E.g., if `ali_stack_bin` is set to 4, the minimum allowed value here is 4.
 
 1. The `output_dir_prefix` sets the name of the tomogram output directories, which will be placed within the `root_dir`.
 For instance, bin 4 tomograms will be placed in: `[root_dir]/[output_dir_prefix]_bin4/`.
-For this tutorial, set it this to `novactf_`.
+For this tutorial, set this to `novactf_`.
 
 1. The additional parameters include the `recons_list`, which allows for reconstructing a subset of tomograms.
 You can leave it as none to reconstruct all non-skipped tomograms in the tomolist.
@@ -55,10 +55,11 @@ Since we have no such motivelist now, this can be left off.
         tomoman(pwd,'tomoman_novactf.param');
 
     This is typically the single longest computation step in the workflow.
-    We suggest starting this job to ensure that it is running and precompued tomograms are provided so you don't have to wait.
+    Start this job and ensure that it is running. Once you have confirmed that it is running, you can kill the job. Precomputed tomograms are provided so you don't have to wait for this to finish.
     If the job is running and you kill it, clear the directories it generated.
 
-        !rm -rf novactf_bin*
+        !rm -rf novactf_bin8
+        !rm -rf novactf_bin4
 
     Now you can create symbolic links to the precomputed 8x and 4x binned tomogram in your working directory.
 
