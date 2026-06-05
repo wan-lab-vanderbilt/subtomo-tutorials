@@ -55,7 +55,7 @@ nav:
   - Initializing a STOPGAP folder for Bin 8 Averaging: hiv/bin8_init.md
   - Extracting Subtomograms: hiv/bin8_extract.md
   - Generating an Initial Average: hiv/bin8_init_avg.md
-  - Translational Alignment: hav/bin8_align1.md
+  - Translational Alignment: hiv/bin8_align1.md
   - Orientational Alignment: hiv/bin8_align2.md
   - Removing Overlapping and Bad Particles: hiv/bin8_clean.md
   - Aligning the Full Dataset: hiv/bin8_full.md
