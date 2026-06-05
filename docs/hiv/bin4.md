@@ -1,8 +1,17 @@
 # Bin 4 Subtomogram Averaging with STOPGAP
 
+## Reconstructing novaCTF bin4 Tomograms
+
+Before we can perform bin4 processing, we need to go back to TOMOMAN and reconstruct the bin4 tomogram. 
+
+1. Go back to the `tomo/` folder and start the `tomoman_standalone.sh`
+2. In a text editor, edit the `tomoman_novactf.param` file, updating the `ali_stack_bin` and`tomo_bin` parameters to `4`.
+3. TOMOMAN's novaCTF task is designed to be run as data is being collected. As such, it keeps track of if novaCTF has been run before and will skip the tomogram if it has. Since we've previously run novaCTF on this tomogram, we will also need to set `force_novactf` to `1`. This will ignore that novaCTF has already been run on this tomogram.
+4. Reconstruct the bin4 tomogram. 
+
 ## Preparing for Bin4 Processing
 
-The main goal here is to prepare the motivelist for bin2 processing.
+The main goal here is to prepare the motivelist for bin4 processing.
 This includes rescaling the motivelist, applying the shifts to the extraction positions, and splitting halfsets.
 
 1. In the STOPGAP Console, we will re-number the particles and assign odd/even halfsets:
