@@ -21,27 +21,35 @@ Start the STOPGAP Toolbox by running:
 
     stopgap_toolbox.sh
 
-## Calculate Starting Reference
 
-"Reference-free" refers to the fact that we are not using an *external* reference.
-Since a reference is always required for iterative alignment, we generate an starting reference by averaging the extracted subtomograms.
-In this example, since we have picked our positions using geometry, we have rough starting angles and our initial reference will not be a sphere but instead have rough features.
+## Preparing an alignment mask
 
-1. Subtomogram averaging in STOPGAP always involves calculating a Fourier Shell Correlation (FSC) in order to output two halfmaps and a figure-of-merit weighted average.
+Subtomogram averaging in STOPGAP always involves calculating a Fourier Shell Correlation (FSC) in order to output two halfmaps and a figure-of-merit weighted average.
 Our motivelist doesn’t currently have A/B halfsets defined, so halfmaps will be randomly generated.
 
-    For FSC calculation, an alignment mask is always required.
+For FSC calculation, an alignment mask is always required.
 Since we don’t know the reference structure, we can simply provide a basic sphere with a Gaussian dropoff (always include a soft edge on your alignment masks).
 To save a sphere mask into the `mask/` folder, change into your `init_ref/` directory, run this in the STOPGAP Toolbox:
 
         sphere = sg_sphere(32, 10, 3);
         sg_mrcwrite('masks/sphere.mrc', sphere);
 
-    Check the mask using 3dmod.
+Check the mask using 3dmod.
 
         3dmod masks/sphere.mrc
 
-    What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
+What you want is a soft-edged mask that tapers to 0 before hitting the box edges.
+
+
+
+
+## Calculate Starting Reference
+
+"Reference-free" refers to the fact that we are not using an *external* reference.
+Since a reference is always required for iterative alignment, we generate an starting reference by averaging the extracted subtomograms.
+In this example, since we have picked our positions using geometry, we have rough starting angles and our initial reference will not be a sphere but instead have rough features.
+
+
 
 1. Open `stopgap_subtomo_parser.sh` in a text editor.
 
