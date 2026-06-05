@@ -81,6 +81,7 @@ In this example, since we have picked our positions using geometry, we have roug
 1. Update `paramfilename` in `run_stopgap.sh` to the new param file.
 
 1. Run STOPGAP to generate the average.
+   Since we are now working with a large dataset, we can update the `n_core` parameter to `16`.
 
 STOPGAP alignment and averaging runs always output 3 references, named `[ref_name]_[iteration].mrc`, `[ref_name]_A_[iteration].mrc`, and `[ref_name]_B_[iteration].mrc`.
 A and B are raw halfsets; these are often noisy as they are not figure-of-merit weighted.
