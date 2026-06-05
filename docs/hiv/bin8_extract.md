@@ -1,31 +1,11 @@
 # Extracting Subtomograms
 
-In this part, we will familiarize ourselves with STOPGAP's approach to generating a parameter file using a parser, then running that file. 
+In this part, we will familiarize ourselves with STOPGAP's approach to generating a parameter file using a parser, then running that file. STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
-Specifically, the first STOPGAP task we will perform is extracting subtomograms.
+The first STOPGAP task we will perform is extracting subtomograms.
 
 
-## Preparing to Run STOPGAP with MPI
-
-STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
-
-1. Open `run_stopgap.sh` in any text editor, for example, gedit using a terminal window:
-
-        gedit run_stopgap.sh
-
-    The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
-
-2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to `24`, and `copy_local` to 0.
-The rest of the run options are SLURM-specific and can be ignored.
-
-3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_dataset/subtomo/init_ref/`).
-We will update `paramfilename` before running each job.
-
-    >NOTE: Remember to end your `rootdir` path with a `/`!
-
-4. Save `run_stopgap.sh`.
-
-## Extract Subtomograms
+## Preparing Extraction Parameter File
 
 With the lists and run script prepared, we are now ready to extract our subtomograms.
 
@@ -67,7 +47,25 @@ Run in the terminal.
 This will generate a new parameter file in the `params/` folder.
 Feel free to preview it if you're curious.
 
-1. Return to `run_stopgap.sh` and set `paramfilename` to `params/extract_param.star`.
+
+## Preparing to Run STOPGAP with MPI
+
+
+1. Open `run_stopgap.sh` in any text editor, for example, gedit using a terminal window:
+
+        gedit run_stopgap.sh
+
+    The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
+
+2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to `1`, and `copy_local` to 0.
+The rest of the run options are SLURM-specific and can be ignored.
+
+3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_dataset/subtomo/init_ref/`).
+We will update `paramfilename` before running each job.
+
+    >NOTE: Remember to end your `rootdir` path with a `/`!
+
+4. Set `paramfilename` to `params/extract_param.star`.
 Save the file and run STOPGAP by running `run_stopgap.sh` in a terminal.
 
         ./run_stopgap.sh
