@@ -5,9 +5,12 @@
 Before we can perform bin4 processing, we need to go back to TOMOMAN and reconstruct the bin4 tomogram. 
 
 1. Go back to the `tomo/` folder and start the `tomoman_standalone.sh`
-2. In a text editor, edit the `tomoman_novactf.param` file, updating the `ali_stack_bin` and`tomo_bin` parameters to `4`.
-3. TOMOMAN's novaCTF task is designed to be run as data is being collected. As such, it keeps track of if novaCTF has been run before and will skip the tomogram if it has. Since we've previously run novaCTF on this tomogram, we will also need to set `force_novactf` to `1`. This will ignore that novaCTF has already been run on this tomogram.
-4. Reconstruct the bin4 tomogram. 
+   
+3. In a text editor, edit the `tomoman_novactf.param` file, updating the `ali_stack_bin` and`tomo_bin` parameters to `4`.
+   
+5. TOMOMAN's novaCTF task is designed to be run as data is being collected. As such, it keeps track of if novaCTF has been run before and will skip the tomogram if it has. Since we've previously run novaCTF on this tomogram, we will also need to set `force_novactf` to `1`. This will ignore that novaCTF has already been run on this tomogram.
+   
+7. Reconstruct the bin4 tomogram. 
 
 ## Preparing for Bin4 Processing
 
