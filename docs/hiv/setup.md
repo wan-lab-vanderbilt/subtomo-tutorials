@@ -10,7 +10,7 @@ Right click on the desktop to start a terminal window.
 The instances we are using for this tutorial have all the required software installed as Lmod modules.
 In terminals where you will run TOMOMAN or STOPGAP, load them with:
 
-    module load aretomo2 chimera ctffind/4.1.14 motioncor3/1.2.4 novactf stopgap tomoman
+    module load aretomo2 chimera ctffind/4.1.14 cuda/12.1.1 fourier3d motioncor3/1.2.4 imod novactf stopgap tomoman
 
 >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + V`.
 
