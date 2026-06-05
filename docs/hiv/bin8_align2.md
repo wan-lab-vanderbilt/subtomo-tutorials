@@ -45,7 +45,7 @@ Since we have not done any angular search yet, we will start with a rough angula
     1. You will need to increment your `startidx` by one and update your `mask_name` to `cyl_mask.mrc`.
     1. We will use a coarse cone search with hill climbing, so the final parameters to decide on are the angular increments.
     The `angincr` and `angiter` parameters control the off-plane (i.e. off the XY-plane) search.
-    If you want to be very precise, you could calculate half the angular offset between two particles from your inter-particle distance and radius; for me this is ~2°, so `angincr=2` and `angiter=3` should be plenty.
+    If you want to be very precise, you could calculate half the angular offset between two particles from your inter-particle distance and radius; for me this is ~2°, so `angincr=2` and `angiter=2` should be plenty.
     1. For `phi_angincr` and `phi_angiter`, which control the in-plane search, we can use our knowledge that there is C6 symmetry, so the maximum error is ± 30°.
     For an initial coarse search, we can then set `phi_angincr=12` and `phi_angiter=3` to find the nearest symmetry element (with a bit extra).
 
@@ -83,7 +83,7 @@ If so, re-shift the motivelist and re-average.
         sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
 
 1. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser.
-With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 4; `angiter=4`.
+With the shift, there may be a bit of off-plane error introduced, so increase the angular iterations to 3; `angiter=3`.
 Parse parameters and perform another round of alignment.
 
 1. The reference should look much better now.
