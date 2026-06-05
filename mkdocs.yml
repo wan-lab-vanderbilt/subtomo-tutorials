@@ -50,7 +50,7 @@ nav:
   - Tilt-Series Alignment: hiv/align.md
   - Tilted CTF estimation: hiv/ctf_estimation.md
   - 3D CTF-Corrected Tomogram Reconstruction: hiv/novactf_recon.md
-  - Reconstuct Tomogram with a SIRT-like Filter: hiv/sirtlie_recons.md
+  - Reconstuct Tomogram with a SIRT-like Filter: hiv/sirtlike_recons.md
   - Particle Picking: hiv/picking.md
   - Initializing a STOPGAP folder for Bin 8 Averaging: hiv/bin8_init.md
   - Extracting Subtomograms: hiv/bin8_extract.md
