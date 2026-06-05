@@ -48,6 +48,7 @@ E.g.:
         sg_motl_score_clean('lists/allmotl_dclean_2.star', 'lists/allmotl_dclean_sclean_2.star', 0.4);
 
 1. Lastly, it can be worth randomizing the orientations around the symmetry axis. This can minimize any missing wedge related bias.
+   
         sg_motl_randomize_eulers_by_symmetry('lists/allmotl_dclean_sclean_2.star','c6','lists/allmotl_dclean_sclean_randsym_2.star')
 
 1. Generate a new average with the cleaned motivelist.
