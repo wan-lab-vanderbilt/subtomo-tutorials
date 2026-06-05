@@ -106,7 +106,7 @@ STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_pa
 
     The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
 
-2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to 14, and `copy_local` to 0.
+2. For parallelization parameters, set `run_type` to `'local'`, `nodes` to 1, `n_cores` to 30, and `copy_local` to 0.
 The rest of the run options are SLURM-specific and can be ignored.
 
 3. Set `rootdir` to the absolute path of your `init_ref/` folder (e.g. `~/HIV_dataset/subtomo/init_ref/`).

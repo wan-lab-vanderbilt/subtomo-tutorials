@@ -15,7 +15,7 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
     >NOTE: Given that chimera uses many different windows, we recommend you go to a new workspace to open chimera.
     You can move to the window on the right by using the keyboard shortcut `Ctrl + Shift + Right Arrow`.
 
-1. For particle picking, we recommend using the non-CTF-corrected tomogram from AreTomo saved in `bin8_aretomo/TS_01_dose-filt_bin8.mrc`.
+1. For particle picking, we recommend using the SIRT-like filtered tomogram saved in `uncorrected_sirt15_bin8/TS_01_dose-filt.rec`.
    This is because non-CTF-corrected tomograms typically have higher contrast, which is useful for this type of visual analysis.
    Open it in Chimera with File > Open.
 
@@ -24,15 +24,13 @@ The Pick Particle and Place Object plugins are not standard in Chimera and have 
 
     You may want to play around in the Chimera viewer to get familiar with the functions of all three mouse buttons in panning, zooming, moving planes, etc.
 
-1. In the Volume Viewer window, open the Coordinates panel by going to Features > Coordinates.
-   Set the Origin index to 0 and the Voxel size to 1.
+1. In the Volume Viewer window, open the Coordinates panel by going to `Features > Coordinates`.
+   Set the `Origin index` to `0` and the `Voxel size` to `1`.
    Press enter after changing each setting.
    You may need to recenter and reorient the view; there are buttons to help with that.
 
-1. If you want more contrast to better visualize the VLPs, you can apply a gaussian filter (Volume Viewer > Tools > Volume Filter).
-   A gaussian with of 1 should be sufficient. Uncheck "Displayed subregion only" under Options before clicking Filter.
 
-1. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (Main Window > Tools > Camera > Projection > Orthographic).
+1. Before picking VLPs, it may be useful to shift the camera to use orthographic projections (`Main Window > Tools > Camera > Projection > Orthographic`).
    Orthographic side view disables "scaling with distance" of objects far from viewing plane due to perspective effect.
 
 ## Picking Spheres
@@ -41,8 +39,8 @@ In Chimera, we will pick VLP centers using Volume Tracer and set radii for each 
 
 ### Picking Centers
 
-1. In the Volume Viewer, open the Tools > Volume Tracer.
-   Try setting the marker radius to 20, which makes a sphere smaller than the VLPs, but large enough to assess centering.
+1. In the `Volume Viewer`, open the `Tools > Volume Tracer`.
+   Try setting the `marker radius` to `20`, which makes a sphere smaller than the VLPs, but large enough to assess centering.
    Move through the planes and place a marker at the center of each VLP.
    We recommend taking only the complete VLPs.
    This tomogram has around 9 complete VLPs.

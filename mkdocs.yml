@@ -52,7 +52,13 @@ nav:
   - 3D CTF-Corrected Tomogram Reconstruction: hiv/novactf_recon.md
   - Reconstuct Tomogram with a SIRT-like Filter: hiv/sirtlie_recons.md
   - Particle Picking: hiv/picking.md
-  - Bin 8 Subtomogram Averaging: hiv/bin8.md
+  - Initializing a STOPGAP folder for Bin 8 Averaging: hiv/bin8_init.md
+  - Extracting Subtomograms: hiv/bin8_extract.md
+  - Generating an Initial Average: hiv/bin8_init_avg.md
+  - Translational Alignment: hav/bin8_align1.md
+  - Orientational Alignment: hiv/bin8_align2.md
+  - Removing Overlapping and Bad Particles: hiv/bin8_clean.md
+  - Aligning the Full Dataset: hiv/bin8_full.md
   - Bin 4 Subtomogram Averaging: hiv/bin4.md
 
 # This extra JS powers the mathjax support for equation rendering
