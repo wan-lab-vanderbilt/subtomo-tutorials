@@ -20,7 +20,7 @@ The default parameters should work fine.
 4. Follow the instructions in the console to remove bad images.
 For this dataset, there is 1 blocked image that should be removed.
 
-    There are some issues with running 3dmod in the TOMOMAN standalone On these AWS instanceso
+    There are some issues with running 3dmod in the TOMOMAN standalone on these AWS instances.
     You can instead open another terminal from the TOMOMAN standalone (`Ctrl + Shift + T`) and open the tilt series manually:
 
         3dmod TS_01/TS_01.st
