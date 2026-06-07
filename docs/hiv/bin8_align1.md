@@ -21,8 +21,7 @@ Run this command in the STOPGAP Console to save a cylindrical mask 4 pixels wide
 ### Run Translational Alignment
 
 1. Open the subtomo parser.
-Update the `subtomo_mode` to `'ali_singleref'`.
-
+Update the `subtomo_mode` to `'ali_singleref'`. Change `'ccmask_name'` to `'ccmask.mrc'`
 2. Set the angular search parameters.
 STOPGAP has multiple search strategies, with overlapping parameter sets.
 For now, set `search_mode` to `'hc'`, `search_type` to `'cone'`, and `cone_search_type` to `'coarse'`.
