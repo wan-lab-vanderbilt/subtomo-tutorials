@@ -8,9 +8,17 @@ Right click on the desktop to start a terminal window.
 ## Load Modules
 
 The instances we are using for this tutorial have all the required software installed as Lmod modules.
-In terminals where you will run TOMOMAN or STOPGAP, load them with:
+Since we will be opening multiple terminals where you will run TOMOMAN or STOPGAP, we will first edit our .bashrc to source the proper modules.
 
+    gedit ~/.bashrc 
+
+Once open, scroll to the bottom and add the following line:
+    
     module load aretomo2 chimera ctffind/4.1.14 cuda/12.1.1 fourier3d motioncor3/1.2.4 imod novactf stopgap tomoman
+
+Save the .bashrc in your text editor, then source our new bashrc file:
+
+    source ~/.bashrc
 
 >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + V`.
 
