@@ -26,9 +26,9 @@ For more information about STOPGAP, see [Wan et al. _Acta Crystallogr., Sect. D:
 
 ## Courses
 
-Workshopss using this tutorial:
+Workshops using this tutorial:
 
-* 202406 [University of Michigan Workshop](https://www.lsi.umich.edu/events/2024-06/2024-cryo-electron-tomography-data-processing-workshop)
-* 202208 [EMBO Practical Course](https://www.embl.org/about/info/course-and-conference-office/events/cry22-01/) ([Archived tutorial](https://github.com/sagarbiophysics/Subtomo-tutorials/tree/main))
-* 202606 [University of Michigan Workshop](https://subtomo.readthedocs.io/umich-2026/)
-* 202610 [Academia Sinica Cryo-ET Symposium and Data Processing Workshop](https://subtomo.readthedocs.io/taiwan-2026/)
+* June 2024 [University of Michigan Workshop](https://www.lsi.umich.edu/events/2024-06/2024-cryo-electron-tomography-data-processing-workshop)
+* August 2022 [EMBO Practical Course](https://www.embl.org/about/info/course-and-conference-office/events/cry22-01/) ([Archived tutorial](https://github.com/sagarbiophysics/Subtomo-tutorials/tree/main))
+* June 2026 [University of Michigan Workshop](https://subtomo.readthedocs.io/umich-2026/)
+* October 2026 [Academia Sinica Cryo-ET Symposium and Data Processing Workshop](https://subtomo.readthedocs.io/taiwan-2026/)
