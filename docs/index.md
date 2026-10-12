@@ -28,7 +28,7 @@ For more information about STOPGAP, see [Wan et al. _Acta Crystallogr., Sect. D:
 
 Workshops using this tutorial:
 
-* August 2022 [EMBO Practical Course](https://www.embl.org/about/info/course-and-conference-office/events/cry22-01/) ([Archived tutorial](https://github.com/sagarbiophysics/Subtomo-tutorials/tree/main))
+* August 2022 [EMBO Practical Course](https://www.embl.org/about/info/course-and-conference-office/events/cry22-01/) ([Archived tutorial](https://embo-2022.readthedocs.io/latest/))
 * June 2024 [University of Michigan Workshop](https://subtomo.readthedocs.io/umich-2024/)
 * June 2026 [University of Michigan Workshop](https://subtomo.readthedocs.io/umich-2026/)
 * October 2026 [Academia Sinica Cryo-ET Symposium and Data Processing Workshop](https://subtomo.readthedocs.io/taiwan-2026/)
