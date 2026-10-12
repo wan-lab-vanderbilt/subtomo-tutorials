@@ -7,6 +7,10 @@ For this tutorial, we will walk through setting up and running novaCTF. We will 
 
 ## Run NovaCTF
 
+To copy the NovaCTF parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','novactf');
+
 Open `tomoman_novactf.param`.
 
 1. The directory parameters should already be correct.

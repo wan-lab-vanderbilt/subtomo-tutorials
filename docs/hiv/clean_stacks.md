@@ -6,6 +6,11 @@ The best way to assess this is by manually looking at the images.
 TOMOMAN facilitates the process using the clean_stacks task.
 
 ## Cleaning Stacks
+
+To copy the clean_stacks parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','clean_stacks');
+
 Open `tomoman_clean_stacks.param`.
 
 1. The tomolist parameters block should be set up already.

@@ -4,6 +4,10 @@ While we will use 3D-CTF corrected tomograms for subtomogram averaging, such tom
 
 ## Tomogram Reconstruction using IMOD and a SIRT-like Filter
 
+To copy the imod_reconstruct parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','imod_reconstruct');
+
 Open `tomoman_imod_reconstruct.param`.
 
 1. The directory parameters should already be correct.

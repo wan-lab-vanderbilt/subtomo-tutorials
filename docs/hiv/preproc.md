@@ -41,13 +41,13 @@ During this step, TOMOMAN scans a `raw_stack_dir` for .mdoc files.
 For each one it finds, it generates a new folder to contain all the preprocessing data, links the .mdoc file, creates a `frames/` subdirectory, parses frame names from the .mdoc file, and generates links for all frames from the `raw_frame_dir` to the `frames/` subdirectory.
 
 New data is imported using the `tomoman_import.param` file.
-Open this file in any text editor, for example, you can use gedit:
+Open this file in any text editor, for example, you can use mousepad:
 
-    gedit tomoman_import.param
+    mousepad tomoman_import.param
 
 >NOTE: Most scripts and parameter files in this tutorial are formatted with very long lines.
 >As such, they are typically best viewed without text wrapping.
->To disable text wrapping in gedit, open the preferences and untick the "Enable text wrapping" option.
+>To disable text wrapping in mousepad, open the preferences and untick the "Enable text wrapping" option.
 
 Parameters specified here will determine how TOMOMAN imports and sorts new data.
 Types of parameters are typically broken into comment blocks.

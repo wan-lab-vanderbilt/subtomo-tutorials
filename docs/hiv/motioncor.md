@@ -5,6 +5,10 @@ For this dataset, we will be using MotionCor3.
 
 ## Running MotionCor3
 
+To copy the MotionCor3 parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','motioncor3');
+
 Open the `tomoman_motioncor3.param` file in a text editor and review its parameters.
 
 1. The tomolist parameters should already be correctly set.

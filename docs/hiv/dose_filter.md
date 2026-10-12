@@ -4,6 +4,11 @@ We find that dose filtering (a.k.a. exposure filtering) greatly improves the con
 TOMOMAN has its own function for doing this based off the empirical values determined by Grant and Grigorieff (doi: [10.7554/eLife.06980](https://doi.org/10.7554/eLife.06980)).
 
 ## Perform Dose Filtering
+
+To copy the dosefilter parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','dosefilter');
+
 Open `tomoman_dosefilter.param`.
 
 1. The tomolist parameter block should already be set correctly.

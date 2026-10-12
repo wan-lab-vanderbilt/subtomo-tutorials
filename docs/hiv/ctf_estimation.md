@@ -6,6 +6,12 @@ As such, Thon rings from each area of the specimen are different; these Thon rin
 TOMOMAN includes `tiltctf`, an algorithm we developed to use tilt series alignment parameters to generate power spectra that account for this defocus gradient.
 We then pass this power spectrum to CTFFIND4 for Thon ring fitting.
 
+## Running TiltCTF
+
+To copy the TiltCTF parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','tiltctf');
+
 Open the `tomoman_tiltctf.param` file.
 
 1. The directory parameters should already be correct.

@@ -100,9 +100,9 @@ Copy the three lists into the `lists/` subfolder in your `subtomo/` directory.
 
 STOPGAP jobs are run by using a task-specific parser script (named `stopgap_*_parser.sh`) to generate a parameter file (named `*_param.star`) and then running that parameter file using the `run_stopgap.sh` script.
 
-1. Open `run_stopgap.sh` in any text editor, for example, gedit using a terminal window:
+1. Open `run_stopgap.sh` in any text editor, for example, mousepad using a terminal window:
 
-        gedit run_stopgap.sh
+        mousepad run_stopgap.sh
 
     The main parameters here are the "run options" which manage parallelization and the "directories" block, which manages directories and paths.
 

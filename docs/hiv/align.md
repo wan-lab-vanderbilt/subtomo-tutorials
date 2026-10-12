@@ -4,9 +4,12 @@ Since this data set has gold fiducials, we could use bead tracking for manual ti
 Manual alignment often yields superior results to automated alignment, but for sake of time we will use TOMOMAN to perform automated tilt-series alignment using AreTomo.
 TOMOMAN provides some additional settings on top of the standard AreTomo settings, including the option to use unfiltered or dose-filtered tilt-series, as well as pre-binning the tilt-series prior to alignment.
 
-For more information about AreTomo, see the publication or [manual](https://gensoft.pasteur.fr/docs/AreTomo/1.3.4/AreTomoManual_1.3.0_09292022.pdf).
 
 ## Run tilt-series alignment with AreTomo
+
+To copy the AreTomo parameter file using the following command: 
+
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','aretomo');
 
 Open `tomoman_aretomo.param`.
 

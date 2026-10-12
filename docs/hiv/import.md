@@ -19,16 +19,16 @@ It may take a minute to start up the first time you run it.
 
 ## Initializing TOMOMAN Parameter Files
 
-In this step, we will copy a set of TOMOMAN parameter files to the tomogram folder.
-These parameter files are plain-text files that tell TOMOMAN which processing step you wish to run and the parameters for that step.
+TOMOMAN performs processing steps using parameter files. These parameter files are plain-text files that tell TOMOMAN which processing step you wish to run and the parameters for that step.
 
-Copy empty parameter files for all TOMOMAN tasks to the current directory, using default TOMOMAN filenames, by running the below command in the TOMOMAN console.
+For each processing step, we will copy a parameter file and adjust the settings to suit our needs. 
 
-    tomoman_copy_paramfiles(pwd);
+To copy the parameter file for the "import" task, use the following command: 
 
-Parameter files for all TOMOMAN tasks are now copied into the `root_dir`, in this case, `tomo/`.
+    tomoman_copy_paramfiles(pwd,'tomolist.mat','tomoman.log','import');
+
+The import parameter file is now copied into the `root_dir`, in this case, `tomo/`.
 You can view the contents of `tomo/` by running `ls`.
-While files for all tasks are copied, they won’t all be used for this tutorial, and you may delete unused ones.
 
 For the rest of the preprocessing tasks, we will be editing parameter files and running them in the TOMOMAN console. To facilitate this, we suggest you now open a new terminal window and go to the `tomo` folder.
 
@@ -41,13 +41,13 @@ During this step, TOMOMAN scans a `raw_stack_dir` for .mdoc files.
 For each one it finds, it generates a new folder to contain all the preprocessing data, links the .mdoc file, creates a `frames/` subdirectory, parses frame names from the .mdoc file, and generates links for all frames from the `raw_frame_dir` to the `frames/` subdirectory.
 
 New data is imported using the `tomoman_import.param` file.
-Open this file in any text editor, for example, you can use gedit:
+Open this file in any text editor, for example, you can use mousepad:
 
-    gedit tomoman_import.param
+    mousepad tomoman_import.param
 
 >NOTE: Most scripts and parameter files in this tutorial are formatted with very long lines.
 >As such, they are typically best viewed without text wrapping.
->To disable text wrapping in gedit, open the preferences and untick the "Enable text wrapping" option.
+>To disable text wrapping in mousepad, open the preferences and untick the "Enable text wrapping" option.
 
 Parameters specified here will determine how TOMOMAN imports and sorts new data.
 Types of parameters are typically broken into comment blocks.
