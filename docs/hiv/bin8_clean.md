@@ -1,7 +1,7 @@
 
 # Removing Overlapping and Bad Particles
 
-Now that the structure has converged, we can take a look at how the particles have aligned by visualizing them as a lattice map.
+To verify that the oversampled positions have aligned to true particle positions, we can take a look at how the particles have aligned by visualizing them as a lattice map.
 We will use the Place Objects Chimera plugin for this.
 
 1. Covert the motivelist to AV3 `.em` format in the STOPGAP Console using `sg_motl_stopgap_to_av3`.
@@ -45,7 +45,12 @@ The settings I used are:
 
     > NOTE: most of your particles may now look red; this is because the color scaling is relative to the lowest and highest CC values.
 
+
 1. If you are satisfied with the cleaning, generate a new average with the cleaned motivelist.
+
+1. From here, we can refine the average a bit by reducing the angular search. 
+Since the out-of-plane search already used a small angle, we can leave these parameters alone. 
+For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 3 iterations should be safe; phi_angincr=4 and phi_angiter=3. Update the parameters and run 2 iterations.
 
 1. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
 Remember, FSC is NOT an objective resolution measure but instead a self-consistency measure.

@@ -16,7 +16,7 @@ Open `tomoman_novactf.param`.
 1. The directory parameters should already be correct.
 
 2. The parallelization parameters determine how jobs are split between cores.
-Set `n_cores` to `16`.
+Set `n_cores` to `10`.
 
 3. Stack parameters are parameters for generating the aligned stacks prior to tomogram reconstruction.
 
