@@ -83,11 +83,12 @@ If so, re-shift the motivelist and re-average.
         sg_mrcwrite('masks/cyl_mask2.mrc', cyl_mask2);
 
 1. Now that the reference is properly centered along the symmetry axis, we can apply a C6 symmetry by setting `symmetry='C6'` in the parser. 
+While we haven't applied symmetry in earlier iterations, our search parameters should have aligned us to the nearest symmetry element. 
+As such, we can now search within the 12 degree increment we used early; set `phi_angincr=4` and `phi_angiter=3`.
 Parse parameters and perform another round of alignment.
 
 1. The reference should look much better now.
 Keep in mind, the output references from STOPGAP do NOT have symmetry applied. Symmetry is applied to the reference prior to alignment, but not during averging.
 
-1. At this point the reference is reasonably well-aligned, with the oversampled particles having locked on to the true particle positions. 
-As such, the dataset still contains a large number of overlapping particles, which we can remove prior to more angular refinement. 
+1. At this point the reference is largely converged.
 If you check the FSC plot in the `fsc/` subfolder, the structure should be well beyond Nyquist.

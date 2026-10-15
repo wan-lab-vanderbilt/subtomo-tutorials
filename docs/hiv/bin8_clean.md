@@ -7,7 +7,7 @@ We will use the Place Objects Chimera plugin for this.
 1. Covert the motivelist to AV3 `.em` format in the STOPGAP Console using `sg_motl_stopgap_to_av3`.
 For example:
 
-        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_7.star');
+        sg_motl_stopgap_to_av3('lists/allmotl_tomo1_obj1_shift_5.star');
 
 1. Start Chimera and open the tomogram.
 Remember that your tomogram is in your `tomo/uncorrected_sirt15_bin8/` directory.
@@ -39,7 +39,7 @@ For `d_cut`, choose a value that is smaller than the true interparticle distance
 Set `s_cut` to the CC value cutoff you determined in the previous step.
 The settings I used are:
 
-        sg_motl_distance_clean('lists/allmotl_tomo1_obj1_shift_7.star','lists/allmotl_tomo1_obj1_shift_dclean_7.star', 6, 0.35);
+        sg_motl_distance_clean('lists/allmotl_tomo1_obj1_shift_5.star','lists/allmotl_tomo1_obj1_shift_dclean_5.star', 6, 0.3);
 
 1. After cleaning, convert the motivelist to AV3 format and check it in Chimera.
 
@@ -50,7 +50,7 @@ The settings I used are:
 
 1. From here, we can refine the average a bit by reducing the angular search. 
 Since the out-of-plane search already used a small angle, we can leave these parameters alone. 
-For phi, we are arguably accurate within 12 degrees; reducing the phi increment to 4 with 3 iterations should be safe; phi_angincr=4 and phi_angiter=3. Update the parameters and run 2 iterations.
+For phi, we previously used a phi increment of 4, so we can also search around that using phi_angincr=2 and phi_angiter=2. Update the parameters and run 2 iterations.
 
 1. If you check your FSC plot pre- and post-cleaning, you may find it has worsened.
 Remember, FSC is NOT an objective resolution measure but instead a self-consistency measure.
