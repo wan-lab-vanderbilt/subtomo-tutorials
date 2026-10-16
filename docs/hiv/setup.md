@@ -8,7 +8,7 @@ First, log into the DiCOS Apps and start a session with the cryoET Tool. After t
 
 The instances we are using for this tutorial have the software installed but not directly on path. To source the necessary parameters to run TOMOMAN and STOPGAP, you can source the following file:
 
-    source /opt/cryoet/source_stopgap.sh
+    source /opt/scripts/source_stopgap.sh
 
 
 >NOTE: To paste into a terminal, you can use the keyboard shortcut `CTRL + Shift + V`.
